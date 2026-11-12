@@ -1,5 +1,5 @@
 ---
-title: 01 — A documentation site that ships itself
+title: Silverskin — a documentation site that ships itself
 description: The site you are reading, described as an isotope: what it proves, what it costs, and what to take.
 order: 2
 updated: 2026-11-12
@@ -7,10 +7,11 @@ slots: none
 tags: isotope, static, github-pages
 ---
 
-# 01 — A documentation site that ships itself
+# Silverskin — a documentation site that ships itself
 
-This page is the first isotope in the collection, and it is self-referential on purpose: the system
-described here is the system serving it. If the description drifts, the site is wrong — which is
+This page is called **silverskin** — a whole pickled onion, one piece, self-contained. It is the
+quietest isotope in the collection, and it is self-referential on purpose: the system described
+here is the system serving it. If the description drifts, the site is wrong — which is
 the cheapest possible test of a claim.
 
 ## What it proves

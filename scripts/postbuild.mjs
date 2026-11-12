@@ -166,7 +166,7 @@ lines.push(
   'for every slot whose query-string value is empty.',
   '',
 )
-for (const page of pages.filter((p) => p.section === 'isotopes' && /^\d/.test(p.route.split('/')[1] ?? ''))) {
+for (const page of pages.filter((p) => p.section === 'isotopes' && p.slots)) {
   const slots = page.slots || 'none'
   lines.push(`- [${page.title}](${SITE}/${page.route}/): slots: ${slots}`)
 }

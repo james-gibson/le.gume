@@ -1,16 +1,18 @@
 /**
- * Isotopes as compounds.
+ * Isotopes as compounds, named after pickles.
  *
  * An isotope is a named procedure with slots — the parameters an agent cannot
- * guess. A QR code can therefore carry a *shortcut*: the isotope's address plus
- * whatever slots are already bound. The agent fetches the page, reads its Agent
- * prompt, fills the blanks by asking, and never needs the long instruction in
- * the code.
+ * guess. Its identity is the name, never a position: "cornichon" survives
+ * reordering, insertion and deletion; "02" does not. The names come from the
+ * pickle shelf (pickled onions and gherkins), and once a name is published it is
+ * permanent, because it is in URLs and in QR codes.
  *
- * The shortcut format is deliberately boring and absolute, so a phone camera
- * opens it and an agent can fetch it without a resolver service:
+ * A shortcut is the isotope's address plus whatever slots are already bound:
  *
- *   https://james-gibson.github.io/le.gume/isotopes/02-cspell-in-ci/?every=weekly
+ *   https://james-gibson.github.io/le.gume/isotopes/cornichon/?every=weekly
+ *
+ * The empty values are the questions the agent asks. No resolver service: the
+ * URL is the address, the page is the expansion.
  */
 
 export type IsotopeSlot = {
@@ -22,10 +24,8 @@ export type IsotopeSlot = {
 }
 
 export type Isotope = {
-  /** two digits, ordered, stable */
-  id: string
-  /** the page slug, which is also the URL segment */
-  slug: string
+  /** the pickle. Permanent once published — it is the slug and the URL segment. */
+  name: string
   title: string
   summary: string
   slots: IsotopeSlot[]
@@ -35,16 +35,14 @@ export const SITE_ORIGIN = 'https://james-gibson.github.io/le.gume'
 
 export const ISOTOPES: Isotope[] = [
   {
-    id: '01',
-    slug: '01-documentation-site',
-    title: 'A documentation site that ships itself',
+    name: 'silverskin',
+    title: 'Silverskin — a documentation site that ships itself',
     summary: 'Content as files, a derived navigation, a publish guard, and a deploy on push.',
     slots: [],
   },
   {
-    id: '02',
-    slug: '02-cspell-in-ci',
-    title: 'Spell-check a repository on a schedule',
+    name: 'cornichon',
+    title: 'Cornichon — spell-check a repository on a schedule',
     summary: 'A recurring GitHub Actions job that fails loudly on typos, with a project dictionary.',
     slots: [
       { name: 'repo', question: 'Which repository should the job run against?', example: 'acme/api' },
@@ -61,7 +59,7 @@ export function isotopeShortcut(
   const params = new URLSearchParams()
   for (const slot of isotope.slots) params.set(slot.name, bound[slot.name] ?? '')
   const query = params.toString()
-  return `${SITE_ORIGIN}/isotopes/${isotope.slug}/${query ? `?${query}` : ''}`
+  return `${SITE_ORIGIN}/isotopes/${isotope.name}/${query ? `?${query}` : ''}`
 }
 
 /** Slots the shortcut leaves for the agent to ask about. */

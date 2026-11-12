@@ -46,7 +46,7 @@ export function Design() {
     'The live design system: every component this site ships, shown with the props it actually uses.',
   )
 
-  const isotope = ISOTOPES.find((candidate) => candidate.id === '02')!
+  const isotope = ISOTOPES.find((candidate) => candidate.name === 'cornichon')!
   const bound: Record<string, string> = { every: 'weekly' }
   const shortcut = isotopeShortcut(isotope, bound)
   const pending = unboundSlots(isotope, bound)
@@ -285,7 +285,7 @@ export function Design() {
             …or hand over an isotope, with its questions
           </h2>
           <p className="mt-2 max-w-prose text-sm leading-6 text-muted">
-            Isotope 02 cannot be applied without three decisions. The shortcut binds the one that is
+            Isotope cornichon cannot be applied without three decisions. The shortcut binds the one that is
             already made and leaves the others empty, so the agent has to ask — a short code that
             expands into the page, the prompt and the questions.
           </p>
@@ -311,7 +311,7 @@ export function Design() {
           id="isotope-02"
           instructions={shortcut}
           title="Spell-check a repository on a schedule"
-          note={`Compound payload: isotope ${isotope.id} with every=weekly bound, repo and dict empty. An agent fetches the page, reads its Agent prompt, and asks for ${pending.map((s) => s.name).join(' and ')} before writing a workflow.`}
+          note={`Compound payload: isotope ${isotope.name} with every=weekly bound, repo and dict empty. An agent fetches the page, reads its Agent prompt, and asks for ${pending.map((s) => s.name).join(' and ')} before writing a workflow.`}
         />
       </div>
     </div>

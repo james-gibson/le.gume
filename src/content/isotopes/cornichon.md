@@ -1,5 +1,5 @@
 ---
-title: 02 — Spell-check a repository on a schedule
+title: Cornichon — spell-check a repository on a schedule
 description: A recurring CI job that catches typos, and a worked example of an isotope with slots an agent must ask about.
 order: 3
 updated: 2026-11-12
@@ -7,7 +7,7 @@ slots: repo, dict, every
 tags: isotope, ci, cspell
 ---
 
-# 02 — Spell-check a repository on a schedule
+# Cornichon — spell-check a repository on a schedule
 
 A repository accumulates typos the way a kitchen accumulates crumbs: nobody adds one on purpose,
 and after a month the prose looks careless. Spell-checking on every pull request catches them at
@@ -52,7 +52,7 @@ A shortcut can bind some of them. `…?every=weekly` means "weekly, ask me the o
 Copy this whole block into the agent, or hand it the QR on [/design](/design) — same thing.
 
 ```text
-You are implementing le.gume isotope 02 (spell-check a repository on a schedule).
+You are implementing le.gume isotope cornichon (spell-check a repository on a schedule).
 
 Bound slots: every=weekly
 Ask for any slot that is not bound above, one question at a time:

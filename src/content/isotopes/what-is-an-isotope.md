@@ -16,6 +16,27 @@ The name is deliberate. An isotope is a specific, identifiable form of something
 a particular configuration, a measurable signature. Two systems built to the same pattern should be
 recognisably the same isotope, the way two samples of the same element are.
 
+## The pickle spec
+
+Isotopes are named after pickles — pickled onions and gherkins — and never numbered. A name is an
+identity; a position is a coincidence.
+
+| Name | The thing | What it suits |
+| --- | --- | --- |
+| `silverskin` | a whole small onion, pickled in one piece | self-contained systems you lift whole |
+| `cornichon` | a small gherkin, picked often | small recurring checks |
+| `pearl` | a round pickling onion | a single primitive, nested in others |
+| `piccalilli` | mixed, chopped, brined | a composite of several parts |
+
+Three rules keep the shelf usable:
+
+1. **Never renumber.** The name is in URLs, in QR codes and in prompts. An ordinal breaks when
+   something is inserted above it; a name does not.
+2. **Pick the shape, not the flavour.** The pickle should describe the system: whole, small,
+   nested, mixed. A name that misleads is worse than a dull one.
+3. **A published name is permanent.** Retire an isotope by removing its page, never by reusing the
+   name for something else — someone's QR code still points at it.
+
 ## What makes something an isotope
 
 Four tests, in order. Fail one and it is a demo, a snippet or a sketch — all useful, none liftable.
@@ -58,7 +79,7 @@ An isotope page is long on purpose; a QR code is small on purpose. The bridge is
 isotope's address plus whatever slots are already bound.
 
 ```text
-https://james-gibson.github.io/le.gume/isotopes/02-cspell-in-ci/?every=weekly
+https://james-gibson.github.io/le.gume/isotopes/cornichon/?every=weekly
 ```
 
 An empty value is a question still to ask. Given the line above, the agent should fetch the page,
@@ -77,8 +98,9 @@ short enough to scan, complete after one fetch.
 
 ## The collection
 
-This section starts with two: [01 — A documentation site that ships itself](/isotopes/01-documentation-site),
-which is the site you are reading, and [02 — Spell-check a repository on a schedule](/isotopes/02-cspell-in-ci),
-the first compound with slots. Each new isotope is one page, and each page is derived from a
-repository that actually runs — the same rule the rest of this site follows, applied to the
-catalogue itself.
+Two so far. [Silverskin](/isotopes/silverskin) is the site you are reading: whole, self-contained,
+the base of the plate. [Cornichon](/isotopes/cornichon) is the first compound — a small recurring
+check with three slots.
+
+Each new isotope is one page and one name from the shelf. Each page is derived from something that
+actually runs — the same rule the rest of this site follows, applied to the catalogue itself.

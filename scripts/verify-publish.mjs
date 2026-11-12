@@ -147,12 +147,13 @@ for (const file of contentFiles) {
     fail('content', `${file} has no title: in frontmatter`)
     continue
   }
-  // A numbered isotope is a compound and must declare its slots, even if none.
-  const slug = route.split('/')[1] ?? ''
-  if (route.startsWith('isotopes/') && /^\d/.test(slug) && !/^slots:/m.test(source)) {
+  // Every isotope page is a compound and must declare its slots, even if none.
+  // `what-is-an-isotope.md` explains the format; it is not itself an isotope.
+  const isFormatPage = route === 'isotopes/what-is-an-isotope'
+  if (route.startsWith('isotopes/') && !isFormatPage && !/^slots:/m.test(source)) {
     fail(
       'isotope',
-      `${file} is a numbered isotope but has no \`slots:\` frontmatter (use \`slots: none\`)`,
+      `${file} is an isotope but has no \`slots:\` frontmatter (use \`slots: none\`)`,
     )
   }
   // React escapes nothing in JS string literals, but the bundler may split

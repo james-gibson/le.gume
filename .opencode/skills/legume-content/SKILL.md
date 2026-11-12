@@ -80,9 +80,11 @@ Sections are `docs`, `factors`, `isotopes`, `guides`, `pitch`, `writing` (`SECTI
 and 404 pick it up.
 
 An **isotope page** is a compound: it declares `slots:` in frontmatter (even `slots: none`), and the
-guard refuses a numbered isotope page without that line. A shortcut is the page URL with the bound
-slots in the query string (`…/isotopes/02-cspell-in-ci/?every=weekly`); the empty ones are the
-questions the agent must ask. Keep the slot names in `src/lib/isotopes.ts` in step with the page.
+guard refuses an isotope page without that line. Isotopes are named after pickles — `silverskin`,
+`cornichon`, `pearl`, `piccalilli` — never numbered, because the name is the URL and the QR code. A
+shortcut is the page URL with the bound slots in the query string
+(`…/isotopes/cornichon/?every=weekly`); the empty ones are the questions the agent must ask. Keep
+the registry in `src/lib/isotopes.ts` in step with the page.
 
 ## Edit or restructure
 
