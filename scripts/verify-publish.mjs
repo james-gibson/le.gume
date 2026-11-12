@@ -201,7 +201,35 @@ if (!llms) {
   }
 }
 
-// --- 7. size sanity -------------------------------------------------------
+// --- 9. the example kit is present and parses -----------------------------
+// An isotope page documents files; a documented file that is missing or broken
+// is a page that teaches something unbuildable.
+try {
+  const examples = await walk('examples')
+  for (const file of examples.filter((f) => f.endsWith('.json'))) {
+    try {
+      JSON.parse(await readText(file))
+    } catch (error) {
+      fail('examples', `${file} is not valid JSON: ${error.message}`)
+    }
+  }
+  for (const required of [
+    'examples/cornichon/spell.yml',
+    'examples/cornichon/cspell.json',
+    'examples/cornichon/spell-baseline.txt',
+  ]) {
+    try {
+      await access(required)
+    } catch (error) {
+      if (!error || error.code !== 'ENOENT') throw error
+      fail('examples', `${required} is missing — the cornichon isotope documents it`)
+    }
+  }
+} catch (error) {
+  if (!error || error.code !== 'ENOENT') throw error
+}
+
+// --- 10. size sanity ------------------------------------------------------
 const total = (await Promise.all(files.map(async (f) => (await stat(f)).size))).reduce(
   (a, b) => a + b,
   0,

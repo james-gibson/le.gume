@@ -1,0 +1,94 @@
+name: spell
+
+# The clock. Change the cron for the `every` slot; keep it off the hour to avoid
+# the GitHub Actions rush, and pick a day you will actually read the report.
+on:
+  schedule:
+    - cron: '17 6 * * 1' # Mondays 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+# One run at a time. A slow run must not overlap the next scheduled one and
+# report the same words twice.
+concurrency:
+  group: spell
+  cancel-in-progress: false
+
+jobs:
+  spell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 1. What does the dictionary not know? `--words-only --unique` gives one
+      #    word per line, which is what the next step compares. A non-zero exit
+      #    is normal here; the findings are the output.
+      - name: Collect unknown words
+        run: |
+          npx --yes cspell@8 '**/*.md' '**/*.ts' '**/*.tsx' \
+            --no-progress --words-only --unique --no-summary > found.txt || true
+          sort -u -o found.txt found.txt
+          echo "unknown words: $(wc -l < found.txt)"
+          head -20 found.txt
+
+      # 2. The recurring logic. The baseline is accepted debt; only the
+      #    difference is new information. comm needs both files sorted.
+      - name: Keep only what is new
+        run: |
+          touch spell-baseline.txt
+          comm -23 found.txt <(sort -u spell-baseline.txt) > new.txt
+          echo "new since baseline: $(wc -l < new.txt)"
+
+      # 3. One report, in the place a reviewer already looks.
+      - name: Write the job summary
+        run: |
+          {
+            echo '## Scheduled spell check'
+            echo
+            echo "| | |"
+            echo '| --- | --- |'
+            echo "| Unknown words | $(wc -l < found.txt) |"
+            echo "| New since baseline | $(wc -l < new.txt) |"
+            echo
+            if [ -s new.txt ]; then
+              echo '<details><summary>New words</summary>'
+              echo
+              echo '```'
+              cat new.txt
+              echo '```'
+              echo
+              echo '</details>'
+            else
+              echo 'No new words. Nothing to do.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # 4. Open or update exactly one issue. Commenting on the existing one keeps
+      #    the history without a new notification thread every week.
+      - name: Open or update the one issue
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: 'Scheduled spell check: new words'
+        run: |
+          if [ ! -s new.txt ]; then
+            echo "nothing new; no issue"
+            exit 0
+          fi
+
+          body=$(printf 'New unknown words since `spell-baseline.txt` was accepted:\n\n```\n%s\n```\n\nTo retire one:\n\n- add it to `cspell.json` → `words` if the project uses it;\n- add it to `spell-baseline.txt` if it is tolerated noise.\n' "$(cat new.txt)")
+
+          existing=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+            echo "commented on #$existing"
+          else
+            gh issue create --title "$TITLE" --body "$body"
+          fi

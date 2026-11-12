@@ -1,0 +1,23 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "files": ["**/*.md", "**/*.ts", "**/*.tsx"],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    "coverage/**",
+    "**/*.min.*",
+    "package-lock.json",
+    "pnpm-lock.yaml"
+  ],
+  "allowCompoundWords": true,
+  "words": [
+    "silverskin",
+    "cornichon",
+    "cspell",
+    "gherkin",
+    "le",
+    "gume"
+  ],
+  "flagWords": []
+}

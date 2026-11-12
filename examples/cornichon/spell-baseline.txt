@@ -1,0 +1,2 @@
+# accepted debt: one unknown word per line, sorted.
+# Lines beginning with # are never produced by cspell, so this header is inert.
