@@ -44,17 +44,38 @@ export type Seed = {
   touches: string
   /** register, not readiness — sits alongside every rung */
   lateral?: boolean
+  /** a site-scoped seed is a view of the whole shelf, not a subset of it */
+  scope?: 'site'
 }
 
-export const SCALE = [
-  { label: 'Decide', touches: 'reads cost and risk; will not open a terminal' },
-  { label: 'Understand', touches: 'reads concepts; will not deploy anything' },
-  { label: 'Learn', touches: 'runs it locally and breaks it on purpose' },
-  { label: 'Operate', touches: 'delegates the running; wants it repeatable' },
-  { label: 'Package', touches: 'designs systems other people will operate' },
-] as const
+export const SCALE: Record<number, { label: string; touches: string }> = {
+  [-1]: {
+    label: 'Just a website',
+    touches: 'wants a page, not a system; will not read a build log',
+  },
+  0: { label: 'Decide', touches: 'reads cost and risk; will not open a terminal' },
+  1: { label: 'Understand', touches: 'reads concepts; will not deploy anything' },
+  2: { label: 'Learn', touches: 'runs it locally and breaks it on purpose' },
+  3: { label: 'Operate', touches: 'delegates the running; wants it repeatable' },
+  4: { label: 'Package', touches: 'designs systems other people will operate' },
+}
 
 export const SEEDS: Seed[] = [
+  {
+    id: 'just-a-website',
+    title: "It's just a website",
+    audience: 'Someone who wants a web page, not a system — and did not ask for a rung.',
+    assumes: 'Nothing. Including an interest in this page.',
+    teaches: [
+      'that every layer above this one is optional, including all of them',
+      'what the browser has done for free since 1993',
+      'that a document which survives a CSS reset was the documentation all along',
+    ],
+    entry: '/seeds/just-a-website',
+    rung: -1,
+    touches: 'wants a page, not a system; will not read a build log',
+    scope: 'site',
+  },
   {
     id: 'pitch',
     title: 'The commercial case',
@@ -148,6 +169,8 @@ export function getSeed(id: string): Seed | undefined {
 
 /** Pages that declare this seed, in section order. */
 export function seedMembers(id: string): Page[] {
+  const seed = getSeed(id)
+  if (seed?.scope === 'site') return PAGES.filter((page) => page.section !== 'seeds')
   return PAGES.filter((page) => page.seeds.includes(id))
 }
 
@@ -163,9 +186,11 @@ export function lateralSeeds(): Seed[] {
 
 /** The rungs, with the seeds that sit on each. */
 export function scale(): { level: number; label: string; touches: string; seeds: Seed[] }[] {
-  return SCALE.map((step, level) => ({
-    level,
-    ...step,
-    seeds: SEEDS.filter((seed) => seed.rung === level),
-  }))
+  return Object.entries(SCALE)
+    .map(([level, step]) => ({
+      level: Number(level),
+      ...step,
+      seeds: SEEDS.filter((seed) => seed.rung === Number(level)),
+    }))
+    .sort((a, b) => a.level - b.level)
 }

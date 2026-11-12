@@ -1,7 +1,7 @@
 ---
 title: The commercial case
 description: The argument, the numbers and the limits, written for whoever approves the time or the invoice.
-order: 2
+order: 3
 updated: 2026-11-12
 tags: seed, pitch
 ---

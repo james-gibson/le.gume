@@ -245,7 +245,7 @@ try {
 const seedsSource = await readText('src/lib/seeds.ts').catch(() => '')
 const seedIds = [...seedsSource.matchAll(/^\s{4}id: '([^']+)'/gm)].map((m) => m[1])
 const seedEntries = [...seedsSource.matchAll(/^\s{4}entry: '([^']+)'/gm)].map((m) => m[1])
-const seedRungs = [...seedsSource.matchAll(/^\s{4}rung: (\d+),/gm)].map((m) => Number(m[1]))
+const seedRungs = [...seedsSource.matchAll(/^\s{4}rung: (-?\d+),/gm)].map((m) => Number(m[1]))
 const seedLaterals = [...seedsSource.matchAll(/^\s{4}lateral: true,/gm)].length
 
 if (!seedIds.length) fail('seeds', 'no seeds found in src/lib/seeds.ts')
@@ -287,9 +287,20 @@ for (const file of contentFiles) {
   }
 }
 
+// A site-scoped seed is a view of the whole shelf, so it has no member list.
+const siteScoped = new Set(
+  seedIds.filter((id) => {
+    const start = seedsSource.indexOf(`id: '${id}'`)
+    const next = seedsSource.indexOf(`id: '`, start + 5)
+    return /scope: 'site'/.test(seedsSource.slice(start, next === -1 ? undefined : next))
+  }),
+)
+
 for (const id of seedIds) {
   if (!/^[a-z0-9-]+$/.test(id)) fail('seeds', `seed id "${id}" must be a lowercase slug`)
-  if (!seedMembers.get(id)) fail('seeds', `seed "${id}" has no page declaring \`seeds: ${id}\``)
+  if (!seedMembers.get(id) && !siteScoped.has(id)) {
+    fail('seeds', `seed "${id}" has no page declaring \`seeds: ${id}\``)
+  }
   if (!rel.includes(`seeds/${id}/index.html`)) {
     fail('seeds', `seed "${id}" has no page at src/content/seeds/${id}.md`)
   }

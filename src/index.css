@@ -53,3 +53,108 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* ------------------------------------------------------------------------- */
+/* HTML 2.0 mode — rung −1, "it's just a website".                           */
+/* A reset in the opposite direction: strip the modern layer on every         */
+/* element, then let the browser's own stylesheet show through.               */
+/* ------------------------------------------------------------------------- */
+html[data-era='1996'] {
+  color-scheme: light;
+  background: #fff;
+}
+
+html[data-era='1996'] body {
+  margin: 0;
+  padding: 1.25em;
+  background: #fff !important;
+  color: #000 !important;
+  font-family: 'Times New Roman', Times, serif !important;
+  font-size: 16px !important;
+  line-height: 1.3 !important;
+}
+
+html[data-era='1996'] * {
+  display: revert !important;
+  position: static !important;
+  max-width: none !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  color: #000 !important;
+  font-family: inherit !important;
+  font-size: medium !important;
+  font-weight: normal !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+  line-height: 1.3 !important;
+}
+
+html[data-era='1996'] h1,
+html[data-era='1996'] h2,
+html[data-era='1996'] h3,
+html[data-era='1996'] h4 {
+  font-weight: bold !important;
+  margin: 0.9em 0 0.4em !important;
+}
+
+html[data-era='1996'] h1 { font-size: 1.8em !important; }
+html[data-era='1996'] h2 { font-size: 1.35em !important; }
+html[data-era='1996'] h3 { font-size: 1.15em !important; }
+
+html[data-era='1996'] p,
+html[data-era='1996'] ul,
+html[data-era='1996'] ol,
+html[data-era='1996'] table,
+html[data-era='1996'] blockquote,
+html[data-era='1996'] pre,
+html[data-era='1996'] figure {
+  margin: 0.7em 0 !important;
+}
+
+html[data-era='1996'] ul { list-style: disc outside !important; padding-left: 1.6em !important; }
+html[data-era='1996'] ol { list-style: decimal outside !important; padding-left: 1.6em !important; }
+html[data-era='1996'] li { display: list-item !important; }
+
+html[data-era='1996'] a { color: #0000ee !important; text-decoration: underline !important; }
+html[data-era='1996'] a:visited { color: #551a8b !important; }
+
+html[data-era='1996'] code,
+html[data-era='1996'] pre,
+html[data-era='1996'] samp,
+html[data-era='1996'] kbd {
+  font-family: 'Courier New', Courier, monospace !important;
+  font-size: 0.95em !important;
+}
+
+html[data-era='1996'] pre { white-space: pre !important; overflow-x: auto !important; }
+
+html[data-era='1996'] table { border-collapse: collapse !important; }
+html[data-era='1996'] th,
+html[data-era='1996'] td { border: 1px solid #000 !important; padding: 2px 6px !important; text-align: left !important; }
+html[data-era='1996'] th { font-weight: bold !important; }
+
+html[data-era='1996'] blockquote { margin-left: 2em !important; }
+html[data-era='1996'] hr { border-top: 1px solid #000 !important; margin: 1em 0 !important; }
+html[data-era='1996'] strong,
+html[data-era='1996'] b { font-weight: bold !important; }
+html[data-era='1996'] em,
+html[data-era='1996'] i { font-style: italic !important; }
+html[data-era='1996'] img { max-width: 100% !important; }
+
+html[data-era='1996'] button {
+  border: 1px solid #000 !important;
+  padding: 1px 4px !important;
+  background: #eee !important;
+}
+
+/* Decoration does not survive the reset; that is the point of the reset. */
+html[data-era='1996'] svg,
+html[data-era='1996'] .plot-grid { display: none !important; }

@@ -63,23 +63,32 @@ export function SeedPanel({ seedId }: { seedId: string }) {
 
       <div>
         <p className="text-xs tracking-[0.14em] text-muted uppercase">
-          What is inside — {members.length} {members.length === 1 ? 'page' : 'pages'}
+          {seed.scope === 'site'
+            ? `What is inside — the whole shelf (${members.length} pages)`
+            : `What is inside — ${members.length} ${members.length === 1 ? 'page' : 'pages'}`}
         </p>
-        <ul className="mt-2 divide-y divide-line-soft rounded-xl border border-line">
-          {members.map((page) => (
-            <li key={page.path}>
-              <Link
-                to={`/${page.section}/${page.slug}`}
-                className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-4 py-2.5 transition-colors hover:bg-surface-2"
-              >
-                <span className="font-mono text-[11px] text-muted/60">
-                  {sectionMeta(page.section).label}
-                </span>
-                <span className="text-sm text-cream">{page.title}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {seed.scope === 'site' ? (
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Not a subset: every page on the site, rendered without the modern layer. If any of them
+            needed the framework to be legible, this seed would say so — that is the whole test.
+          </p>
+        ) : (
+          <ul className="mt-2 divide-y divide-line-soft rounded-xl border border-line">
+            {members.map((page) => (
+              <li key={page.path}>
+                <Link
+                  to={`/${page.section}/${page.slug}`}
+                  className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-4 py-2.5 transition-colors hover:bg-surface-2"
+                >
+                  <span className="font-mono text-[11px] text-muted/60">
+                    {sectionMeta(page.section).label}
+                  </span>
+                  <span className="text-sm text-cream">{page.title}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <AgentHandoff

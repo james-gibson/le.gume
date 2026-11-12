@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { SECTIONS } from '../lib/content'
+import { useEra } from '../lib/era'
 import { MotionToggle } from './MotionToggle'
 
 const linkBase =
@@ -7,6 +8,8 @@ const linkBase =
 const linkActive = 'bg-surface-2 text-cream'
 
 export function SiteHeader() {
+  const { era, setEra } = useEra()
+
   return (
     <header className="sticky top-0 z-50 border-b border-line/80 bg-ink/85 backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-5 py-3 sm:px-8">
@@ -38,16 +41,27 @@ export function SiteHeader() {
           </NavLink>
         </nav>
 
-        <div className="ml-auto hidden items-center gap-3 sm:flex">
-          <MotionToggle />
-          <a
-            href="https://github.com/james-gibson/le.gume"
-            target="_blank"
-            rel="noreferrer noopener"
+        <div className="ml-auto flex items-center gap-3">
+          <div className="hidden items-center gap-3 sm:flex">
+            <MotionToggle />
+            <a
+              href="https://github.com/james-gibson/le.gume"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="shrink-0 rounded-lg border border-line px-2.5 py-1.5 text-xs text-muted transition-colors hover:border-pulse/50 hover:text-cream"
+            >
+              Source
+            </a>
+          </div>
+          {/* The way back out of 1996 must exist at every width. */}
+          <button
+            type="button"
+            onClick={() => setEra(era === 'retro' ? 'modern' : 'retro')}
             className="shrink-0 rounded-lg border border-line px-2.5 py-1.5 text-xs text-muted transition-colors hover:border-pulse/50 hover:text-cream"
+            title={era === 'retro' ? 'Restore modern rendering' : 'Render as HTML 2.0'}
           >
-            Source
-          </a>
+            {era === 'retro' ? '2026' : 'HTML 2.0'}
+          </button>
         </div>
       </div>
     </header>

@@ -35,6 +35,7 @@ Rungs measure **readiness**, not seniority. The question is not "how experienced
 
 | Rung | Readiness | What they do | Seed |
 | --- | --- | --- | --- |
+| −1 | Just a website | wants a page, not a system; will not read a build log | It's just a website |
 | 0 | Decide | reads cost and risk; will not open a terminal | The commercial case |
 | 1 | Understand | reads concepts; will not deploy anything | The twelve factors |
 | 2 | Learn | runs it locally and breaks it on purpose | The starter |
@@ -61,6 +62,7 @@ reading:
 
 | Rung | Motion | What that means here |
 | --- | --- | --- |
+| −1 | `still` | and rendered as HTML 2.0, because the page is about not needing the layer |
 | 0–1 | `still` | no beams, no marquee, no counting numbers — the page holds still |
 | 2–3 | `calm` | reveals and tickers, no ambient loops |
 | 4 | `full` | everything the design calls for |
