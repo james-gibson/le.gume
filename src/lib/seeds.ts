@@ -45,10 +45,18 @@ export type Seed = {
   /** register, not readiness — sits alongside every rung */
   lateral?: boolean
   /** a site-scoped seed is a view of the whole shelf, not a subset of it */
-  scope?: 'site'
+  scope?: 'site' | 'entrance'
 }
 
 export const SCALE: Record<number, { label: string; touches: string }> = {
+  [-3]: {
+    label: 'No script',
+    touches: 'reads a document; the application never loads',
+  },
+  [-2]: {
+    label: 'No stylesheet',
+    touches: 'reads a document; the design system never arrives',
+  },
   [-1]: {
     label: 'Just a website',
     touches: 'wants a page, not a system; will not read a build log',
@@ -61,6 +69,36 @@ export const SCALE: Record<number, { label: string; touches: string }> = {
 }
 
 export const SEEDS: Seed[] = [
+  {
+    id: 'no-script',
+    title: 'No script',
+    audience: 'Someone who wants the words, and has JavaScript off on purpose.',
+    assumes: 'A browser, and no patience for hydration.',
+    teaches: [
+      'that the document was the program all along',
+      'what a single-page app looks like with the script removed',
+      'why "works without JavaScript" is a property, not an aspiration',
+    ],
+    entry: '/nojs/',
+    rung: -3,
+    touches: 'reads a document; the application never loads',
+    scope: 'entrance',
+  },
+  {
+    id: 'no-stylesheet',
+    title: 'No stylesheet',
+    audience: 'Someone who wants to read, and would rather the page did not have opinions.',
+    assumes: 'A browser with its default stylesheet still installed.',
+    teaches: [
+      'what the user agent has been doing for free since 1993',
+      'how much of "design" is actually a preference',
+      'that a page with no CSS is still a page, and often a faster one',
+    ],
+    entry: '/bare/',
+    rung: -2,
+    touches: 'reads a document; the design system never arrives',
+    scope: 'entrance',
+  },
   {
     id: 'just-a-website',
     title: "It's just a website",

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>No script — le.gume</title>
+    <style>
+      /* CSS is allowed here. JavaScript is not. */
+      :root {
+        color-scheme: light dark;
+        --ink: #0a0b09;
+        --paper: #f4f1e8;
+        --pulse: #4f7a12;
+      }
+      html {
+        font-family: ui-sans-serif, system-ui, Georgia, serif;
+        line-height: 1.55;
+      }
+      body {
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 4rem;
+        max-width: 46rem;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      h1 {
+        font-size: 2rem;
+        letter-spacing: -0.02em;
+        margin: 0 0 0.5rem;
+      }
+      h2 {
+        font-size: 1.15rem;
+        margin: 2rem 0 0.5rem;
+      }
+      p,
+      li {
+        max-width: 62ch;
+      }
+      code,
+      pre {
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 0.9em;
+      }
+      pre {
+        overflow-x: auto;
+        padding: 0.9rem 1rem;
+        border: 1px solid #d6d1c2;
+        background: #fbf9f2;
+      }
+      table {
+        border-collapse: collapse;
+        margin: 1rem 0;
+      }
+      th,
+      td {
+        border: 1px solid #d6d1c2;
+        padding: 0.4rem 0.7rem;
+        text-align: left;
+      }
+      .note {
+        border-left: 3px solid var(--pulse);
+        padding: 0.25rem 0 0.25rem 0.9rem;
+        margin: 1.5rem 0;
+      }
+      a {
+        color: var(--pulse);
+      }
+      footer {
+        margin-top: 2.5rem;
+        border-top: 1px solid #d6d1c2;
+        padding-top: 1rem;
+        font-size: 0.9rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #f2efe4;
+          --paper: #0a0b09;
+          --pulse: #b6f24a;
+        }
+        pre {
+          background: #11130f;
+          border-color: #272b22;
+        }
+        th,
+        td,
+        footer {
+          border-color: #272b22;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>No script</h1>
+
+    <p>
+      This page was delivered whole. There is no <code>&lt;script&gt;</code>
+      element in this file, no bundle behind it, and nothing here will run after
+      the last byte arrives. What you see is what the server sent.
+    </p>
+
+    <p class="note">
+      The rest of this site is a React application. With JavaScript disabled it
+      renders an empty box and a title — you can try it, the box is honest about
+      it. This page exists to show that the words never needed the application.
+    </p>
+
+    <h2>What still works</h2>
+
+    <ul>
+      <li>Reading, in the order the document was written.</li>
+      <li>Links, including the browser's back button.</li>
+      <li>Find in page, bookmarks, screen readers, print, reader mode.</li>
+      <li>Fetching it with <code>curl</code>, if that is your idea of reading.</li>
+    </ul>
+
+    <h2>What does not</h2>
+
+    <ul>
+      <li>Client-side routing: every link is a real request.</li>
+      <li>The motion budget, the seed scale widget, the QR handoff.</li>
+      <li>Anything that needed a state update to become true.</li>
+    </ul>
+
+    <h2>The trade, in a table</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Property</th>
+          <th scope="col">Single-page app</th>
+          <th scope="col">This page</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Time to first word</td>
+          <td>After the bundle parses</td>
+          <td>On arrival</td>
+        </tr>
+        <tr>
+          <td>Works with JS off</td>
+          <td>No</td>
+          <td>By construction</td>
+        </tr>
+        <tr>
+          <td>Route change</td>
+          <td>Instant</td>
+          <td>A request</td>
+        </tr>
+        <tr>
+          <td>Failure mode</td>
+          <td>A blank page that looks fine in testing</td>
+          <td>A 404, which is at least true</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>How it is built</h2>
+
+    <pre><code>&lt;!-- the entire build step --&gt;
+cp public/nojs/index.html dist/nojs/index.html</code></pre>
+
+    <footer>
+      <p>
+        <a href="../seeds/no-script/">Why this page exists</a> &middot;
+        <a href="../bare/">The same argument, without CSS</a> &middot;
+        <a href="../">Back to the site</a>
+      </p>
+    </footer>
+  </body>
+</html>

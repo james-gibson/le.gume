@@ -1,7 +1,7 @@
 ---
 title: The voice
 description: Cost-first prose, receipts instead of claims, and one house joke told straight.
-order: 8
+order: 10
 updated: 2026-11-12
 tags: seed, writing, voice
 ---

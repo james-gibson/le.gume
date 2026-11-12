@@ -1,7 +1,7 @@
 ---
 title: It's just a website
 description: Rung −1. No framework, no build, no decisions — a page is a document, and this one is rendered as HTML 2.0 to prove it.
-order: 2
+order: 4
 updated: 2026-11-12
 tags: seed, satire, html
 ---

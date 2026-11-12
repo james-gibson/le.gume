@@ -72,6 +72,17 @@ export function SeedPanel({ seedId }: { seedId: string }) {
             Not a subset: every page on the site, rendered without the modern layer. If any of them
             needed the framework to be legible, this seed would say so — that is the whole test.
           </p>
+        ) : seed.scope === 'entrance' ? (
+          <p className="mt-2 text-sm leading-6 text-muted">
+            One document, not a collection:{' '}
+            <a
+              href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}${seed.entry}`}
+              className="text-pulse underline decoration-pulse/30 underline-offset-4"
+            >
+              open {seed.entry}
+            </a>
+            . It is a real file, served whole, with no build step of its own.
+          </p>
         ) : (
           <ul className="mt-2 divide-y divide-line-soft rounded-xl border border-line">
             {members.map((page) => (

@@ -1,7 +1,7 @@
 ---
 title: Isotopes
 description: How to package a setup you only do occasionally, name it permanently, and hand it over with its questions.
-order: 7
+order: 9
 updated: 2026-11-12
 tags: seed, isotopes, compounds
 ---

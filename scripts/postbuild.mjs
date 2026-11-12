@@ -187,6 +187,7 @@ lines.push(
   `- [Twelve factors](${SITE}/factors/start-here/): the rules as lessons, with their costs.`,
   `- [Isotopes](${SITE}/isotopes/what-is-an-isotope/): minimal systems you can lift.`,
   `- [Design](${SITE}/design/): every component in use, live.`,
+  `- Static artifacts with no application: [no script](${SITE}/nojs/), [no stylesheet](${SITE}/bare/).`,
   '',
 )
 

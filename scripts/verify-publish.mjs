@@ -182,7 +182,7 @@ const knownRoutes = new Set([
   ...sections.map((s) => `/${s}`),
   ...contentFiles.map((f) => `/${relative('src/content', f).replace(/\.md$/, '')}`),
 ])
-const knownFiles = new Set(['/llms.txt', '/robots.txt', '/favicon.svg'])
+const knownFiles = new Set(['/llms.txt', '/robots.txt', '/favicon.svg', '/bare', '/nojs'])
 for (const file of contentFiles) {
   const source = await readText(file)
   for (const match of source.matchAll(/\]\((\/[^)\s]*)\)/g)) {
@@ -288,17 +288,17 @@ for (const file of contentFiles) {
 }
 
 // A site-scoped seed is a view of the whole shelf, so it has no member list.
-const siteScoped = new Set(
+const scopedSeeds = new Set(
   seedIds.filter((id) => {
     const start = seedsSource.indexOf(`id: '${id}'`)
     const next = seedsSource.indexOf(`id: '`, start + 5)
-    return /scope: 'site'/.test(seedsSource.slice(start, next === -1 ? undefined : next))
+    return /scope: '(site|entrance)'/.test(seedsSource.slice(start, next === -1 ? undefined : next))
   }),
 )
 
 for (const id of seedIds) {
   if (!/^[a-z0-9-]+$/.test(id)) fail('seeds', `seed id "${id}" must be a lowercase slug`)
-  if (!seedMembers.get(id) && !siteScoped.has(id)) {
+  if (!seedMembers.get(id) && !scopedSeeds.has(id)) {
     fail('seeds', `seed "${id}" has no page declaring \`seeds: ${id}\``)
   }
   if (!rel.includes(`seeds/${id}/index.html`)) {
@@ -308,10 +308,28 @@ for (const id of seedIds) {
 
 for (const entry of seedEntries) {
   const route = entry.replace(/\/$/, '') || '/'
-  if (!knownRoutes.has(route)) fail('seeds', `seed entrance ${entry} is not a route`)
+  if (!knownRoutes.has(route) && !knownFiles.has(route)) {
+    fail('seeds', `seed entrance ${entry} is not a route or a served file`)
+  }
 }
 
-// --- 11. size sanity ------------------------------------------------------
+// --- 11. the satire keeps its promises ------------------------------------
+// A page that claims "no CSS" or "no script" is a testable claim. If the claim
+// rots, the seed is a lie with a URL.
+const bare = await readText('public/bare/index.html').catch(() => '')
+const nojs = await readText('public/nojs/index.html').catch(() => '')
+if (!bare) {
+  fail('satire', 'public/bare/index.html is missing — the no-stylesheet seed points at it')
+} else if (/<style|<link[^>]+stylesheet|style=|<script/i.test(bare)) {
+  fail('satire', 'public/bare/index.html claims no CSS but contains a style, a stylesheet or a script')
+}
+if (!nojs) {
+  fail('satire', 'public/nojs/index.html is missing — the no-script seed points at it')
+} else if (/<script/i.test(nojs)) {
+  fail('satire', 'public/nojs/index.html claims no JavaScript but contains a <script>')
+}
+
+// --- 12. size sanity ------------------------------------------------------
 const total = (await Promise.all(files.map(async (f) => (await stat(f)).size))).reduce(
   (a, b) => a + b,
   0,
