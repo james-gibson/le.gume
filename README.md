@@ -23,6 +23,8 @@ replace the rest with your own words.
   reached the bundle.
 - **A live design system.** `/design` renders the components the site ships, with the props
   actually used. Motion comes from [fancy-ui](https://fancy-ui.rama.app).
+- **An agent entry.** `dist/llms.txt` is generated at build time: every route, the build
+  commands, the invariants. An agent can take the site and go.
 - **A smoke test for the React tree.** `npm run smoke` renders every route on the server and
   fails if one throws.
 
@@ -55,7 +57,7 @@ src/lib/content.ts                the content model: glob, ordering, headings, n
 src/lib/markdown.tsx              article typography
 src/pages/Design.tsx              the live design system
 src/App.tsx                       five routes
-scripts/postbuild.mjs             per-route shells, 404.html, .nojekyll, robots.txt
+scripts/postbuild.mjs             per-route shells, 404.html, .nojekyll, robots.txt, llms.txt
 scripts/verify-publish.mjs        the publish guard
 scripts/smoke.tsx                 the route smoke test
 .github/workflows/deploy.yml      GitHub Pages on push

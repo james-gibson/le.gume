@@ -1,0 +1,91 @@
+---
+title: For agents
+description: The operating contract — what to read, what to run, what must stay true, and where the machine entry lives.
+order: 7
+updated: 2026-11-11
+tags: agents, llms, operations
+---
+
+# For agents
+
+This page is the contract for an agent picking the site up cold. It assumes you can read the
+repository, run Node, and push to `main`. Everything below is verifiable from the files.
+
+The machine-readable version of this page — a flat list of every route, the build commands and
+the invariants — is generated at build time at [`/llms.txt`](/llms.txt). Read it first when you
+only need the map; read this page when you need the reasoning.
+
+## Read in this order
+
+1. [`/llms.txt`](/llms.txt) — every page, one line each, plus the invariants.
+2. [Quickstart](/docs/quickstart) — clone, install, dev server.
+3. [Site anatomy](/docs/site-anatomy) — the file map, annotated.
+4. [Content model](/docs/content-model) — frontmatter, ordering, headings.
+5. [Twelve factors](/docs/twelve-factor) — the operational stance, including the deviations.
+
+You do not need the source to answer a question about the site: `llms.txt` plus the page you are
+reading is usually enough. You do need the source to change it.
+
+## The loop
+
+```bash
+git clone https://github.com/james-gibson/le.gume my-site
+cd my-site && npm install
+npm run dev          # read it
+# … edit src/content/<section>/<slug>.md …
+npm run build        # type-check, bundle, route shells, llms.txt, publish guard
+npm run smoke        # every route rendered server-side
+git commit -am "content: …" && git push
+```
+
+The push is the deploy. There is no release branch, no artifact to upload, no environment to
+promote. If the guard refuses, nothing shipped.
+
+## Invariants — breaking one is a bug
+
+- **Navigation is derived.** Every nav surface reads `src/content/**/*.md`. Do not add a nav
+  array, a route manifest, or a hand-written index. A page that does not appear is a file in the
+  wrong folder or with broken frontmatter.
+- **The path is the URL.** `src/content/docs/deploy.md` is `/docs/deploy`. Renaming the file
+  changes the public URL; grep for the old path before you do.
+- **Router links are basename-relative.** `<Link to="/docs">` is right; a raw `href` needs
+  `${import.meta.env.BASE_URL}docs` because production mounts at `/le.gume/`.
+- **Content is Markdown.** No MDX, no imported components. If a page needs a live widget, it is a
+  route in `src/pages/`, like `/design`.
+- **`llms.txt` is generated.** It is written by `scripts/postbuild.mjs` from the content tree. Do
+  not hand-edit `dist/llms.txt`, and do not add a page without rebuilding it.
+- **The guard is the gate.** `scripts/verify-publish.mjs` runs inside `npm run build`. Weakening a
+  check to get a green build is the one change that invalidates the rest of this page.
+
+## Adding content, in full
+
+```markdown
+---
+title: Rate limits
+description: One line, reused as the nav subtitle and the llms.txt entry.
+order: 8
+updated: 2026-11-12
+tags: api, limits
+---
+
+# Rate limits
+
+Body. `##` and `###` become the table of contents; `#` does not.
+```
+
+Sections are `docs`, `guides`, `pitch`, `writing`. A new section is an entry in `SECTIONS`
+(`src/lib/content.ts`) plus a folder — header, footer, section index, 404 and `llms.txt` follow.
+
+## What "done" means
+
+- `npm run build` prints `guard: clean`.
+- `npm run smoke` renders every route, including the intentional miss.
+- The page appears in its section index, in the right position.
+- One deep link works on the deployed site after the Actions run, not just the homepage.
+- If you used a new component, `/design` shows it with the props you used.
+
+## What you cannot infer
+
+The editorial voice is a judgement call: dry, specific, willing to state the cost. The legume
+idioms in the titles are ordinary English as far as this site is concerned, and no page explains
+them. If a draft starts to explain the connection, cut that sentence.

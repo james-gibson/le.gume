@@ -28,10 +28,17 @@ export const markdownComponents: Components = {
     <p className="my-4 leading-7 text-muted [&_strong]:font-semibold [&_strong]:text-cream" {...props} />
   ),
   a: ({ node: _node, href, ...props }) => {
-    const external = !!href && /^https?:/.test(href)
+    const external = !!href && (/^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith('//'))
+    // Content links are written root-absolute ("/docs/quickstart") because that
+    // is how an author thinks about the site. Production serves from /le.gume/,
+    // so the mount has to be prefixed here or every internal link 404s.
+    const to =
+      !external && href?.startsWith('/')
+        ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${href}`
+        : href
     return (
       <a
-        href={href}
+        href={to}
         {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
         className="text-pulse underline decoration-pulse/35 underline-offset-4 transition-colors hover:decoration-pulse"
         {...props}

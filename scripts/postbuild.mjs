@@ -9,8 +9,10 @@
  *    a found page rather than a missing one that happens to render.
  * 3. dist/.nojekyll — stops Pages from running Jekyll over the output.
  * 4. dist/robots.txt — explicit allow.
+ * 5. dist/llms.txt — the machine entry. Generated from the content tree, not
+ *    hand-maintained, so an agent that reads it gets the real site.
  */
-import { copyFile, writeFile, mkdir, readdir, access } from 'node:fs/promises'
+import { copyFile, writeFile, mkdir, readdir, readFile, access } from 'node:fs/promises'
 import { join, relative } from 'node:path'
 
 const DIST = 'dist'
@@ -58,4 +60,99 @@ await copyFile(index, join(DIST, '404.html'))
 await writeFile(join(DIST, '.nojekyll'), '')
 await writeFile(join(DIST, 'robots.txt'), ['User-agent: *', 'Allow: /', ''].join('\n'), 'utf8')
 
-console.log(`postbuild: wrote ${routes.length} route shells, 404.html, .nojekyll, robots.txt`)
+// --- llms.txt -------------------------------------------------------------
+// The site's own answer to "an agent should be able to take it and go": one
+// plain-text file listing every page, the build command, and the invariants.
+// Generated from the content tree so it cannot drift from the site.
+const SITE = 'https://james-gibson.github.io/le.gume'
+const SECTIONS = { docs: 'Documentation', guides: 'Guides', pitch: 'Pitch', writing: 'Writing' }
+
+function frontmatter(source) {
+  const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(source)
+  const data = {}
+  if (!match) return data
+  for (const line of match[1].split(/\r?\n/)) {
+    const at = line.indexOf(':')
+    if (at <= 0) continue
+    const key = line.slice(0, at).trim()
+    data[key] = line
+      .slice(at + 1)
+      .trim()
+      .replace(/^["']|["']$/g, '')
+  }
+  return data
+}
+
+const pages = []
+for (const file of await walk(CONTENT)) {
+  if (!file.endsWith('.md')) continue
+  const route = relative(CONTENT, file).replace(/\.md$/, '')
+  const [section] = route.split('/')
+  const data = frontmatter(await readFile(file, 'utf8'))
+  pages.push({
+    route,
+    section,
+    title: data.title || route,
+    description: data.description || '',
+    order: Number(data.order ?? 999),
+  })
+}
+pages.sort((a, b) => a.section.localeCompare(b.section) || a.order - b.order || a.title.localeCompare(b.title))
+
+const lines = [
+  '# le.gume',
+  '',
+  '> A documentation site that documents itself, and a starter for an open knowledge project.',
+  '> Promotional and educational at once: the site is the argument, and the source is the proof.',
+  '',
+  `Live: ${SITE}/`,
+  'Repo: https://github.com/james-gibson/le.gume',
+  'Stack: React 19, Vite, Tailwind CSS v4, fancy-ui (motion). Static output, no runtime services.',
+  'Source of truth: src/content/<section>/<slug>.md — the file path is the URL.',
+  '',
+  '## Build and verify',
+  '',
+  '    npm ci',
+  '    npm run build    # tsc --noEmit, vite build, route shells, llms.txt, publish guard',
+  '    npm run smoke    # renders every route server-side; fails if one throws',
+  '',
+  'The guard refuses placeholders, absolute local paths, credentials, a base path',
+  'that disagrees with package.json homepage, a route without its shell, or a page',
+  'that never reached the bundle. A failure means nothing is published.',
+  '',
+  '## Invariants',
+  '',
+  '- Navigation, section indexes, table of contents, previous/next and counts are',
+  '  derived from the content tree. There is no nav array to edit.',
+  '- Router links are basename-relative; raw href strings use import.meta.env.BASE_URL.',
+  '- Content is Markdown, never MDX. A live widget is a route under src/pages/.',
+  '- /design is the live design system: the same components the site ships.',
+  '- This file is generated at build time; editing it in dist/ changes nothing.',
+  '',
+]
+
+for (const [id, label] of Object.entries(SECTIONS)) {
+  const list = pages.filter((p) => p.section === id)
+  if (!list.length) continue
+  lines.push(`## ${label}`, '')
+  for (const page of list) {
+    lines.push(`- [${page.title}](${SITE}/${page.route}/): ${page.description}`)
+  }
+  lines.push('')
+}
+
+lines.push(
+  '## For agents',
+  '',
+  `- Start with [For agents](${SITE}/docs/for-agents/): the operating contract.`,
+  `- [Quickstart](${SITE}/docs/quickstart/): clone, install, run.`,
+  `- [Twelve factors](${SITE}/docs/twelve-factor/): how this site maps the twelve-factor app.`,
+  `- [Design](${SITE}/design/): every component in use, live.`,
+  '',
+)
+
+await writeFile(join(DIST, 'llms.txt'), lines.join('\n'), 'utf8')
+
+console.log(
+  `postbuild: wrote ${routes.length} route shells, 404.html, .nojekyll, robots.txt, llms.txt (${pages.length} pages)`,
+)

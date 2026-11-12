@@ -71,6 +71,25 @@ Anything beyond that — MDX, JSX in content, interactive widgets — belongs in
 under `src/pages/`, not in a Markdown file. Which is why the design system is a route, not a
 document.
 
+## Portability — the starter part
+
+Content here is deliberately boring: CommonMark plus a flat frontmatter map. No MDX, no
+imported components, no build-time data in a page. That is what makes this repository a starter
+for an *open knowledge* project rather than a site for one product: a tree of Markdown notes can
+be copied in, given the four fields, and published.
+
+Moving notes from a knowledge vault (an OpenKnowledge project, for instance) is a copy, not an
+integration:
+
+1. Copy `notes/<topic>/<slug>.md` into `src/content/<section>/<slug>.md`.
+2. Add `title`, `description`, `order` and `updated`; keep the body as it is.
+3. Rename or drop internal links, or leave them — they are rewritten against the Pages mount at
+   render time, and the guard fails the build if a root-absolute link points at no route.
+
+Nothing here reads the vault at build time, and the vault does not read this repository. The
+coupling is a copy of files and a shared opinion about what a document is: a heading, a line of
+prose, and a date that tells you whether to trust it.
+
 ## Adding a section
 
 Add an entry to `SECTIONS` in `src/lib/content.ts`, create the folder, add one file. The header,

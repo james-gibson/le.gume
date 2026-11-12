@@ -30,9 +30,21 @@ src/pages/DocPage.tsx       article, breadcrumb, TOC rail, prev/next, edit link
 src/pages/Design.tsx        live design system (this is a route, not a document)
 src/pages/NotFound.tsx      404 with the real section list
 src/content/**/*.md         the pages you are reading
-scripts/postbuild.mjs       per-route shells, 404.html, .nojekyll, robots.txt
-scripts/verify-publish.mjs  the guard; fails the build on unsafe output
+scripts/postbuild.mjs       per-route shells, 404.html, .nojekyll, robots.txt, llms.txt
+scripts/verify-publish.mjs  the guard; fails the build on unsafe or broken output
+scripts/smoke.tsx           renders every route server-side
 ```
+
+## Generated at build time
+
+Nothing below is edited by hand; every file is derived from the content tree.
+
+| File | What it is |
+| --- | --- |
+| `dist/llms.txt` | The machine entry: every page, the build commands, the invariants |
+| `dist/<section>/<slug>/index.html` | One shell per route, so a deep link is a 200 |
+| `dist/404.html` | The shell Pages serves for anything unknown |
+| `dist/.nojekyll`, `dist/robots.txt` | Pages housekeeping |
 
 ## Routes
 

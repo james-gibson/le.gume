@@ -47,7 +47,7 @@ try {
 }
 
 const rel = files.map((f) => relative(DIST, f))
-for (const required of ['index.html', '404.html', '.nojekyll', 'favicon.svg', 'robots.txt']) {
+for (const required of ['index.html', '404.html', '.nojekyll', 'favicon.svg', 'robots.txt', 'llms.txt']) {
   if (!rel.includes(required)) {
     fail('required-file', `${required} is missing from dist/ (see scripts/postbuild.mjs)`)
   }
@@ -151,6 +151,44 @@ for (const file of contentFiles) {
   // long strings; a title is short enough to appear whole.
   if (!jsText.includes(title)) {
     fail('content', `${file} ("${title}") is not present in the built bundle`)
+  }
+}
+
+// --- 7. internal links point at routes that exist -------------------------
+// Markdown authors write root-absolute links ("/docs/quickstart") because that
+// is how the site reads in a browser. The mount prefix is applied at render
+// time, so the check here is against routes, not against the built HTML.
+const knownRoutes = new Set([
+  '/',
+  '/design',
+  ...sections.map((s) => `/${s}`),
+  ...contentFiles.map((f) => `/${relative('src/content', f).replace(/\.md$/, '')}`),
+])
+const knownFiles = new Set(['/llms.txt', '/robots.txt', '/favicon.svg'])
+for (const file of contentFiles) {
+  const source = await readText(file)
+  for (const match of source.matchAll(/\]\((\/[^)\s]*)\)/g)) {
+    const target = match[1].replace(/#.*$/, '').replace(/\/$/, '') || '/'
+    if (knownRoutes.has(target) || knownFiles.has(target)) continue
+    fail('link', `${file} links to ${match[1]}, which is not a route on this site`)
+  }
+}
+
+// --- 8. the machine entry lists every page -------------------------------
+// llms.txt is how an agent takes the site without crawling it. A page missing
+// from it is a page the site does not admit to having.
+const llms = rel.includes('llms.txt') ? await readText(join(DIST, 'llms.txt')) : ''
+if (!llms) {
+  fail('llms', 'dist/llms.txt is empty or missing (see scripts/postbuild.mjs)')
+} else {
+  for (const file of contentFiles) {
+    const route = relative('src/content', file).replace(/\.md$/, '')
+    if (!llms.includes(`/${route}/)`)) {
+      fail('llms', `dist/llms.txt does not list /${route}`)
+    }
+  }
+  for (const anchor of ['## For agents', '## Invariants', '## Build and verify']) {
+    if (!llms.includes(anchor)) fail('llms', `dist/llms.txt is missing the "${anchor}" section`)
   }
 }
 
