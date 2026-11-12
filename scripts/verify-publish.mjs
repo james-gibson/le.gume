@@ -122,11 +122,13 @@ for (const [pattern, what] of leakPatterns) {
 // --- 6. every real route has its own shell, and the content is in the bundle -
 const contentFiles = (await walk('src/content')).filter((f) => f.endsWith('.md'))
 if (contentFiles.length === 0) fail('content', 'src/content/**/*.md matched nothing')
-for (const file of contentFiles) {
-  const route = relative('src/content', file).replace(/\.md$/, '')
-  const shell = join(DIST, route, 'index.html')
+
+const sections = [...new Set(contentFiles.map((f) => relative('src/content', f).split('/')[0]))]
+const routes = [...sections, ...contentFiles.map((f) => relative('src/content', f).replace(/\.md$/, ''))]
+
+for (const route of routes) {
   try {
-    await access(shell)
+    await access(join(DIST, route, 'index.html'))
   } catch (error) {
     // Only a missing file is the finding; anything else is this script being wrong.
     if (!error || error.code !== 'ENOENT') throw error
@@ -135,7 +137,10 @@ for (const file of contentFiles) {
       `dist/${route}/index.html is missing — GitHub Pages would answer 404 for /${route}`,
     )
   }
+}
 
+for (const file of contentFiles) {
+  const route = relative('src/content', file).replace(/\.md$/, '')
   const source = await readText(file)
   const title = /^title:\s*(.+)$/m.exec(source)?.[1]?.trim().replace(/^["']|["']$/g, '')
   if (!title) {

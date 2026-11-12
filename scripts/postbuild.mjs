@@ -36,8 +36,13 @@ async function walk(dir) {
 
 // Routes are the content tree plus the two static ones. Keeping this derived
 // means a new page gets its own 200 without editing this file.
+const sectionDirs = (await readdir(CONTENT, { withFileTypes: true }))
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => entry.name)
+
 const routes = [
   'design',
+  ...sectionDirs,
   ...(await walk(CONTENT))
     .filter((f) => f.endsWith('.md'))
     .map((f) => relative(CONTENT, f).replace(/\.md$/, '')),
