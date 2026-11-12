@@ -12,6 +12,7 @@
  *
  * Exit 1 on the first class of failure that is not merely advisory.
  */
+import { readFileSync } from 'node:fs'
 import { access, readFile, readdir, stat } from 'node:fs/promises'
 import { join, relative } from 'node:path'
 
@@ -236,8 +237,37 @@ try {
 const seedsSource = await readText('src/lib/seeds.ts').catch(() => '')
 const seedIds = [...seedsSource.matchAll(/^\s{4}id: '([^']+)'/gm)].map((m) => m[1])
 const seedEntries = [...seedsSource.matchAll(/^\s{4}entry: '([^']+)'/gm)].map((m) => m[1])
+const seedRungs = [...seedsSource.matchAll(/^\s{4}rung: (\d+),/gm)].map((m) => Number(m[1]))
+const seedLaterals = [...seedsSource.matchAll(/^\s{4}lateral: true,/gm)].length
 
 if (!seedIds.length) fail('seeds', 'no seeds found in src/lib/seeds.ts')
+
+// The ladder: rungs unique, ascending in file order, lateral seeds last.
+for (let i = 1; i < seedRungs.length; i += 1) {
+  if (seedRungs[i] <= seedRungs[i - 1]) {
+    fail('seeds', `rungs are out of order: ${seedRungs[i - 1]} then ${seedRungs[i]}`)
+  }
+}
+if (seedLaterals && seedIds.length - seedLaterals !== seedRungs.length) {
+  fail('seeds', 'a lateral seed must come after every runged seed')
+}
+
+// Each seed's page must appear in the same order as the registry.
+const seedPageOrders = seedIds.map((id) => {
+  const source = contentFiles.find((f) => f.endsWith(`seeds/${id}.md`))
+  if (!source) return Number.NaN
+  const order = /^order:\s*(\d+)/m.exec(readFileSync(source, 'utf8'))?.[1]
+  return Number(order ?? Number.NaN)
+})
+for (let i = 1; i < seedPageOrders.length; i += 1) {
+  if (!(seedPageOrders[i] > seedPageOrders[i - 1])) {
+    fail(
+      'seeds',
+      `the shelf disagrees with the ladder: ${seedIds[i - 1]} (order ${seedPageOrders[i - 1]}) ` +
+        `does not sit before ${seedIds[i]} (order ${seedPageOrders[i]})`,
+    )
+  }
+}
 
 const seedMembers = new Map()
 for (const file of contentFiles) {

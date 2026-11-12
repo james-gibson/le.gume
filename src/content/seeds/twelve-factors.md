@@ -1,7 +1,7 @@
 ---
 title: The twelve factors
 description: Thirteen pages that teach the rules as decisions, with the price and the exit on every one.
-order: 2
+order: 3
 updated: 2026-11-12
 tags: seed, factors, teaching
 ---

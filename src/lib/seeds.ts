@@ -1,17 +1,29 @@
 import { PAGES, type Page } from './content'
 
 /**
- * Seeds.
+ * Seeds, on a scale.
  *
  * A seed is a body of knowledge with three things stated up front: who it is
- * for, what it assumes, and where it starts. That is the whole difference
- * between a seed and a folder — a folder is a pile, a seed is a pile with an
- * entrance and a claim about who can walk through it.
+ * for, what it assumes, and where it starts. The scale adds the fourth: **how
+ * much of the machine the audience is willing to touch**.
+ *
+ *     rung 0  Decide      reads cost and risk, will not open a terminal
+ *     rung 1  Understand  reads concepts, still will not deploy anything
+ *     rung 2  Learn       runs it locally, breaks it on purpose
+ *     rung 3  Operate     delegates the running, wants it repeatable
+ *     rung 4  Package     designs systems other people will operate
+ *
+ * Rungs are about readiness, not seniority: a buyer at rung 0 is not a beginner,
+ * and a beginner at rung 1 is not buying anything. The order matters because an
+ * audience that does not want to deploy software must never be handed a page
+ * that assumes a terminal — so it sits *below* the wanting-to-learn rung.
+ *
+ * `lateral` seeds are about register rather than readiness; they sit alongside
+ * every rung instead of on it.
  *
  * Membership is derived from `seeds:` in page frontmatter, so a seed's contents
  * cannot drift from the pages that declare them. A page may belong to several
- * seeds: that is what "shared" means here, and it is why `starter` and
- * `agent-operations` overlap.
+ * seeds: that is what "shared" means here.
  */
 
 export type Seed = {
@@ -26,9 +38,37 @@ export type Seed = {
   teaches: string[]
   /** the route a newcomer should open first */
   entry: string
+  /** position on the readiness scale; absent for lateral seeds */
+  rung?: number
+  /** what this audience does with the machine */
+  touches: string
+  /** register, not readiness — sits alongside every rung */
+  lateral?: boolean
 }
 
+export const SCALE = [
+  { label: 'Decide', touches: 'reads cost and risk; will not open a terminal' },
+  { label: 'Understand', touches: 'reads concepts; will not deploy anything' },
+  { label: 'Learn', touches: 'runs it locally and breaks it on purpose' },
+  { label: 'Operate', touches: 'delegates the running; wants it repeatable' },
+  { label: 'Package', touches: 'designs systems other people will operate' },
+] as const
+
 export const SEEDS: Seed[] = [
+  {
+    id: 'pitch',
+    title: 'The commercial case',
+    audience: 'The person who approves the time or the invoice.',
+    assumes: 'You care about cost, risk and maintenance — not syntax.',
+    teaches: [
+      'what this stack costs to own, in money and in attention',
+      'where it is the wrong answer, on the record',
+      'what a publish guard is actually buying',
+    ],
+    entry: '/pitch/why-legume',
+    rung: 0,
+    touches: 'reads cost and risk; will not open a terminal',
+  },
   {
     id: 'twelve-factors',
     title: 'The twelve factors',
@@ -40,18 +80,8 @@ export const SEEDS: Seed[] = [
       'why the right subset depends on the app and on who notices',
     ],
     entry: '/factors/start-here',
-  },
-  {
-    id: 'agent-operations',
-    title: 'Agent operations',
-    audience: 'An LLM agent, or the person who points one at a repository.',
-    assumes: 'Node 22, a shell, and the willingness to read a guard script.',
-    teaches: [
-      'where the machine entry is, and what it promises',
-      'the build, smoke and guard loop, and what "done" means',
-      'how to resolve an isotope shortcut and ask for its slots',
-    ],
-    entry: '/docs/for-agents',
+    rung: 1,
+    touches: 'reads concepts; will not deploy anything',
   },
   {
     id: 'starter',
@@ -64,6 +94,22 @@ export const SEEDS: Seed[] = [
       'a publish guard as the gate, instead of a release checklist',
     ],
     entry: '/docs/quickstart',
+    rung: 2,
+    touches: 'runs it locally and breaks it on purpose',
+  },
+  {
+    id: 'agent-operations',
+    title: 'Agent operations',
+    audience: 'An LLM agent, or the person who points one at a repository.',
+    assumes: 'Node 22, a shell, and the willingness to read a guard script.',
+    teaches: [
+      'where the machine entry is, and what it promises',
+      'the build, smoke and guard loop, and what "done" means',
+      'how to resolve an isotope shortcut and ask for its slots',
+    ],
+    entry: '/docs/for-agents',
+    rung: 3,
+    touches: 'delegates the running; wants it repeatable',
   },
   {
     id: 'isotopes',
@@ -76,18 +122,8 @@ export const SEEDS: Seed[] = [
       'slots, compounds, and a QR code that expands into instructions',
     ],
     entry: '/isotopes/what-is-an-isotope',
-  },
-  {
-    id: 'pitch',
-    title: 'The commercial case',
-    audience: 'The person who approves the time or the invoice.',
-    assumes: 'You care about cost, risk and maintenance — not syntax.',
-    teaches: [
-      'what this stack costs to own, in money and in attention',
-      'where it is the wrong answer, on the record',
-      'what a publish guard is actually buying',
-    ],
-    entry: '/pitch/why-legume',
+    rung: 4,
+    touches: 'designs systems other people will operate',
   },
   {
     id: 'voice',
@@ -100,6 +136,8 @@ export const SEEDS: Seed[] = [
       'one house joke, told perfectly straight',
     ],
     entry: '/writing/the-hard-parts',
+    touches: 'writes for any of the rungs above',
+    lateral: true,
   },
 ]
 
@@ -115,4 +153,18 @@ export function seedMembers(id: string): Page[] {
 /** Seeds a page belongs to. */
 export function seedsOf(page: Page): Seed[] {
   return page.seeds.map(getSeed).filter((seed): seed is Seed => !!seed)
+}
+
+/** Seeds that sit alongside every rung rather than on one. */
+export function lateralSeeds(): Seed[] {
+  return SEEDS.filter((seed) => seed.lateral)
+}
+
+/** The rungs, with the seeds that sit on each. */
+export function scale(): { level: number; label: string; touches: string; seeds: Seed[] }[] {
+  return SCALE.map((step, level) => ({
+    level,
+    ...step,
+    seeds: SEEDS.filter((seed) => seed.rung === level),
+  }))
 }

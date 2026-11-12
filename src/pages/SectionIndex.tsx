@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Reveal } from 'fancy-ui-react'
 import { SECTIONS, pagesIn, sectionMeta, type SectionId } from '../lib/content'
+import { lateralSeeds, scale } from '../lib/seeds'
 import { usePageMeta } from '../lib/usePageMeta'
 
 export function SectionIndex({ section }: { section: SectionId }) {
@@ -14,6 +15,64 @@ export function SectionIndex({ section }: { section: SectionId }) {
       <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-cream sm:text-5xl">
         {meta.blurb}
       </h1>
+
+      {section === 'seeds' && (
+        <div className="mt-10 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full border-collapse text-left text-sm">
+            <thead className="bg-surface-2 text-cream">
+              <tr>
+                <th className="border-b border-line px-4 py-3 font-semibold">Rung</th>
+                <th className="border-b border-line px-4 py-3 font-semibold">Readiness</th>
+                <th className="border-b border-line px-4 py-3 font-semibold">Seed</th>
+              </tr>
+            </thead>
+            <tbody>
+              {scale().map((step) => (
+                <tr key={step.level}>
+                  <td className="border-b border-line-soft px-4 py-3 font-mono text-xs text-muted">
+                    {step.level}
+                  </td>
+                  <td className="border-b border-line-soft px-4 py-3">
+                    <span className="text-cream">{step.label}</span>
+                    <span className="mt-0.5 block text-xs text-muted">{step.touches}</span>
+                  </td>
+                  <td className="border-b border-line-soft px-4 py-3">
+                    {step.seeds.map((seed) => (
+                      <Link
+                        key={seed.id}
+                        to={`/seeds/${seed.id}`}
+                        className="text-pulse underline decoration-pulse/30 underline-offset-4 hover:decoration-pulse"
+                      >
+                        {seed.title}
+                      </Link>
+                    ))}
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td className="px-4 py-3 font-mono text-xs text-muted">—</td>
+                <td className="px-4 py-3">
+                  <span className="text-cream">Register</span>
+                  <span className="mt-0.5 block text-xs text-muted">
+                    writes for any rung; the voice, not the ladder
+                  </span>
+                </td>
+                <td className="px-4 py-3">
+                  {lateralSeeds().map((seed) => (
+                    <Link
+                      key={seed.id}
+                      to={`/seeds/${seed.id}`}
+                      className="text-pulse underline decoration-pulse/30 underline-offset-4 hover:decoration-pulse"
+                    >
+                      {seed.title}
+                    </Link>
+                  ))}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      )}
 
       <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted">
         <span className="rounded-full border border-line px-2.5 py-1">{pages.length} pages</span>

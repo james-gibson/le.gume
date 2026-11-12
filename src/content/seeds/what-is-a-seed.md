@@ -28,6 +28,32 @@ serves the first of those and wastes the time of the other two.
 The page you are on is the index. Each seed below has its own page with the same three fields at the
 top, rendered from `src/lib/seeds.ts`, so the claim and the content sit together.
 
+## The scale
+
+Rungs measure **readiness**, not seniority. The question is not "how experienced is this person" but
+"how much of the machine will they touch?" — because that decides what a page is allowed to assume.
+
+| Rung | Readiness | What they do | Seed |
+| --- | --- | --- | --- |
+| 0 | Decide | reads cost and risk; will not open a terminal | The commercial case |
+| 1 | Understand | reads concepts; will not deploy anything | The twelve factors |
+| 2 | Learn | runs it locally and breaks it on purpose | The starter |
+| 3 | Operate | delegates the running; wants it repeatable | Agent operations |
+| 4 | Package | designs systems other people will operate | Isotopes |
+
+The ordering is the argument: **someone who does not want to deploy software sits below someone who
+wants to learn.** Handing a terminal-level page to a rung-0 reader does not raise the ceiling; it
+ends the conversation. A buyer is not a beginner, and a beginner is not buying anything — which is
+why the pitch and the factors are separate seeds with separate entrances rather than one "getting
+started" page with a long first paragraph.
+
+One seed sits beside the ladder instead of on it. **The voice** is a register, not a rung: writers
+produce pages for every audience above, so it carries no level and appears last.
+
+The scale is enforced rather than described: the registry must be in rung order, rungs must be
+unique, lateral seeds must come last, and each seed's page must appear in that same order in the
+section. The build refuses a shelf whose ladder and table disagree.
+
 ## Shared and separate
 
 Some seeds overlap. **Agent operations** and **The starter** both need the site's anatomy; the

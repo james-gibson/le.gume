@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { AgentHandoff } from './AgentHandoff'
 import { SITE_ORIGIN } from '../lib/isotopes'
-import { getSeed, seedMembers } from '../lib/seeds'
+import { getSeed, SCALE, seedMembers } from '../lib/seeds'
 import { sectionMeta } from '../lib/content'
 
 /**
@@ -18,6 +18,15 @@ export function SeedPanel({ seedId }: { seedId: string }) {
 
   return (
     <div className="mt-8 space-y-6">
+      <div className="rounded-2xl border border-line bg-surface p-5">
+        <p className="text-xs tracking-[0.14em] text-pulse uppercase">
+          {seed.lateral || seed.rung === undefined
+            ? 'Lateral · any rung'
+            : `Rung ${seed.rung} · ${SCALE[seed.rung].label}`}
+        </p>
+        <p className="mt-1 text-sm text-muted">{seed.touches}</p>
+      </div>
+
       <div className="grid gap-4 rounded-2xl border border-line bg-surface p-5 sm:grid-cols-3">
         <div>
           <p className="text-xs tracking-[0.14em] text-muted uppercase">Audience</p>
