@@ -5,6 +5,7 @@ order: 2
 updated: 2026-11-12
 slots: none
 tags: isotope, static, github-pages
+seeds: isotopes, starter
 ---
 
 # Silverskin — a documentation site that ships itself

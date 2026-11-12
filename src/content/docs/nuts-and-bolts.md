@@ -4,6 +4,7 @@ description: The five moving parts, the contract between them, and the places a 
 order: 2
 updated: 2026-11-11
 tags: architecture
+seeds: starter
 ---
 
 # Nuts and bolts

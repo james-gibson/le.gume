@@ -229,7 +229,40 @@ try {
   if (!error || error.code !== 'ENOENT') throw error
 }
 
-// --- 10. size sanity ------------------------------------------------------
+// --- 10. seeds are declared, populated and resolvable ---------------------
+// A seed promises an audience an entrance. The registry is TypeScript, so it is
+// read as text here: ids and entry routes, then cross-checked against the pages
+// that declare membership in frontmatter.
+const seedsSource = await readText('src/lib/seeds.ts').catch(() => '')
+const seedIds = [...seedsSource.matchAll(/^\s{4}id: '([^']+)'/gm)].map((m) => m[1])
+const seedEntries = [...seedsSource.matchAll(/^\s{4}entry: '([^']+)'/gm)].map((m) => m[1])
+
+if (!seedIds.length) fail('seeds', 'no seeds found in src/lib/seeds.ts')
+
+const seedMembers = new Map()
+for (const file of contentFiles) {
+  const line = /^seeds:\s*(.+)$/m.exec(await readText(file))?.[1]
+  if (!line) continue
+  for (const id of line.split(',').map((value) => value.trim()).filter(Boolean)) {
+    if (!seedIds.includes(id)) fail('seeds', `${file} declares unknown seed "${id}"`)
+    seedMembers.set(id, (seedMembers.get(id) ?? 0) + 1)
+  }
+}
+
+for (const id of seedIds) {
+  if (!/^[a-z0-9-]+$/.test(id)) fail('seeds', `seed id "${id}" must be a lowercase slug`)
+  if (!seedMembers.get(id)) fail('seeds', `seed "${id}" has no page declaring \`seeds: ${id}\``)
+  if (!rel.includes(`seeds/${id}/index.html`)) {
+    fail('seeds', `seed "${id}" has no page at src/content/seeds/${id}.md`)
+  }
+}
+
+for (const entry of seedEntries) {
+  const route = entry.replace(/\/$/, '') || '/'
+  if (!knownRoutes.has(route)) fail('seeds', `seed entrance ${entry} is not a route`)
+}
+
+// --- 11. size sanity ------------------------------------------------------
 const total = (await Promise.all(files.map(async (f) => (await stat(f)).size))).reduce(
   (a, b) => a + b,
   0,

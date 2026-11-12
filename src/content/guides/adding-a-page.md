@@ -4,6 +4,7 @@ description: Four minutes, one file, no navigation edit.
 order: 2
 updated: 2026-11-11
 tags: workflow
+seeds: starter
 ---
 
 # Adding a page

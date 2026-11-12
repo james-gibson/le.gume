@@ -4,6 +4,7 @@ description: What the twelve factors are, why following them blindly wastes mone
 order: 1
 updated: 2026-11-12
 tags: factors, teaching
+seeds: twelve-factors
 ---
 
 # Start here

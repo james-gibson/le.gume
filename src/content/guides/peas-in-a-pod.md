@@ -4,6 +4,7 @@ description: Keeping pages, sections and components close enough to stay honest.
 order: 3
 updated: 2026-11-11
 tags: structure, content
+seeds: starter
 ---
 
 # Peas in a pod

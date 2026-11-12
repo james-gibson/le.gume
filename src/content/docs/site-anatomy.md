@@ -4,6 +4,7 @@ description: The file map behind the page you are reading, annotated.
 order: 4
 updated: 2026-11-11
 tags: reference, files
+seeds: starter, agent-operations
 ---
 
 # Site anatomy

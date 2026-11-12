@@ -4,6 +4,7 @@ description: The smallest working system that demonstrates one pattern completel
 order: 1
 updated: 2026-11-12
 tags: isotopes, format
+seeds: isotopes
 ---
 
 # What an isotope is

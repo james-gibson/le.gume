@@ -4,6 +4,7 @@ description: Write down everything the program needs, with versions, so any mach
 order: 3
 updated: 2026-11-12
 tags: factor, dependencies
+seeds: twelve-factors
 ---
 
 # 2. Dependencies

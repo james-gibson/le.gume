@@ -4,6 +4,7 @@ description: Scale by starting more copies of the same program, not by making on
 order: 9
 updated: 2026-11-12
 tags: factor, scaling
+seeds: twelve-factors
 ---
 
 # 8. Concurrency

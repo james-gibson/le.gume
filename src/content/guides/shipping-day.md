@@ -4,6 +4,7 @@ description: The pre-flight list that catches the four mistakes this stack can s
 order: 4
 updated: 2026-11-11
 tags: checklist, release
+seeds: starter
 ---
 
 # Shipping day

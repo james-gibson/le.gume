@@ -4,6 +4,7 @@ description: Keep the place you develop close to the place you ship — same ver
 order: 11
 updated: 2026-11-12
 tags: factor, parity
+seeds: twelve-factors
 ---
 
 # 10. Dev/prod parity

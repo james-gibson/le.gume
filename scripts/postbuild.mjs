@@ -68,14 +68,15 @@ const SITE = 'https://james-gibson.github.io/le.gume'
 // Labels are presentation; the order and membership come from the files. A new
 // section therefore appears here without this map being edited, under its slug.
 const LABELS = {
-  docs: 'Documentation',
-  factors: 'Twelve factors',
+  docs: 'Docs',
+  seeds: 'Seeds',
+  factors: 'Factors',
   isotopes: 'Isotopes',
   guides: 'Guides',
   pitch: 'Pitch',
   writing: 'Writing',
 }
-const SECTION_ORDER = ['docs', 'factors', 'isotopes', 'guides', 'pitch', 'writing']
+const SECTION_ORDER = ['docs', 'seeds', 'factors', 'isotopes', 'guides', 'pitch', 'writing']
 
 function frontmatter(source) {
   const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(source)

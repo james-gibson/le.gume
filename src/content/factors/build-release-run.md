@@ -4,6 +4,7 @@ description: Making the files, labelling the files, and serving the files are th
 order: 6
 updated: 2026-11-12
 tags: factor, deploy
+seeds: twelve-factors
 ---
 
 # 5. Build, release, run

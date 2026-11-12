@@ -4,6 +4,7 @@ description: Housekeeping tasks run as one-off commands from the same code, not 
 order: 13
 updated: 2026-11-12
 tags: factor, operations
+seeds: twelve-factors
 ---
 
 # 12. Admin processes

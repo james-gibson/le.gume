@@ -4,6 +4,7 @@ description: The frontmatter contract, how ordering works, and how headings beco
 order: 3
 updated: 2026-11-11
 tags: markdown, frontmatter
+seeds: starter
 ---
 
 # Content model

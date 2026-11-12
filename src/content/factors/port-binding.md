@@ -4,6 +4,7 @@ description: The program opens a port and serves itself — a rule about servers
 order: 8
 updated: 2026-11-12
 tags: factor, hosting
+seeds: twelve-factors
 ---
 
 # 7. Port binding

@@ -4,6 +4,7 @@ description: Why the least interesting part of a documentation stack is the part
 order: 2
 updated: 2026-11-11
 tags: essay, maintenance
+seeds: voice
 ---
 
 # Boring is a feature

@@ -4,6 +4,7 @@ description: The commercial case for a documentation site that is cheap to own a
 order: 1
 updated: 2026-11-11
 tags: pitch, roi
+seeds: pitch
 ---
 
 # Why le.gume

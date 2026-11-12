@@ -4,6 +4,7 @@ description: Making a difficult thing easy is mostly deciding what to remove, an
 order: 1
 updated: 2026-11-11
 tags: essay, craft
+seeds: voice
 ---
 
 # The hard parts

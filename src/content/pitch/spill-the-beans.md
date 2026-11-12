@@ -4,6 +4,7 @@ description: What this project does not do, what it will cost you later, and whe
 order: 2
 updated: 2026-11-11
 tags: pricing, limits
+seeds: pitch
 ---
 
 # Let me spill the beans

@@ -12,12 +12,17 @@
 export const SECTIONS = [
   {
     id: 'docs',
-    label: 'Documentation',
+    label: 'Docs',
     blurb: 'How the site is put together, and why each part is the size it is.',
   },
   {
+    id: 'seeds',
+    label: 'Seeds',
+    blurb: 'Bodies of knowledge with a stated audience, a stated assumption and an entrance.',
+  },
+  {
     id: 'factors',
-    label: 'Twelve factors',
+    label: 'Factors',
     blurb: 'Twelve rules of thumb, taught one at a time — with the price tag and the exit.',
   },
   {
@@ -56,6 +61,8 @@ export type Page = {
   order: number
   updated: string
   tags: string[]
+  /** seed ids this page belongs to; a page can be shared by several seeds */
+  seeds: string[]
   body: string
   headings: Heading[]
 }
@@ -126,6 +133,10 @@ function toPage(path: string, source: string): Page | null {
     order: Number(data.order ?? 999),
     updated: data.updated || '',
     tags: (data.tags || '')
+      .split(',')
+      .map((t) => t.trim())
+      .filter(Boolean),
+    seeds: (data.seeds || '')
       .split(',')
       .map((t) => t.trim())
       .filter(Boolean),

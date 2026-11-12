@@ -4,6 +4,7 @@ description: Any copy can be killed at any moment, and starting one should be qu
 order: 10
 updated: 2026-11-12
 tags: factor, reliability
+seeds: twelve-factors
 ---
 
 # 9. Disposability

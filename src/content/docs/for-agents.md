@@ -4,6 +4,7 @@ description: The operating contract — what to read, what to run, what must sta
 order: 7
 updated: 2026-11-11
 tags: agents, llms, operations
+seeds: agent-operations
 ---
 
 # For agents
@@ -73,7 +74,9 @@ tags: api, limits
 Body. `##` and `###` become the table of contents; `#` does not.
 ```
 
-Sections are `docs`, `factors`, `isotopes`, `guides`, `pitch`, `writing`. A new section is an entry in `SECTIONS`
+Sections are `docs`, `seeds`, `factors`, `isotopes`, `guides`, `pitch`, `writing`. A page declares
+which seeds it belongs to (`seeds: starter, agent-operations`); the seed pages derive their contents
+from that, so a seed cannot claim a page that does not claim it back. A new section is an entry in `SECTIONS`
 (`src/lib/content.ts`) plus a folder — header, footer, section index, 404 and `llms.txt` follow.
 
 ## What "done" means

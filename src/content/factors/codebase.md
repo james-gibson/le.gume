@@ -4,6 +4,7 @@ description: One program, one folder with a diary, many deploys — and why a se
 order: 2
 updated: 2026-11-12
 tags: factor, source-control
+seeds: twelve-factors
 ---
 
 # 1. Codebase

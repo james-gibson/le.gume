@@ -4,6 +4,7 @@ description: A database, a mail sender, a queue — treat each as a plug you can
 order: 5
 updated: 2026-11-12
 tags: factor, services
+seeds: twelve-factors
 ---
 
 # 4. Backing services

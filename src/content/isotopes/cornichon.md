@@ -5,6 +5,7 @@ order: 3
 updated: 2026-11-12
 slots: repo, dict, every
 tags: isotope, ci, cspell
+seeds: isotopes, agent-operations
 ---
 
 # Cornichon — spell-check a repository on a schedule

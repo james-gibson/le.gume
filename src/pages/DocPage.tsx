@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { neighbours, sectionMeta, type Page } from '../lib/content'
 import { markdownComponents } from '../lib/markdown'
+import { SeedPanel } from '../components/SeedPanel'
 import { usePageMeta } from '../lib/usePageMeta'
 
 export function DocPage({ page }: { page: Page }) {
@@ -47,6 +48,8 @@ export function DocPage({ page }: { page: Page }) {
             </a>
           </div>
         </header>
+
+        {page.section === 'seeds' && <SeedPanel seedId={page.slug} />}
 
         <div className="pb-4">
           <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>

@@ -4,6 +4,7 @@ description: Settings live outside the code, so the same files can run in two pl
 order: 4
 updated: 2026-11-12
 tags: factor, config, secrets
+seeds: twelve-factors
 ---
 
 # 3. Config

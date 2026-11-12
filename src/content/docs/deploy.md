@@ -4,6 +4,7 @@ description: GitHub Pages on push, the base-path trap, and how to roll back in o
 order: 5
 updated: 2026-11-11
 tags: pages, ci, release
+seeds: starter
 ---
 
 # Deploy

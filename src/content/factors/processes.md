@@ -4,6 +4,7 @@ description: Run the program as something that can be restarted at any moment, w
 order: 7
 updated: 2026-11-12
 tags: factor, state
+seeds: twelve-factors
 ---
 
 # 6. Processes

@@ -4,6 +4,7 @@ description: Why this repository is a seed rather than a generator, what to keep
 order: 1
 updated: 2026-11-11
 tags: templates, bootstrap
+seeds: starter
 ---
 
 # Project seeds

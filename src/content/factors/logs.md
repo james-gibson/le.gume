@@ -4,6 +4,7 @@ description: A log is a stream of events, not a file to rotate — write to the 
 order: 12
 updated: 2026-11-12
 tags: factor, logs
+seeds: twelve-factors
 ---
 
 # 11. Logs
