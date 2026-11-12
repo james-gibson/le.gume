@@ -107,6 +107,7 @@ for (const file of await walk(CONTENT)) {
     description: data.description || '',
     order: Number(data.order ?? 999),
     slots: data.slots || '',
+    presumes: data.presumes || '',
   })
 }
 pages.sort((a, b) => a.section.localeCompare(b.section) || a.order - b.order || a.title.localeCompare(b.title))
@@ -166,10 +167,15 @@ lines.push(
   'To resolve one, fetch the page, read its "Agent prompt" block, and ask the user',
   'for every slot whose query-string value is empty.',
   '',
+  'A line also carries `presumes:` — the runtime, platform and permissions the',
+  'isotope assumes. Compare isotopes on that line before comparing anything else:',
+  'the same shape on two eras has two different attack surfaces.',
+  '',
 )
 for (const page of pages.filter((p) => p.section === 'isotopes' && p.slots)) {
   const slots = page.slots || 'none'
-  lines.push(`- [${page.title}](${SITE}/${page.route}/): slots: ${slots}`)
+  const presumes = page.presumes || 'none'
+  lines.push(`- [${page.title}](${SITE}/${page.route}/): slots: ${slots} · presumes: ${presumes}`)
 }
 lines.push('')
 

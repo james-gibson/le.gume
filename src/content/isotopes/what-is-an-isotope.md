@@ -51,6 +51,45 @@ A cost with no function is an expense; a function with no cost is a fantasy. Nam
 makes a system liftable, and what makes it re-decidable when the cost crosses a threshold
 ([the business version of that argument](/pitch/cost-centres)).
 
+## Similar, self-standing, self-declaring
+
+Three properties do the work, and none of them is about technology:
+
+- **Similar.** Same page shape, same vocabulary — *proves, parts, costs, take, break*. Similarity is
+  about form, so two isotopes can be laid side by side. It says nothing about the stack underneath.
+- **Self-standing.** It runs on its own. No dependency on the rest of the collection, no shared
+  runtime, no "install the others first". Lift it and it works.
+- **Self-declaring.** It announces its presumptions: the runtime, the platform, the permissions, the
+  era. This is the one people skip, and it is the one that makes the other two worth anything.
+
+## The same service, twenty years apart
+
+A web service is a stable shape across eras. What it *presumes* is not.
+
+| Launch era | Usual stack | What the service presumes | What that changes |
+| --- | --- | --- | --- |
+| Late 1990s | CGI / Perl, a process per request | filesystem permissions, no framework, string-built HTML | request flooding is cheap; injection arrives through concatenation |
+| Late 2000s | PHP / mod_php, shared interpreter | session files, includes, a plugin ecosystem | session fixation, include paths, a supply chain you did not write |
+| Late 2010s | Node / JavaScript | an event loop, a package tree, JSON on the wire | prototype pollution, dependency drift, parser and regex denial of service |
+| Mid 2020s | Rust / Go binaries | memory safety, no runtime, explicit dependencies | fewer memory classes, but TLS, certificates, config and registry supply chain remain |
+
+Same user story in every row. Same request. A security assessment that does not know which row it is
+looking at is not an assessment — it is a guess with a confident tone.
+
+That is why an isotope declares its presumptions in frontmatter, next to its slots:
+
+```yaml
+slots: repo, dict, every
+presumes: github-actions, node-22, cspell-8, issues-write
+```
+
+The line is not a security audit. It is what makes one possible: you cannot assess an attack against
+a system whose era and assumptions you had to guess. Two isotopes are comparable when their
+presumptions are written down; otherwise you are comparing vibes.
+
+The build enforces the line on every isotope page, and `/llms.txt` repeats it next to the slots, so a
+machine can compare two isotopes without opening either page.
+
 ## What makes something an isotope
 
 Four tests, in order. Fail one and it is a demo, a snippet or a sketch — all useful, none liftable.

@@ -4,6 +4,7 @@ description: Three files that compose into a recurring job, a worked example of 
 order: 3
 updated: 2026-11-12
 slots: repo, dict, every
+presumes: github-actions, node-22, cspell-8, issues-write
 tags: isotope, ci, cspell
 seeds: isotopes, agent-operations
 ---

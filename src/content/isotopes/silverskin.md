@@ -4,6 +4,7 @@ description: The site you are reading, described as an isotope: what it proves, 
 order: 2
 updated: 2026-11-12
 slots: none
+presumes: node-22, tailwind-v4, git, github-pages, no-server
 tags: isotope, static, github-pages
 seeds: isotopes, starter
 ---

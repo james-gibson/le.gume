@@ -120,6 +120,7 @@ export const SEEDS: Seed[] = [
       'the four tests that make a system an isotope',
       'why names beat numbers, and what a permanent name costs',
       'slots, compounds, and a QR code that expands into instructions',
+      'why an isotope announces its presumptions before it can be compared',
     ],
     entry: '/isotopes/what-is-an-isotope',
     rung: 4,

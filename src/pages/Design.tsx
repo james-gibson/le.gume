@@ -326,6 +326,10 @@ export function Design() {
               </li>
             ))}
           </ul>
+
+          <p className="mt-3 font-mono text-xs text-muted/80">
+            presumes: {isotope.presumes.join(', ')}
+          </p>
         </div>
 
         <AgentHandoff

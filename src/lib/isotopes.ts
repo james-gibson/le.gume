@@ -29,6 +29,8 @@ export type Isotope = {
   title: string
   summary: string
   slots: IsotopeSlot[]
+  /** what the isotope assumes about its runtime and permissions — announced, not inferred */
+  presumes: string[]
 }
 
 export const SITE_ORIGIN = 'https://james-gibson.github.io/le.gume'
@@ -39,6 +41,7 @@ export const ISOTOPES: Isotope[] = [
     title: 'Silverskin — a documentation site that ships itself',
     summary: 'Content as files, a derived navigation, a publish guard, and a deploy on push.',
     slots: [],
+    presumes: ['node-22', 'tailwind-v4', 'git', 'github-pages', 'no-server'],
   },
   {
     name: 'cornichon',
@@ -49,6 +52,7 @@ export const ISOTOPES: Isotope[] = [
       { name: 'dict', question: 'Which dictionary should carry your domain words?', example: 'acme-terms' },
       { name: 'every', question: 'How often should it run?', example: 'weekly' },
     ],
+    presumes: ['github-actions', 'node-22', 'cspell-8', 'issues-write'],
   },
 ]
 

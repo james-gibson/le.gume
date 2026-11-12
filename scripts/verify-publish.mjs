@@ -157,6 +157,14 @@ for (const file of contentFiles) {
       `${file} is an isotope but has no \`slots:\` frontmatter (use \`slots: none\`)`,
     )
   }
+  // Announcing the presumptions is what makes two isotopes comparable: an
+  // attack surface is only assessable against a stated runtime and era.
+  if (route.startsWith('isotopes/') && !isFormatPage && !/^presumes:/m.test(source)) {
+    fail(
+      'isotope',
+      `${file} is an isotope but never announces \`presumes:\` (runtime, platform, permissions)`,
+    )
+  }
   // React escapes nothing in JS string literals, but the bundler may split
   // long strings; a title is short enough to appear whole.
   if (!jsText.includes(title)) {

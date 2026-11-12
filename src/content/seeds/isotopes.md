@@ -15,6 +15,8 @@ that you have written a runbook, or hated one. The entrance is
 ## What is inside
 
 - **The format** — four tests (runs, ships, minimal, liftable) and a fixed page shape.
+- **Three properties** — similar, self-standing, self-declaring: the page shape is what makes two
+  isotopes comparable, and the `presumes:` line is what makes the comparison honest.
 - **The naming spec** — the pickle shelf, and the three rules that keep names permanent.
 - **A whole system** — [Silverskin](/isotopes/silverskin), the documentation site as an isotope.
 - **A compound** — [Cornichon](/isotopes/cornichon), a recurring job with three slots, a working
