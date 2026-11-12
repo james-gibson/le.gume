@@ -55,7 +55,7 @@ src/lib/content.ts                the content model: glob, ordering, headings, n
 src/lib/markdown.tsx              article typography
 src/pages/Design.tsx              the live design system
 src/App.tsx                       five routes
-scripts/postbuild.mjs             404.html, .nojekyll, robots.txt
+scripts/postbuild.mjs             per-route shells, 404.html, .nojekyll, robots.txt
 scripts/verify-publish.mjs        the publish guard
 scripts/smoke.tsx                 the route smoke test
 .github/workflows/deploy.yml      GitHub Pages on push

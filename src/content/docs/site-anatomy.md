@@ -30,7 +30,7 @@ src/pages/DocPage.tsx       article, breadcrumb, TOC rail, prev/next, edit link
 src/pages/Design.tsx        live design system (this is a route, not a document)
 src/pages/NotFound.tsx      404 with the real section list
 src/content/**/*.md         the pages you are reading
-scripts/postbuild.mjs       404.html + .nojekyll
+scripts/postbuild.mjs       per-route shells, 404.html, .nojekyll, robots.txt
 scripts/verify-publish.mjs  the guard; fails the build on unsafe output
 ```
 

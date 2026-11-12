@@ -32,9 +32,10 @@ There is no second place to edit.
 A URL that does not resolve to a page renders the 404 with the real section list, so a bad link
 still lands somewhere useful.
 
-**The build has two post-steps.** `postbuild.mjs` writes `dist/404.html` (a copy of the shell,
-so GitHub Pages can serve deep links) and `dist/.nojekyll` (so nothing is silently dropped).
-`verify-publish.mjs` then refuses the output if it is unsafe or obviously broken.
+**The build has three post-steps.** `postbuild.mjs` writes one shell per real route
+(`dist/docs/quickstart/index.html` and so on), a `dist/404.html` for everything else, and
+`dist/.nojekyll` so nothing is silently dropped. `verify-publish.mjs` then refuses the output if
+it is unsafe or obviously broken — including a route without its shell.
 
 **Motion is a dependency, not an invention.** fancy-ui supplies the effects; the site supplies
 the restraint. Components are used as shipped.

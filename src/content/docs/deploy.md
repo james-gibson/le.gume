@@ -43,7 +43,26 @@ Three properties of this shape are worth keeping:
 - The guard runs inside `npm run build`, so a failure stops the deploy rather than the reader.
 - One artifact, one environment. There is no `gh-pages` branch to reconcile.
 
-## The base-path trap
+## Deep links are pages, not fallbacks
+
+GitHub Pages answers an unknown path with `404.html` — and a 404 status, even when the body is
+your app. A documentation site cannot live with that: link checkers, crawlers and "is this page
+real" both read the status.
+
+So `scripts/postbuild.mjs` writes one shell per route:
+
+```text
+dist/404.html                        everything unknown
+dist/docs/quickstart/index.html      a real 200 for a real page
+dist/design/index.html               the same, for the design route
+```
+
+The routes are derived from `src/content/**/*.md`, and the guard refuses a build where a content
+file has no shell. Adding a page still means adding one Markdown file.
+
+The expense is that every page is the identical shell: no per-page HTML, so nothing is
+pre-rendered and crawlers see the same document everywhere. That is the trade this stack accepts
+— if per-page HTML becomes a requirement, server-render each route at build time and hydrate.
 
 A project site is served from `https://<owner>.github.io/<repo>/`, not from the domain root.
 Two places must agree:
