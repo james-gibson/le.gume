@@ -4,7 +4,7 @@ A documentation site that documents itself. Four sections, one content model, on
 deploy — and a live design system instead of a screenshot of one.
 
 <p align="center">
-  <a href="https://github.com/james-gibson/le.gume/actions/workflows/deploy.yml"><img src="https://shieldcn.dev/github/ci/james-gibson/le.gume.svg?workflow=deploy&branch=main&variant=secondary" alt="deploy" /></a>
+  <a href="https://github.com/james-gibson/le.gume/actions/workflows/deploy.yml"><img src="https://shieldcn.dev/github/ci/james-gibson/le.gume.svg?workflow=deploy.yml&branch=main&variant=secondary" alt="deploy" /></a>
   <a href="https://github.com/james-gibson/le.gume/blob/main/LICENSE"><img src="https://shieldcn.dev/github/license/james-gibson/le.gume.svg?variant=secondary" alt="license" /></a>
   <a href="https://github.com/james-gibson/le.gume/commits/main"><img src="https://shieldcn.dev/github/last-commit/james-gibson/le.gume.svg?variant=secondary" alt="last commit" /></a>
 </p>
