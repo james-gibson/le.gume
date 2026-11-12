@@ -1,0 +1,37 @@
+{
+  "name": "le-gume",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A self-documenting documentation site. Replaces the hard parts of shipping docs with a build that already knows them.",
+  "homepage": "https://james-gibson.github.io/le.gume/",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build && node scripts/postbuild.mjs && node scripts/verify-publish.mjs",
+    "preview": "vite preview",
+    "smoke": "vite build --ssr scripts/smoke.tsx --outDir .smoke --emptyOutDir && node .smoke/smoke.js",
+    "guard": "node scripts/verify-publish.mjs",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "fancy-ui-react": "0.7.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-markdown": "10.1.0",
+    "react-router-dom": "7.18.5",
+    "remark-gfm": "4.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "6.3.0",
+    "tailwindcss": "4.3.5",
+    "typescript": "5.9.3",
+    "vite": "8.3.8"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
