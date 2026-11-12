@@ -46,7 +46,7 @@ npm install   # resolve versions, possibly update the lock — used when changin
   must decide when to move.
 - **Supply chain risk.** Every dependency is code you did not write, running with your permissions.
   Fewer is safer, and "fewer" is a design choice, not a cleanup task.
-- **Size.** Dependencies are most of a modern bundle. This site ships six runtime packages and that
+- **Size.** Dependencies are most of a modern bundle. This site ships seven runtime packages and that
   is already a considered number.
 
 ## Skip it when
@@ -56,7 +56,7 @@ throwaway into something you keep.
 
 ## Where this site stands
 
-**Applied.** `package.json` declares six runtime and eight build dependencies; `package-lock.json`
+**Applied.** `package.json` declares seven runtime and eight build dependencies; `package-lock.json`
 pins them; CI runs `npm ci`. The site assumes nothing is installed on the machine except Node 22.
 
 ## Exercise

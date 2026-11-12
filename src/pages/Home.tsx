@@ -23,7 +23,7 @@ export function Home() {
   const facts = [
     { k: 'Pages', v: PAGES.length },
     { k: 'Sections', v: SECTIONS.length },
-    { k: 'Dependencies', v: 6 },
+    { k: 'Dependencies', v: 7 },
   ]
 
   return (

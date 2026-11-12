@@ -24,6 +24,7 @@ src/lib/usePageMeta.ts      document title + description per route
 src/components/Layout.tsx   header, outlet, footer, scroll reset
 src/components/SiteHeader.tsx  sticky nav, built from SECTIONS
 src/components/SiteFooter.tsx  counts, section columns, source link
+src/components/AgentHandoff.tsx  QR handoff: instructions an agent can scan
 src/pages/Home.tsx          hero, stats, bento grid, marquee, self-documenting cards
 src/pages/SectionIndex.tsx  a section's pages, numbered and sorted
 src/pages/DocPage.tsx       article, breadcrumb, TOC rail, prev/next, edit link

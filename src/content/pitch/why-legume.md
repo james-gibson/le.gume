@@ -20,7 +20,7 @@ publication that costs nothing.
 
 | | Typical docs platform | This |
 | --- | --- | --- |
-| Dependencies | 30–200 packages | 6 runtime, 8 build |
+| Dependencies | 30–200 packages | 7 runtime, 8 build |
 | Build time | 20–90s, incremental, fragile | under 3s locally |
 | Hosting | managed, metered | GitHub Pages, free for public repos |
 | Publish | a person, a runbook | a push |

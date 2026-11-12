@@ -10,7 +10,7 @@ import {
   RainbowButton,
   Reveal,
 } from 'fancy-ui-react'
-import { Link } from 'react-router-dom'
+import { AgentHandoff, SITE_HANDOFF } from '../components/AgentHandoff'
 import { usePageMeta } from '../lib/usePageMeta'
 
 function Sample({
@@ -265,16 +265,8 @@ export function Design() {
         </Sample>
       </div>
 
-      <div className="mt-14 rounded-2xl border border-line bg-surface p-6">
-        <p className="text-sm text-muted">
-          Want the same page in your project? The install is one dependency and two CSS imports —
-          see{' '}
-          <Link to="/docs/quickstart" className="text-pulse underline decoration-pulse/30 underline-offset-4">
-            the quickstart
-          </Link>
-          . Want to change this page? It lives at{' '}
-          <code className="font-mono text-xs text-pulse">src/pages/Design.tsx</code>.
-        </p>
+      <div className="mt-14">
+        <AgentHandoff id="handoff" instructions={SITE_HANDOFF} />
       </div>
     </div>
   )

@@ -15,7 +15,7 @@ the cheapest possible test of a claim.
 ## What it proves
 
 A documentation site can be owned outright, deploy on push, refuse to publish bad output, and
-document itself — with six runtime dependencies and no server.
+document itself — with seven runtime dependencies and no server.
 
 It also proves the limits: no search, no versions, no CMS, no per-page HTML. Those are listed at
 the bottom, because an isotope that hides its costs is an advertisement.
