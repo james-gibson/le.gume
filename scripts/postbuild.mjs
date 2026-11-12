@@ -65,7 +65,17 @@ await writeFile(join(DIST, 'robots.txt'), ['User-agent: *', 'Allow: /', ''].join
 // plain-text file listing every page, the build command, and the invariants.
 // Generated from the content tree so it cannot drift from the site.
 const SITE = 'https://james-gibson.github.io/le.gume'
-const SECTIONS = { docs: 'Documentation', guides: 'Guides', pitch: 'Pitch', writing: 'Writing' }
+// Labels are presentation; the order and membership come from the files. A new
+// section therefore appears here without this map being edited, under its slug.
+const LABELS = {
+  docs: 'Documentation',
+  factors: 'Twelve factors',
+  isotopes: 'Isotopes',
+  guides: 'Guides',
+  pitch: 'Pitch',
+  writing: 'Writing',
+}
+const SECTION_ORDER = ['docs', 'factors', 'isotopes', 'guides', 'pitch', 'writing']
 
 function frontmatter(source) {
   const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(source)
@@ -131,10 +141,15 @@ const lines = [
   '',
 ]
 
-for (const [id, label] of Object.entries(SECTIONS)) {
+const sectionIds = [...new Set(pages.map((p) => p.section))].sort(
+  (a, b) =>
+    (SECTION_ORDER.indexOf(a) === -1 ? 99 : SECTION_ORDER.indexOf(a)) -
+      (SECTION_ORDER.indexOf(b) === -1 ? 99 : SECTION_ORDER.indexOf(b)) || a.localeCompare(b),
+)
+for (const id of sectionIds) {
   const list = pages.filter((p) => p.section === id)
   if (!list.length) continue
-  lines.push(`## ${label}`, '')
+  lines.push(`## ${LABELS[id] ?? id}`, '')
   for (const page of list) {
     lines.push(`- [${page.title}](${SITE}/${page.route}/): ${page.description}`)
   }
@@ -146,7 +161,8 @@ lines.push(
   '',
   `- Start with [For agents](${SITE}/docs/for-agents/): the operating contract.`,
   `- [Quickstart](${SITE}/docs/quickstart/): clone, install, run.`,
-  `- [Twelve factors](${SITE}/docs/twelve-factor/): how this site maps the twelve-factor app.`,
+  `- [Twelve factors](${SITE}/factors/start-here/): the rules as lessons, with their costs.`,
+  `- [Isotopes](${SITE}/isotopes/what-is-an-isotope/): minimal systems you can lift.`,
   `- [Design](${SITE}/design/): every component in use, live.`,
   '',
 )

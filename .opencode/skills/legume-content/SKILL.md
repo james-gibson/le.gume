@@ -75,7 +75,8 @@ npm run build   # tsc + vite + postbuild + guard
 npm run smoke   # every route rendered server-side
 ```
 
-Sections are `docs`, `guides`, `pitch`, `writing` (`SECTIONS` in `src/lib/content.ts`). A new
+Sections are `docs`, `factors`, `isotopes`, `guides`, `pitch`, `writing` (`SECTIONS` in
+`src/lib/content.ts`). A new
 section is an entry there plus a folder — the header, footer, index and 404 pick it up.
 
 ## Edit or restructure

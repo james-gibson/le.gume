@@ -1,6 +1,6 @@
 # le.gume
 
-A documentation site that documents itself. Four sections, one content model, one guard, one
+A documentation site that documents itself. Six sections, one content model, one guard, one
 deploy — and a live design system instead of a screenshot of one.
 
 <p align="center">

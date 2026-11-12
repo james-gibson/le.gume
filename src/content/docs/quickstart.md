@@ -50,7 +50,7 @@ boring.
 
 1. Change the `homepage`, `name` and `base` (in `vite.config.ts`) if the repo is not called
    `le.gume`.
-2. Replace the four sections in `src/lib/content.ts` if your docs are not docs/guides/pitch/writing.
+2. Replace the sections in `src/lib/content.ts` if your docs are not docs/factors/isotopes/guides/pitch/writing.
 3. Delete the content you do not want. The navigation follows the files, so an empty folder is an
    empty section — no dangling links.
 

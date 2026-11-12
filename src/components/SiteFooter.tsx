@@ -13,7 +13,7 @@ export function SiteFooter() {
             A documentation site that documents itself. Nothing here is hidden behind a
             build system you have to learn first.
           </p>
-          <p className="mt-4 font-mono text-xs text-muted/70">{PAGES.length} pages · 4 sections · 1 build</p>
+          <p className="mt-4 font-mono text-xs text-muted/70">{PAGES.length} pages · {SECTIONS.length} sections · 1 build</p>
         </div>
 
         {SECTIONS.slice(0, 3).map((section) => (

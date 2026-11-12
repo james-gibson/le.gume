@@ -16,6 +16,16 @@ export const SECTIONS = [
     blurb: 'How the site is put together, and why each part is the size it is.',
   },
   {
+    id: 'factors',
+    label: 'Twelve factors',
+    blurb: 'Twelve rules of thumb, taught one at a time — with the price tag and the exit.',
+  },
+  {
+    id: 'isotopes',
+    label: 'Isotopes',
+    blurb: 'Minimal viable systems you can lift whole: one page per working exemplar.',
+  },
+  {
     id: 'guides',
     label: 'Guides',
     blurb: 'Task-shaped walkthroughs: seed a project, add a page, ship it.',

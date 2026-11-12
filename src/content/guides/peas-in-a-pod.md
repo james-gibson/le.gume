@@ -17,8 +17,8 @@ describe. Colocation is the defence.
 **Page and URL.** The file path *is* the route. There is no map from `quickstart.md` to
 `/docs/quickstart` to update, which means there is no map that can go stale.
 
-**Section and navigation.** `SECTIONS` is four entries. The header, the footer columns, the
-section indexes and the 404 all read it. One edit, four surfaces.
+**Section and navigation.** `SECTIONS` is one short array. The header, the footer columns, the
+section indexes, the 404 and `llms.txt` all read it. One edit, five surfaces.
 
 **Design system and implementation.** `/design` imports the same modules the rest of the site
 imports. The sample cannot quietly diverge from the product, because it *is* the product.

@@ -42,7 +42,7 @@ src/content/guides/adding-a-page.md  ->  /guides/adding-a-page
 src/content/docs/quickstart.md       ->  /docs/quickstart
 ```
 
-The section must be one of the four declared in `src/lib/content.ts`. A file in an unknown
+The section must be one of those declared in `src/lib/content.ts`. A file in an unknown
 folder is ignored rather than guessed at — a typo in a folder name shows up as a missing page
 instead of a route nobody asked for.
 

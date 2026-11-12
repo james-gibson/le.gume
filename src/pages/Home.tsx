@@ -115,7 +115,7 @@ export function Home() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-cream sm:text-3xl">
-              Four sections, one contract
+              Every section, one contract
             </h2>
             <p className="mt-2 max-w-xl text-muted">
               Each section is a folder. Each page is a file. The navigation builds itself from

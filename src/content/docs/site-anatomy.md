@@ -63,7 +63,7 @@ filesystem, and nothing reads `PAGES` and then re-sorts it.
 
 ## The two things that are not in the tree
 
-- **Search.** There is none. A four-section site with thirteen pages does not need a search
+- **Search.** There is none. A site this size does not need a search
   index, and adding one would be the first piece of infrastructure a reader has to reason about.
 - **A CMS.** Markdown in git is the CMS. The `Edit this page` link on every article goes straight
   to the file on GitHub, which is the shortest possible feedback loop.

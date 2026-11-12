@@ -21,7 +21,7 @@ only need the map; read this page when you need the reasoning.
 2. [Quickstart](/docs/quickstart) — clone, install, dev server.
 3. [Site anatomy](/docs/site-anatomy) — the file map, annotated.
 4. [Content model](/docs/content-model) — frontmatter, ordering, headings.
-5. [Twelve factors](/docs/twelve-factor) — the operational stance, including the deviations.
+5. [Twelve factors](/factors/start-here) — the rules as lessons, including the three this site declines.
 
 You do not need the source to answer a question about the site: `llms.txt` plus the page you are
 reading is usually enough. You do need the source to change it.
@@ -73,7 +73,7 @@ tags: api, limits
 Body. `##` and `###` become the table of contents; `#` does not.
 ```
 
-Sections are `docs`, `guides`, `pitch`, `writing`. A new section is an entry in `SECTIONS`
+Sections are `docs`, `factors`, `isotopes`, `guides`, `pitch`, `writing`. A new section is an entry in `SECTIONS`
 (`src/lib/content.ts`) plus a folder — header, footer, section index, 404 and `llms.txt` follow.
 
 ## What "done" means
