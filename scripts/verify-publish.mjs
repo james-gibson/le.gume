@@ -147,6 +147,14 @@ for (const file of contentFiles) {
     fail('content', `${file} has no title: in frontmatter`)
     continue
   }
+  // A numbered isotope is a compound and must declare its slots, even if none.
+  const slug = route.split('/')[1] ?? ''
+  if (route.startsWith('isotopes/') && /^\d/.test(slug) && !/^slots:/m.test(source)) {
+    fail(
+      'isotope',
+      `${file} is a numbered isotope but has no \`slots:\` frontmatter (use \`slots: none\`)`,
+    )
+  }
   // React escapes nothing in JS string literals, but the bundler may split
   // long strings; a title is short enough to appear whole.
   if (!jsText.includes(title)) {
@@ -187,7 +195,7 @@ if (!llms) {
       fail('llms', `dist/llms.txt does not list /${route}`)
     }
   }
-  for (const anchor of ['## For agents', '## Invariants', '## Build and verify']) {
+  for (const anchor of ['## For agents', '## Invariants', '## Build and verify', '## Isotope shortcuts']) {
     if (!llms.includes(anchor)) fail('llms', `dist/llms.txt is missing the "${anchor}" section`)
   }
 }

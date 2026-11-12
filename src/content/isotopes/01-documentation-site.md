@@ -3,6 +3,7 @@ title: 01 — A documentation site that ships itself
 description: The site you are reading, described as an isotope: what it proves, what it costs, and what to take.
 order: 2
 updated: 2026-11-12
+slots: none
 tags: isotope, static, github-pages
 ---
 

@@ -11,6 +11,7 @@ import {
   Reveal,
 } from 'fancy-ui-react'
 import { AgentHandoff, SITE_HANDOFF } from '../components/AgentHandoff'
+import { ISOTOPES, isotopeShortcut, unboundSlots } from '../lib/isotopes'
 import { usePageMeta } from '../lib/usePageMeta'
 
 function Sample({
@@ -44,6 +45,11 @@ export function Design() {
     'Design',
     'The live design system: every component this site ships, shown with the props it actually uses.',
   )
+
+  const isotope = ISOTOPES.find((candidate) => candidate.id === '02')!
+  const bound: Record<string, string> = { every: 'weekly' }
+  const shortcut = isotopeShortcut(isotope, bound)
+  const pending = unboundSlots(isotope, bound)
 
   return (
     <div className="mx-auto w-full max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
@@ -265,8 +271,48 @@ export function Design() {
         </Sample>
       </div>
 
-      <div className="mt-14">
-        <AgentHandoff id="handoff" instructions={SITE_HANDOFF} />
+      <div className="mt-14 space-y-6">
+        <AgentHandoff
+          id="handoff"
+          instructions={SITE_HANDOFF}
+          title="Hand this site to an agent"
+          note="The code carries the same instructions printed beside it: where the contract lives, and the three commands that prove the site still works."
+        />
+
+        <div>
+          <p className="text-xs tracking-[0.16em] text-violet uppercase">Compound shortcut</p>
+          <h2 className="mt-2 text-xl font-semibold text-cream">
+            …or hand over an isotope, with its questions
+          </h2>
+          <p className="mt-2 max-w-prose text-sm leading-6 text-muted">
+            Isotope 02 cannot be applied without three decisions. The shortcut binds the one that is
+            already made and leaves the others empty, so the agent has to ask — a short code that
+            expands into the page, the prompt and the questions.
+          </p>
+
+          <ul className="mt-4 grid gap-2 sm:grid-cols-3">
+            {isotope.slots.map((slot) => (
+              <li key={slot.name} className="rounded-lg border border-line-soft bg-surface p-3">
+                <span className="font-mono text-xs text-pulse">{slot.name}</span>
+                <span className="mt-1 block text-xs leading-5 text-muted">{slot.question}</span>
+                {bound[slot.name] ? (
+                  <span className="mt-2 block font-mono text-[11px] text-cream/70">
+                    bound: {bound[slot.name]}
+                  </span>
+                ) : (
+                  <span className="mt-2 block font-mono text-[11px] text-violet">agent asks</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <AgentHandoff
+          id="isotope-02"
+          instructions={shortcut}
+          title="Spell-check a repository on a schedule"
+          note={`Compound payload: isotope ${isotope.id} with every=weekly bound, repo and dict empty. An agent fetches the page, reads its Agent prompt, and asks for ${pending.map((s) => s.name).join(' and ')} before writing a workflow.`}
+        />
       </div>
     </div>
   )

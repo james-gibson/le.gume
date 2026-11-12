@@ -77,4 +77,5 @@ registers it; there is no nav array to edit. See `/guides/adding-a-page` on the 
 
 ## License
 
-MIT.
+AGPL-3.0-only. The source is public; if you run a modified version as a network
+service, publish your changes.

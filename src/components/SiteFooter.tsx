@@ -59,7 +59,7 @@ export function SiteFooter() {
           >
             james-gibson/le.gume
           </a>{' '}
-          · MIT ·{' '}
+          · AGPL-3.0 ·{' '}
           <Link to="/design#handoff" className="hover:text-cream">
             take it with you
           </Link>

@@ -105,6 +105,7 @@ for (const file of await walk(CONTENT)) {
     title: data.title || route,
     description: data.description || '',
     order: Number(data.order ?? 999),
+    slots: data.slots || '',
   })
 }
 pages.sort((a, b) => a.section.localeCompare(b.section) || a.order - b.order || a.title.localeCompare(b.title))
@@ -155,6 +156,21 @@ for (const id of sectionIds) {
   }
   lines.push('')
 }
+
+lines.push(
+  '## Isotope shortcuts',
+  '',
+  'An isotope is a compound: a named procedure with slots — the values it cannot',
+  'guess. A QR code carries a shortcut: the isotope URL plus any bound slots.',
+  'To resolve one, fetch the page, read its "Agent prompt" block, and ask the user',
+  'for every slot whose query-string value is empty.',
+  '',
+)
+for (const page of pages.filter((p) => p.section === 'isotopes' && /^\d/.test(p.route.split('/')[1] ?? ''))) {
+  const slots = page.slots || 'none'
+  lines.push(`- [${page.title}](${SITE}/${page.route}/): slots: ${slots}`)
+}
+lines.push('')
 
 lines.push(
   '## For agents',

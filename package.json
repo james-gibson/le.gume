@@ -5,7 +5,7 @@
   "type": "module",
   "description": "A self-documenting documentation site. Replaces the hard parts of shipping docs with a build that already knows them.",
   "homepage": "https://james-gibson.github.io/le.gume/",
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build && node scripts/postbuild.mjs && node scripts/verify-publish.mjs",
