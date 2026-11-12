@@ -38,6 +38,19 @@ Three rules keep the shelf usable:
 3. **A published name is permanent.** Retire an isotope by removing its page, never by reusing the
    name for something else — someone's QR code still points at it.
 
+## Two numbers, not one
+
+An isotope carries a **cost centre** and a **profit function**, and the page format exists to keep
+them attached to each other.
+
+- The cost centre is the "what it costs" section: the standing obligation — upgrades, certificates,
+  a dictionary to prune, an owner — required to keep it alive.
+- The profit function is the system itself: what it lets a person stop doing by hand.
+
+A cost with no function is an expense; a function with no cost is a fantasy. Naming both is what
+makes a system liftable, and what makes it re-decidable when the cost crosses a threshold
+([the business version of that argument](/pitch/cost-centres)).
+
 ## What makes something an isotope
 
 Four tests, in order. Fail one and it is a demo, a snippet or a sketch — all useful, none liftable.

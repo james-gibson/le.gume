@@ -32,7 +32,8 @@ Those are not marketing numbers. `npm run build` on this repository is a type-ch
 build and two small scripts.
 
 The business reading of that table is one line: **the recurring cost is a push, and the failure is
-loud.** Everything else — fewer packages, seconds instead of minutes, free hosting — is the same
+loud.** Neither column is wrong — a managed platform buys the same guarantees with an invoice instead
+of attention, and [that trade has an expiry date](/pitch/cost-centres). Everything else — fewer packages, seconds instead of minutes, free hosting — is the same
 claim about maintenance from different angles. A site whose upkeep fits in a minute gets updated; a
 site whose upkeep needs a specialist gets stale, and stale documentation is a support cost wearing a
 different hat.

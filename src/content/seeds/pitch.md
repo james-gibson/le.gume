@@ -18,6 +18,9 @@ about cost, risk and maintenance rather than syntax. The entrance is
   is worth, with the numbers that back each one.
 - **The limits** — [Let me spill the beans](/pitch/spill-the-beans): what it does not do, what it
   costs later, and where it is the wrong answer.
+- **The expiry** — [A cost centre, until a threshold](/pitch/cost-centres): why neither option is
+  wrong, what "free" is conditional on, and how the decision gets recertified instead of
+  re-argued.
 
 The engineering version of the same argument — ownership, the guard, derived navigation, and what
 it costs an operator — is deliberately not here. It is [The operations case](/docs/operations-case),

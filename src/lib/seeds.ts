@@ -63,7 +63,7 @@ export const SEEDS: Seed[] = [
     teaches: [
       'what a documentation site costs to own, in money and in attention',
       'what keeping the promise true is worth, and who notices when it stops',
-      'where the alternative is cheaper, on the record',
+      'when the cost centre changes, and what recertification looks like',
     ],
     entry: '/pitch/why-legume',
     rung: 0,

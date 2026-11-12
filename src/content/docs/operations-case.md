@@ -59,6 +59,11 @@ The parts that would otherwise become projects are already small and visible:
 Those four are the operational claim, and each is verified by the same script that would stop the
 build if it stopped being true.
 
+What they do not do is remove the standing obligation: certificates, platform updates, dependency
+advisories and traffic ceilings all still arrive on a schedule. That obligation is a
+[cost centre with a threshold](/pitch/cost-centres), and it is worth naming even when the bill is
+zero.
+
 ## Where to go next
 
 - [The deploy](/docs/deploy) — the workflow and the guard in full.
