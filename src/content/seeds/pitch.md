@@ -14,10 +14,14 @@ about cost, risk and maintenance rather than syntax. The entrance is
 
 ## What is inside
 
-- **The argument** — ownership, a guard, derived navigation, a live design system, with the numbers
-  that back each one.
+- **The business case** — the running cost, the failure mode, and what "keeping the promise true"
+  is worth, with the numbers that back each one.
 - **The limits** — [Let me spill the beans](/pitch/spill-the-beans): what it does not do, what it
   costs later, and where it is the wrong answer.
+
+The engineering version of the same argument — ownership, the guard, derived navigation, and what
+it costs an operator — is deliberately not here. It is [The operations case](/docs/operations-case),
+in the starter seed, because it answers different objections for a different person.
 
 ## Why it is shaped this way
 
@@ -35,7 +39,9 @@ favour is not evidence.
 1. Copy both pages.
 2. Re-derive every number from your own repository: dependency count, build time, hosting cost.
 3. Keep the "where it is the wrong answer" section. Delete it and you have a brochure.
-4. Replace the personal judgement with yours; the structure survives, the sentences should not.
+4. Do not fold the engineering argument back in. If the reader will operate the system, they want
+   [the operations case](/docs/operations-case), not a longer invoice page.
+5. Replace the personal judgement with yours; the structure survives, the sentences should not.
 
 ## What it costs to host
 

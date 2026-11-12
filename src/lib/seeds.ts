@@ -61,9 +61,9 @@ export const SEEDS: Seed[] = [
     audience: 'The person who approves the time or the invoice.',
     assumes: 'You care about cost, risk and maintenance — not syntax.',
     teaches: [
-      'what this stack costs to own, in money and in attention',
-      'where it is the wrong answer, on the record',
-      'what a publish guard is actually buying',
+      'what a documentation site costs to own, in money and in attention',
+      'what keeping the promise true is worth, and who notices when it stops',
+      'where the alternative is cheaper, on the record',
     ],
     entry: '/pitch/why-legume',
     rung: 0,

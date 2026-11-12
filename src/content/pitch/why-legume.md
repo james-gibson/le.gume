@@ -1,8 +1,8 @@
 ---
 title: Why le.gume
-description: The commercial case for a documentation site that is cheap to own and hard to let rot.
+description: The business case — what a documentation site costs to own, and what the promise is worth.
 order: 1
-updated: 2026-11-11
+updated: 2026-11-12
 tags: pitch, roi
 seeds: pitch
 ---
@@ -31,37 +31,25 @@ publication that costs nothing.
 Those are not marketing numbers. `npm run build` on this repository is a type-check, a Vite
 build and two small scripts.
 
-## What you are actually buying
-
-**Ownership.** Every file is readable in an afternoon. Nothing in the stack requires a plugin
-whose behaviour you have to infer.
-
-**A guard.** The reason a public doc site can be safe is that something refuses unsafe output.
-Here that is `scripts/verify-publish.mjs`, and it runs on every build — not in a review meeting.
-
-**A navigation that cannot drift.** The nav is derived from the content tree. The usual drift
-between "what exists" and "what is linked" is structurally impossible.
-
-**A live design system.** The component page is the product page. Your readers see the thing
-working, not a screenshot of it working.
-
-## The honest comparison
-
-If you need versioned docs for a dozen releases, a search index over 2,000 pages, and a
-localisation pipeline, this is not the tool and no amount of polish changes that.
-
-If you need a technical site that a small team can publish to for three years without a
-maintenance project, the argument is simple: fewer moving parts, one guard, one build, one
-push. The rest is writing.
-
-## What it costs you
-
-- **Node 22.** A current runtime, nothing exotic.
-- **Git.** Markdown in a repository is the CMS.
-- **A decision about sections.** Four, or fewer.
-- **The willingness to delete.** A page nobody needs is a page that will be wrong eventually.
+The business reading of that table is one line: **the recurring cost is a push, and the failure is
+loud.** Everything else — fewer packages, seconds instead of minutes, free hosting — is the same
+claim about maintenance from different angles. A site whose upkeep fits in a minute gets updated; a
+site whose upkeep needs a specialist gets stale, and stale documentation is a support cost wearing a
+different hat.
 
 ## The part that is hard to price
 
 Documentation is a promise that the thing you describe still exists. A stack with one build, one
 guard and one navigation makes keeping that promise cheap — and cheap promises get kept.
+
+That is the whole case. It is not that this stack makes better documents; it is that it makes
+**keeping them true** affordable, and the second one is what an organisation is actually buying.
+
+## Where the rest of the argument lives
+
+The engineering reasoning — ownership, the guard, derived navigation, and what it costs an operator
+— is [The operations case](/docs/operations-case). It is a different audience and a different set of
+objections, and it does not belong in a page about money.
+
+What this stack deliberately does not do is [on the next page](/pitch/spill-the-beans). Read it
+before you approve anything; a pitch that lists only strengths is a brochure.
