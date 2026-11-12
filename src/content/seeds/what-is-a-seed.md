@@ -54,6 +54,22 @@ The scale is enforced rather than described: the registry must be in rung order,
 unique, lateral seeds must come last, and each seed's page must appear in that same order in the
 section. The build refuses a shelf whose ladder and table disagree.
 
+### The scale is also the motion budget
+
+Rungs are not only editorial. The default amount of animation on a page follows the seed you are
+reading:
+
+| Rung | Motion | What that means here |
+| --- | --- | --- |
+| 0–1 | `still` | no beams, no marquee, no counting numbers — the page holds still |
+| 2–3 | `calm` | reveals and tickers, no ambient loops |
+| 4 | `full` | everything the design calls for |
+
+A rung-0 reader is deciding, not decorating, and a beam of light orbiting a card is friction for
+them. The header carries a **Still / Calm / Full** toggle that overrides the default; the choice is
+saved, because a preference that resets on navigation is not a preference. Reduced-motion is not an
+override — it wins, and the control says so.
+
 ## Shared and separate
 
 Some seeds overlap. **Agent operations** and **The starter** both need the site's anatomy; the

@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { SECTIONS } from '../lib/content'
+import { MotionToggle } from './MotionToggle'
 
 const linkBase =
   'rounded-lg px-2.5 py-1.5 text-sm text-muted transition-colors hover:bg-surface-2 hover:text-cream'
@@ -37,14 +38,17 @@ export function SiteHeader() {
           </NavLink>
         </nav>
 
-        <a
-          href="https://github.com/james-gibson/le.gume"
-          target="_blank"
-          rel="noreferrer noopener"
-          className="hidden shrink-0 rounded-lg border border-line px-2.5 py-1.5 text-xs text-muted transition-colors hover:border-pulse/50 hover:text-cream sm:block"
-        >
-          Source
-        </a>
+        <div className="ml-auto hidden items-center gap-3 sm:flex">
+          <MotionToggle />
+          <a
+            href="https://github.com/james-gibson/le.gume"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="shrink-0 rounded-lg border border-line px-2.5 py-1.5 text-xs text-muted transition-colors hover:border-pulse/50 hover:text-cream"
+          >
+            Source
+          </a>
+        </div>
       </div>
     </header>
   )

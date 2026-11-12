@@ -2,15 +2,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import {
   BentoGrid,
   BentoGridCard,
-  BorderBeam,
+  Button,
   CopyButton,
   GradientButton,
   Marquee,
-  NumberTicker,
   RainbowButton,
-  Reveal,
 } from 'fancy-ui-react'
 import { PAGES, SECTIONS, pagesIn } from '../lib/content'
+import { MotionBeam, MotionReveal, MotionTicker, useMotion } from '../lib/motion'
 import { usePageMeta } from '../lib/usePageMeta'
 
 const base = import.meta.env.BASE_URL
@@ -19,6 +18,8 @@ const INSTALL = 'git clone https://github.com/james-gibson/le.gume my-site\ncd m
 export function Home() {
   usePageMeta(undefined, 'A documentation site that documents itself: content model, routing, deploy and design system in one small stack.')
   const navigate = useNavigate()
+  const { mode } = useMotion()
+  const still = mode === 'still'
 
   const facts = [
     { k: 'Pages', v: PAGES.length },
@@ -32,46 +33,59 @@ export function Home() {
         <div className="plot-grid pointer-events-none absolute inset-0" aria-hidden="true" />
         <div className="relative mx-auto grid w-full max-w-6xl gap-14 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <Reveal preset="fade-up" duration={500}>
+            <MotionReveal preset="fade-up">
               <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3 py-1 text-xs tracking-wide text-muted">
                 <span className="h-1.5 w-1.5 rounded-full bg-pulse" />
                 v0.1 · the hard parts, already handled
               </p>
-            </Reveal>
+            </MotionReveal>
 
-            <Reveal preset="fade-up" delay={60}>
+            <MotionReveal preset="fade-up" delay={60}>
               <h1 className="mt-6 text-4xl leading-[1.05] font-semibold tracking-tight text-cream sm:text-6xl">
                 Difficult things,
                 <br />
                 made <span className="text-pulse">uneventful</span>.
               </h1>
-            </Reveal>
+            </MotionReveal>
 
-            <Reveal preset="fade-up" delay={120}>
+            <MotionReveal preset="fade-up" delay={120}>
               <p className="mt-6 max-w-xl text-lg leading-8 text-muted">
                 A documentation site for a stack that refuses to make you learn it first.
                 Routing, content, motion, deploy and the publish guard — visible, small, and
                 documented by the pages you are reading.
               </p>
-            </Reveal>
+            </MotionReveal>
 
-            <Reveal preset="fade-up" delay={180}>
+            <MotionReveal preset="fade-up" delay={180}>
               <div className="mt-9 flex flex-wrap items-center gap-3">
-                <RainbowButton href={`${base}docs/quickstart`}>Read the quickstart</RainbowButton>
-                <GradientButton onClick={() => navigate('/pitch/why-legume')}>
-                  The commercial case
-                </GradientButton>
+                {still ? (
+                  <>
+                    <Button href={`${base}docs/quickstart`} variant="primary">
+                      Read the quickstart
+                    </Button>
+                    <Button variant="secondary" onClick={() => navigate('/pitch/why-legume')}>
+                      The commercial case
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <RainbowButton href={`${base}docs/quickstart`}>Read the quickstart</RainbowButton>
+                    <GradientButton onClick={() => navigate('/pitch/why-legume')}>
+                      The commercial case
+                    </GradientButton>
+                  </>
+                )}
               </div>
-            </Reveal>
+            </MotionReveal>
 
             <p className="mt-6 text-xs text-muted/70">
               No CLI to install, no plugin order to memorise, no theme file to reconcile.
             </p>
           </div>
 
-          <Reveal preset="fade-up" delay={140}>
+          <MotionReveal preset="fade-up" delay={140}>
             <div className="relative overflow-hidden rounded-2xl border border-line bg-surface/90 p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.9)]">
-              <BorderBeam colorFrom="#b6f24a" colorTo="#a78bfa" duration={11} size={220} glow={0.5} />
+              <MotionBeam colorFrom="#b6f24a" colorTo="#a78bfa" duration={11} size={220} glow={0.5} />
               <div className="flex items-center justify-between gap-3">
                 <p className="text-xs tracking-[0.16em] text-muted uppercase">Start a site</p>
                 <CopyButton value={INSTALL} label="Copy" copiedLabel="Copied" size="sm" />
@@ -94,7 +108,7 @@ export function Home() {
                 </li>
               </ul>
             </div>
-          </Reveal>
+          </MotionReveal>
         </div>
       </section>
 
@@ -103,7 +117,7 @@ export function Home() {
           {facts.map((fact) => (
             <div key={fact.k}>
               <p className="font-mono text-3xl font-semibold text-cream sm:text-4xl">
-                <NumberTicker value={fact.v} duration={1100} />
+                <MotionTicker value={fact.v} />
               </p>
               <p className="mt-1 text-xs tracking-[0.14em] text-muted uppercase">{fact.k}</p>
             </div>
@@ -130,8 +144,8 @@ export function Home() {
           </Link>
         </div>
 
-        <Reveal preset="fade-up" className="mt-8">
-          <BentoGrid accent="#b6f24a" className="w-full">
+        <MotionReveal preset="fade-up" className="mt-8">
+          <BentoGrid accent="#b6f24a" className="w-full" reveal={!still}>
             {SECTIONS.map((section) => (
               <BentoGridCard
                 key={section.id}
@@ -143,17 +157,27 @@ export function Home() {
               />
             ))}
           </BentoGrid>
-        </Reveal>
+        </MotionReveal>
       </section>
 
       <section className="overflow-hidden border-y border-line/70 bg-surface/40 py-6">
-        <Marquee repeat={3} speed={0.8} fade pauseOnHover>
-          {['project seeds', 'nuts and bolts', 'peas in a pod', 'the guide spills the beans'].map((phrase) => (
-            <span key={phrase} className="mx-7 text-xs tracking-[0.24em] text-muted/70 uppercase">
-              {phrase}
-            </span>
-          ))}
-        </Marquee>
+        {still ? (
+          <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
+            {['project seeds', 'nuts and bolts', 'peas in a pod', 'the guide spills the beans'].map((phrase) => (
+              <span key={phrase} className="text-xs tracking-[0.24em] text-muted/70 uppercase">
+                {phrase}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <Marquee repeat={3} speed={0.8} fade pauseOnHover>
+            {['project seeds', 'nuts and bolts', 'peas in a pod', 'the guide spills the beans'].map((phrase) => (
+              <span key={phrase} className="mx-7 text-xs tracking-[0.24em] text-muted/70 uppercase">
+                {phrase}
+              </span>
+            ))}
+          </Marquee>
+        )}
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">

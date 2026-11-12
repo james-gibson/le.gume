@@ -21,10 +21,12 @@ src/App.tsx                 five routes: /, /design, /:section, /:section/:slug,
 src/index.css               tailwind import, fancy-ui stylesheet, palette tokens, two utilities
 src/lib/content.ts          the content model: glob, frontmatter, ordering, headings
 src/lib/markdown.tsx        element-by-element styling for rendered Markdown
+src/lib/motion.tsx          the ladder's motion budget: provider, wrappers, stored preference
 src/lib/usePageMeta.ts      document title + description per route
 src/components/Layout.tsx   header, outlet, footer, scroll reset
 src/components/SiteHeader.tsx  sticky nav, built from SECTIONS
 src/components/SiteFooter.tsx  counts, section columns, source link
+src/components/MotionToggle.tsx  Still / Calm / Full, defaulting to the seed's rung
 src/components/AgentHandoff.tsx  QR handoff: instructions an agent can scan
 src/pages/Home.tsx          hero, stats, bento grid, marquee, self-documenting cards
 src/pages/SectionIndex.tsx  a section's pages, numbered and sorted

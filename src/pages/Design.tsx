@@ -2,14 +2,12 @@ import type { ReactNode } from 'react'
 import {
   BentoGrid,
   BentoGridCard,
-  BorderBeam,
   CopyButton,
   GradientButton,
   Marquee,
-  NumberTicker,
   RainbowButton,
-  Reveal,
 } from 'fancy-ui-react'
+import { MotionBeam, MotionReveal, MotionTicker, useMotion } from '../lib/motion'
 import { AgentHandoff, SITE_HANDOFF } from '../components/AgentHandoff'
 import { ISOTOPES, isotopeShortcut, unboundSlots } from '../lib/isotopes'
 import { usePageMeta } from '../lib/usePageMeta'
@@ -46,6 +44,9 @@ export function Design() {
     'The live design system: every component this site ships, shown with the props it actually uses.',
   )
 
+  const { mode, auto } = useMotion()
+  const still = mode === 'still'
+
   const isotope = ISOTOPES.find((candidate) => candidate.name === 'cornichon')!
   const bound: Record<string, string> = { every: 'weekly' }
   const shortcut = isotopeShortcut(isotope, bound)
@@ -78,6 +79,12 @@ export function Design() {
         </code>{' '}
         only appears where the component's props table declares it.
       </p>
+
+      <div className="mt-8 rounded-xl border border-line bg-surface p-4 text-sm text-muted">
+        Motion budget: <span className="font-mono text-cream">{mode}</span> (the ladder would choose{' '}
+        <span className="font-mono text-cream">{auto}</span> on this page). The samples below obey it —
+        set a different level in the header to see the full catalogue, or watch the calm version.
+      </div>
 
       <div className="mt-12">
         <h2 className="text-xs tracking-[0.18em] text-muted uppercase">Palette</h2>
@@ -117,7 +124,7 @@ export function Design() {
           }
         >
           <div className="relative max-w-md overflow-hidden rounded-xl border border-line bg-[#0c0e0a] p-6">
-            <BorderBeam colorFrom="#b6f24a" colorTo="#a78bfa" duration={9} size={180} glow={0.55} />
+            <MotionBeam colorFrom="#b6f24a" colorTo="#a78bfa" duration={9} size={180} glow={0.55} />
             <p className="text-sm font-medium text-cream">Deploy in progress</p>
             <p className="mt-1 text-xs text-muted">main · build 1482 · 41s</p>
           </div>
@@ -197,7 +204,7 @@ export function Design() {
         >
           <div className="flex flex-wrap gap-10">
             <p className="font-mono text-3xl text-cream">
-              <NumberTicker value={156} duration={1200} />
+              <MotionTicker value={156} />
               <span className="ml-2 text-sm text-muted">components in the library</span>
             </p>
           </div>
@@ -214,13 +221,23 @@ export function Design() {
             </>
           }
         >
-          <Marquee repeat={3} speed={0.7} fade pauseOnHover>
-            {['documented', 'guarded', 'deployed', 'readable'].map((word) => (
-              <span key={word} className="mx-6 text-xs tracking-[0.24em] text-muted/70 uppercase">
-                {word}
-              </span>
-            ))}
-          </Marquee>
+          {still ? (
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+              {['documented', 'guarded', 'deployed', 'readable'].map((word) => (
+                <span key={word} className="text-xs tracking-[0.24em] text-muted/70 uppercase">
+                  {word}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <Marquee repeat={3} speed={0.7} fade pauseOnHover>
+              {['documented', 'guarded', 'deployed', 'readable'].map((word) => (
+                <span key={word} className="mx-6 text-xs tracking-[0.24em] text-muted/70 uppercase">
+                  {word}
+                </span>
+              ))}
+            </Marquee>
+          )}
         </Sample>
 
         <Sample
@@ -263,11 +280,15 @@ export function Design() {
             </>
           }
         >
-          <Reveal preset="fade-up" delay={120} className="rounded-xl border border-line bg-surface p-5">
+          <MotionReveal
+            preset="fade-up"
+            delay={120}
+            className="rounded-xl border border-line bg-surface p-5"
+          >
             <p className="text-sm text-muted">
               This block faded up once, when it entered the viewport, and will not animate again.
             </p>
-          </Reveal>
+          </MotionReveal>
         </Sample>
       </div>
 
