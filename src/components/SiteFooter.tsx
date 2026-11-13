@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { AgentCta } from './AgentCta'
 import { PAGES, SECTIONS } from '../lib/content'
 
 export function SiteFooter() {
@@ -36,6 +37,8 @@ export function SiteFooter() {
           </div>
         ))}
       </div>
+
+      <AgentCta />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 border-t border-line-soft px-5 py-5 text-xs text-muted/70 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <p>

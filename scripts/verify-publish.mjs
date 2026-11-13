@@ -350,7 +350,28 @@ if (!deck) {
   }
 }
 
-// --- 13. size sanity ------------------------------------------------------
+// --- 13. one door for agents ----------------------------------------------
+// Agent capability varies from a model that can follow one instruction to one
+// that will invent a plan. The only thing that serves both is a single, stable
+// payload and a single place it is printed. A second payload is a second door.
+const srcFiles = await walk('src').catch(() => [])
+const tsSources = (
+  await Promise.all(srcFiles.filter((f) => /\.(ts|tsx)$/.test(f)).map((f) => readText(f)))
+).join('\n')
+
+const payloads = (tsSources.match(/Read https:\/\//g) ?? []).length
+if (payloads !== 1) {
+  fail('agents', `found ${payloads} agent payload strings in src/ — there must be exactly one`)
+}
+if (!/export const SITE_HANDOFF/.test(tsSources)) {
+  fail('agents', 'SITE_HANDOFF is not exported — the door has no constant')
+}
+const footer = await readText('src/components/SiteFooter.tsx').catch(() => '')
+if (!footer.includes('<AgentCta')) {
+  fail('agents', 'SiteFooter does not render the agent call to action')
+}
+
+// --- 14. size sanity ------------------------------------------------------
 const total = (await Promise.all(files.map(async (f) => (await stat(f)).size))).reduce(
   (a, b) => a + b,
   0,
