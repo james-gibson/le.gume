@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { AgentCta } from './AgentCta'
+import { HiddenNote } from './HiddenNote'
 import { PAGES, SECTIONS } from '../lib/content'
 
 export function SiteFooter() {
@@ -36,6 +37,20 @@ export function SiteFooter() {
             </ul>
           </div>
         ))}
+      </div>
+
+      <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
+        <HiddenNote title="this system is incorrect for taking notes on criminal enterprises">
+          <p>
+            There is no access control, no encryption at rest, no audit log that survives a clone, and
+            no way to revoke a copy. A public repository is the opposite of a wiretap: everyone can
+            read it, including the people you were writing about.
+          </p>
+          <p>
+            If you are running a wire, use a system with a door. <em>The Wire</em> is a television
+            programme; this is a static site.
+          </p>
+        </HiddenNote>
       </div>
 
       <AgentCta />
