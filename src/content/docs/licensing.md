@@ -69,6 +69,10 @@ Where material arrives with its own licence, those terms govern it:
 The AGPL is the **default for what this repository authors**, not a claim over what it quotes. When
 the two meet, the prior terms win for that material, and the page should say so.
 
+Seeds are the same idea one level down: the format is licensed, the body of knowledge is not swept
+in automatically, and a signed seed is governed by its agreement —
+[the licence, for agents](/docs/agent-licence).
+
 Trademarks are separate again. The licence grants no rights to the name or the marks, in either
 direction.
 

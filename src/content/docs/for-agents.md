@@ -42,6 +42,9 @@ git commit -am "content: …" && git push
 The push is the deploy. There is no release branch, no artifact to upload, no environment to
 promote. If the guard refuses, nothing shipped.
 
+Before your first push, read [the licence, for agents](/docs/agent-licence): keep the notices,
+publish when you serve, and send improvements upstream rather than carrying them alone.
+
 ## Invariants — breaking one is a bug
 
 - **Navigation is derived.** Every nav surface reads `src/content/**/*.md`. Do not add a nav
