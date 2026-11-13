@@ -73,6 +73,33 @@ A value without a price is decoration. These are the choices, each with the bill
 8. **A demonstration, not a product.** Buys proof instead of claims. Costs you the maintenance,
    because nobody is on call.
 
+## Prior art
+
+Two documents from the early 2000s made the same bet before the garden closed.
+
+[**CSS Zen Garden**](https://csszengarden.com/) (Dave Shea, 2003) was one HTML file and a public
+competition: designers restyled the same markup without touching it. It proved that content and
+presentation are separable in practice, not just in principle, and that a page can be re-skinned
+without a migration. This site makes the same bet one layer down — the Markdown is the file, and the
+rendering is a decision. The era toggle, file mode and the deck are three skins over one source.
+What it cost: the markup had to be semantic enough to restyle, a discipline most of the web
+declined, and a garden of skins is still one document — the content never changed because it was
+never the thing being designed.
+
+[**why's (poignant) Guide to Ruby**](https://poignant.guide/book/), by why the lucky stiff (2005), was
+a programming book with a voice: cartoons, asides, a plot. It proved that a technical document can
+be authored rather than assembled, and that a reader will follow a strange voice further than a
+neutral one. It also
+demonstrated the failure mode: a voice is a person, the person left in 2009, and the guide survives
+because people kept copies. That is the same argument as the file and the licence — the copy
+outlives the author, the domain and the maintainer.
+
+What both share with this site: the document is the artefact, and presentation is a separate
+decision you can revisit without asking permission. What neither has: a guard. A garden of skins can
+be beautiful and wrong; a beloved guide can be charming and out of date. The guard is the part this
+site adds, because a document that cannot be checked is a document that will drift — and drift is
+the one failure a good voice cannot talk its way out of.
+
 ## The tests
 
 Four questions decide whether a change belongs here. They are cheap to run and hard to argue with:
