@@ -190,7 +190,7 @@ const knownRoutes = new Set([
   ...sections.map((s) => `/${s}`),
   ...contentFiles.map((f) => `/${relative('src/content', f).replace(/\.md$/, '')}`),
 ])
-const knownFiles = new Set(['/llms.txt', '/robots.txt', '/feed.xml', '/favicon.svg', '/bare', '/nojs', '/deck.html'])
+const knownFiles = new Set(['/llms.txt', '/robots.txt', '/feed.xml', '/rules.md', '/favicon.svg', '/bare', '/nojs', '/deck.html'])
 for (const file of contentFiles) {
   const source = await readText(file)
   for (const match of source.matchAll(/\]\((\/[^)\s]*)\)/g)) {
