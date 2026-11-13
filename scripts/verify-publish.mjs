@@ -440,7 +440,21 @@ if (!/upstream/i.test(skill) || !/isotope/i.test(skill)) {
   fail('upstream', 'the upstream rule no longer mentions isotopes or upstreaming')
 }
 
-// --- 16. size sanity ------------------------------------------------------
+// --- 16. rules.md, the file a child seed defers to -----------------------
+// Stable ids, one line each. A child fetches this and records overrides; if the
+// ids move, every child's override silently stops matching.
+const rulesFile = await readText('dist/rules.md').catch(() => '')
+if (!rulesFile) {
+  fail('rules', 'dist/rules.md is missing — child seeds have nothing to defer to')
+} else {
+  for (let i = 1; i <= 8; i += 1) {
+    const id = `RULES-${String(i).padStart(2, '0')}`
+    if (!rulesFile.includes(`${id}:`)) fail('rules', `dist/rules.md does not define ${id}`)
+  }
+  if (!/^version: \S+/m.test(rulesFile)) fail('rules', 'dist/rules.md has no version line')
+}
+
+// --- 17. size sanity ------------------------------------------------------
 const total = (await Promise.all(files.map(async (f) => (await stat(f)).size))).reduce(
   (a, b) => a + b,
   0,

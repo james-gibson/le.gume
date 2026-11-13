@@ -12,10 +12,19 @@
  * 5. dist/llms.txt — the machine entry. Generated from the content tree, not
  *    hand-maintained, so an agent that reads it gets the real site.
  */
+import { execFileSync } from 'node:child_process'
 import { writeFile, mkdir, readdir, readFile, access, rm } from 'node:fs/promises'
 import { join, relative } from 'node:path'
 
 const SITE = 'https://james-gibson.github.io/le.gume'
+const built = new Date().toISOString().slice(0, 10)
+const commit = (() => {
+  try {
+    return execFileSync('git', ['rev-parse', '--short', 'HEAD'], { encoding: 'utf8' }).trim()
+  } catch {
+    return built
+  }
+})()
 const DIST = 'dist'
 const CONTENT = 'src/content'
 const index = join(DIST, 'index.html')
@@ -154,6 +163,38 @@ const catalog = {
 }
 await mkdir(join(DIST, '.well-known'), { recursive: true })
 await writeFile(join(DIST, '.well-known', 'ai-catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`, 'utf8')
+
+// --- rules.md -------------------------------------------------------------
+// The rules a child seed defers to. Stable ids, one line each, so a child can
+// fetch this file, diff it, and record an override rather than re-derive the
+// rule from prose. Generated here so it cannot drift from the site's own guard.
+const RULES = [
+  ['RULES-01', 'The path is the URL. A rename is a breaking public change.'],
+  ['RULES-02', 'Navigation is derived from the content tree; there is no nav array.'],
+  ['RULES-03', 'Content is Markdown, never MDX. A live widget is a route in src/pages/.'],
+  ['RULES-04', 'llms.txt is generated; never hand-edit it.'],
+  ['RULES-05', 'The guard is the gate. Weakening a check invalidates every other claim.'],
+  ['RULES-06', 'A claim that the site does X must be checkable at the URL or in the repository.'],
+  ['RULES-07', 'Child seeds ship back: package a new capability as an isotope and propose it upstream.'],
+  ['RULES-08', 'A child seed defers to these rules until it records a local override, with a reason.'],
+]
+const rulesVersion = commit ?? built
+await writeFile(
+  join(DIST, 'rules.md'),
+  [
+    '# le.gume rules',
+    '',
+    `version: ${rulesVersion}`,
+    `source: ${SITE}/rules.md`,
+    '',
+    'A child seed defers to this list until it records a local override.',
+    'An override names a rule id, gives a reason, and is published by the child.',
+    '',
+    ...RULES.map(([id, text]) => `- ${id}: ${text}`),
+    '',
+  ].join('\n'),
+  'utf8',
+)
 
 await rm(PRERENDER, { recursive: true, force: true })
 
