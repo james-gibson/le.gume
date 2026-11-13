@@ -43,3 +43,7 @@ with a size. `/design` is the live catalogue — keep it in step with what the s
 
 `.opencode/skills/legume-content/SKILL.md` — the full content workflow (add, edit, restructure,
 verify, ship).
+
+`.opencode/commands/page.md` — `/page <section>`: one file, guard, smoke, local commit.
+`opencode.json` — the schema and an explicit pointer at this file; skills and commands are discovered
+from their directories, not listed.

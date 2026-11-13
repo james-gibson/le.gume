@@ -27,6 +27,9 @@ only need the map; read this page when you need the reasoning.
 You do not need the source to answer a question about the site: `llms.txt` plus the page you are
 reading is usually enough. You do need the source to change it.
 
+If you are running inside OpenCode, the repository ships the standard placements — instructions,
+a skill and one command — described in [OpenCode, out of the box](/docs/opencode).
+
 ## The loop
 
 ```bash
