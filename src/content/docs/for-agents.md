@@ -37,7 +37,7 @@ git clone https://github.com/james-gibson/le.gume my-site
 cd my-site && npm install
 npm run dev          # read it
 # … edit src/content/<section>/<slug>.md …
-npm run build        # type-check, bundle, route shells, llms.txt, publish guard
+npm run build        # type-check, bundle, deck, prerender, shells, llms.txt, guard
 npm run smoke        # every route rendered server-side
 git commit -am "content: …" && git push
 ```

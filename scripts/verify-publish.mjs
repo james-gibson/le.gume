@@ -56,11 +56,15 @@ for (const required of ['index.html', '404.html', '.nojekyll', 'favicon.svg', 'r
 
 const indexHtml = await readText(join(DIST, 'index.html')).catch(() => '')
 const notFoundHtml = await readText(join(DIST, '404.html')).catch(() => '')
-if (indexHtml && notFoundHtml && indexHtml !== notFoundHtml) {
-  fail(
-    'spa-fallback',
-    'dist/404.html differs from dist/index.html — deep links would boot a different shell',
-  )
+
+// Every shell carries its own prerendered markup now, so identical files are no
+// longer the invariant. The invariant is that every shell boots the same
+// application: a deep link must start the app, not serve a stale page.
+const appScript = /<script[^>]+src="[^"]*assets\/index-[^"]+\.js"/.exec(indexHtml)?.[0]
+if (!appScript) {
+  fail('spa-fallback', 'dist/index.html does not load the application bundle')
+} else if (notFoundHtml && !notFoundHtml.includes(appScript)) {
+  fail('spa-fallback', 'dist/404.html does not load the application bundle')
 }
 
 // --- 2. the base path agrees with the deployed location -------------------
@@ -75,9 +79,12 @@ if (!indexHtml.includes(`${expectedBase}assets/`)) {
   )
 }
 
+// The mount itself ("/le.gume") is legitimate — it is the home link. Anything
+// else must sit under it.
+const mount = expectedBase.replace(/\/$/, '')
 const rootRefs = [...indexHtml.matchAll(/(?:src|href)="(\/[^"]*)"/g)].map((m) => m[1])
 for (const ref of rootRefs) {
-  if (!ref.startsWith(expectedBase)) {
+  if (ref !== mount && !ref.startsWith(expectedBase)) {
     fail('base-path', `index.html references ${ref}, which escapes the mount ${expectedBase}`)
   }
 }
@@ -371,7 +378,56 @@ if (!footer.includes('<AgentCta')) {
   fail('agents', 'SiteFooter does not render the agent call to action')
 }
 
-// --- 14. size sanity ------------------------------------------------------
+// --- 14. agent-ready: find and read --------------------------------------
+// AgentReady's essentials, checked because a claim in a page is worth what the
+// build enforces. Act is out of scope: this is a site to read, not a product to
+// transact through, so no MCP server or CLI is claimed.
+const ORIGIN = 'https://james-gibson.github.io/le.gume'
+
+const robots = await readText('dist/robots.txt').catch(() => '')
+if (!/^User-agent: \*/m.test(robots)) {
+  fail('agent-ready', 'dist/robots.txt has no wildcard rule — one policy for all agents')
+}
+if (!robots.includes(`Sitemap: ${ORIGIN}/sitemap.xml`)) {
+  fail('agent-ready', 'dist/robots.txt does not point at the sitemap')
+}
+
+const sitemap = await readText('dist/sitemap.xml').catch(() => '')
+for (const route of ['', ...routes, 'nojs/', 'bare/', 'deck.html']) {
+  const loc = route ? `${ORIGIN}/${route}` : `${ORIGIN}/`
+  if (!sitemap.includes(`<loc>${loc}</loc>`)) {
+    fail('agent-ready', `dist/sitemap.xml is missing ${loc}`)
+  }
+}
+
+const catalogSource = await readText('dist/.well-known/ai-catalog.json').catch(() => '')
+if (!catalogSource) {
+  fail('agent-ready', 'dist/.well-known/ai-catalog.json is missing')
+} else {
+  try {
+    const catalog = JSON.parse(catalogSource)
+    if (!JSON.stringify(catalog).includes('/llms.txt')) {
+      fail('agent-ready', 'the AI catalog does not list llms.txt')
+    }
+  } catch {
+    fail('agent-ready', 'dist/.well-known/ai-catalog.json is not JSON')
+  }
+}
+
+// AR-READ-01: the answer is in the initial HTML. Every shell must carry its
+// page as markup, not only as a script tag that would build it.
+const shells = (await walk(DIST)).filter((f) => f.endsWith('index.html') || f.endsWith('404.html'))
+if (shells.length < routes.length) {
+  fail('agent-ready', `found ${shells.length} HTML shells for ${routes.length} routes`)
+}
+for (const shell of shells) {
+  const html = await readText(shell)
+  if (!/<h1[\s>]/.test(html)) {
+    fail('agent-ready', `${shell} has no <h1> in the initial HTML — the answer is JavaScript-only`)
+  }
+}
+
+// --- 15. size sanity ------------------------------------------------------
 const total = (await Promise.all(files.map(async (f) => (await stat(f)).size))).reduce(
   (a, b) => a + b,
   0,

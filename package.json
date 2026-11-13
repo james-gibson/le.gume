@@ -8,7 +8,7 @@
   "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build && node scripts/deck.mjs && node scripts/postbuild.mjs && node scripts/verify-publish.mjs",
+    "build": "tsc --noEmit && vite build && node scripts/deck.mjs && vite build --ssr scripts/prerender.tsx --outDir .prerender --emptyOutDir && node .prerender/prerender.js && node scripts/postbuild.mjs && node scripts/verify-publish.mjs",
     "preview": "vite preview",
     "smoke": "vite build --ssr scripts/smoke.tsx --outDir .smoke --emptyOutDir && node .smoke/smoke.js",
     "guard": "node scripts/verify-publish.mjs",

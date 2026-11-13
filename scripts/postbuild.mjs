@@ -12,9 +12,10 @@
  * 5. dist/llms.txt — the machine entry. Generated from the content tree, not
  *    hand-maintained, so an agent that reads it gets the real site.
  */
-import { copyFile, writeFile, mkdir, readdir, readFile, access } from 'node:fs/promises'
+import { writeFile, mkdir, readdir, readFile, access, rm } from 'node:fs/promises'
 import { join, relative } from 'node:path'
 
+const SITE = 'https://james-gibson.github.io/le.gume'
 const DIST = 'dist'
 const CONTENT = 'src/content'
 const index = join(DIST, 'index.html')
@@ -50,21 +51,81 @@ const routes = [
     .map((f) => relative(CONTENT, f).replace(/\.md$/, '')),
 ]
 
+// --- prerendered shells ---------------------------------------------------
+// `scripts/prerender.tsx` renders every route to static HTML before this runs.
+// A shell is the Vite index with its empty #root replaced by that markup, so a
+// reader that does not run JavaScript gets the answer and the application
+// replaces it on load. AgentReady AR-READ-01 is a MUST for exactly this reason;
+// it is also why the build is slower and the output larger.
+const template = await readFile(index, 'utf8')
+const PRERENDER = join(DIST, '.prerender')
+const markup = new Map()
+try {
+  for (const file of await readdir(PRERENDER)) {
+    markup.set(file.replace(/\.html$/, ''), await readFile(join(PRERENDER, file), 'utf8'))
+  }
+} catch {
+  console.warn('postbuild: no prerendered markup — shells will be empty')
+}
+
+const shellFor = (key) => {
+  const content = markup.get(key)
+  return content ? template.replace('<div id="root"></div>', `<div id="root">${content}</div>`) : template
+}
+
 for (const route of routes) {
   const dir = join(DIST, route)
   await mkdir(dir, { recursive: true })
-  await copyFile(index, join(dir, 'index.html'))
+  await writeFile(join(dir, 'index.html'), shellFor(route.replace(/\//g, '__')), 'utf8')
 }
 
-await copyFile(index, join(DIST, '404.html'))
+await writeFile(join(DIST, 'index.html'), shellFor('home'), 'utf8')
+await writeFile(join(DIST, '404.html'), shellFor('404'), 'utf8')
 await writeFile(join(DIST, '.nojekyll'), '')
-await writeFile(join(DIST, 'robots.txt'), ['User-agent: *', 'Allow: /', ''].join('\n'), 'utf8')
+
+// --- sitemap, crawl policy, catalog ---------------------------------------
+// The find half of agent readiness: one rule for all agents, a sitemap that
+// lists what is published, and a manifest an agent can discover from the head.
+const sitemapUrls = ['', ...routes, 'nojs/', 'bare/', 'deck.html']
+const sitemap = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ...sitemapUrls.map((route) => `  <url><loc>${route ? `${SITE}/${route}` : `${SITE}/`}</loc></url>`),
+  '</urlset>',
+  '',
+].join('\n')
+await writeFile(join(DIST, 'sitemap.xml'), sitemap, 'utf8')
+
+await writeFile(
+  join(DIST, 'robots.txt'),
+  ['User-agent: *', 'Allow: /', '', `Sitemap: ${SITE}/sitemap.xml`, ''].join('\n'),
+  'utf8',
+)
+
+const catalog = {
+  name: 'le.gume',
+  url: `${SITE}/`,
+  description:
+    'A documentation site that documents itself: content model, routing, deploy and design system in one small stack.',
+  entries: [
+    { type: 'text/plain', url: `${SITE}/llms.txt`, name: 'llms.txt' },
+    { type: 'application/xml', url: `${SITE}/sitemap.xml`, name: 'sitemap.xml' },
+    { type: 'text/html', url: `${SITE}/`, name: 'home' },
+    { type: 'text/html', url: `${SITE}/docs/for-agents/`, name: 'agent contract' },
+    { type: 'text/html', url: `${SITE}/deck.html`, name: 'offline deck' },
+    { type: 'text/html', url: `${SITE}/nojs/`, name: 'no script' },
+    { type: 'text/html', url: `${SITE}/bare/`, name: 'no stylesheet' },
+  ],
+}
+await mkdir(join(DIST, '.well-known'), { recursive: true })
+await writeFile(join(DIST, '.well-known', 'ai-catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`, 'utf8')
+
+await rm(PRERENDER, { recursive: true, force: true })
 
 // --- llms.txt -------------------------------------------------------------
 // The site's own answer to "an agent should be able to take it and go": one
 // plain-text file listing every page, the build command, and the invariants.
 // Generated from the content tree so it cannot drift from the site.
-const SITE = 'https://james-gibson.github.io/le.gume'
 // Labels are presentation; the order and membership come from the files. A new
 // section therefore appears here without this map being edited, under its slug.
 const LABELS = {
@@ -194,5 +255,5 @@ lines.push(
 await writeFile(join(DIST, 'llms.txt'), lines.join('\n'), 'utf8')
 
 console.log(
-  `postbuild: wrote ${routes.length} route shells, 404.html, .nojekyll, robots.txt, llms.txt (${pages.length} pages)`,
+  `postbuild: wrote ${routes.length} prerendered shells, 404.html, sitemap.xml, robots.txt, ai-catalog.json, llms.txt (${pages.length} pages)`,
 )

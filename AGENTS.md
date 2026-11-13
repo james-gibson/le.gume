@@ -11,7 +11,7 @@ Live: https://james-gibson.github.io/le.gume/ · Repo: `james-gibson/le.gume`
 
 ```bash
 npm run dev      # vite
-npm run build    # tsc --noEmit && vite build && postbuild && guard   <- what CI runs
+npm run build    # tsc, vite, deck, prerender, postbuild, guard   <- what CI runs
 npm run smoke    # render every route (and the 404) to a string
 npm run guard    # guard alone, against an existing dist/
 ```

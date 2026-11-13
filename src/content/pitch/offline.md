@@ -40,8 +40,9 @@ does not open and the meeting becomes about the slide deck.
 
 ## What the whole site weighs
 
-The built site is about 1.2 MB across 65 files at the time of writing — under the 1.44 MB of a
-floppy disk, which is the cheapest size an audience can verify without trusting anyone.
+The built site is about 2.9 MB across 81 files at the time of writing, most of it the prerendered
+HTML that puts each page's answer in its initial response. That is the price of being readable
+without JavaScript, and it is why the deck exists: one 6.5 KB file with no application behind it.
 
 The deck itself is a few tens of kilobytes: the size of an email attachment nobody has to think
 about. A project that cannot fit on a stick has a dependency the stick just exposed.
