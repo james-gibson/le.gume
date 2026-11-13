@@ -182,7 +182,7 @@ const knownRoutes = new Set([
   ...sections.map((s) => `/${s}`),
   ...contentFiles.map((f) => `/${relative('src/content', f).replace(/\.md$/, '')}`),
 ])
-const knownFiles = new Set(['/llms.txt', '/robots.txt', '/favicon.svg', '/bare', '/nojs'])
+const knownFiles = new Set(['/llms.txt', '/robots.txt', '/favicon.svg', '/bare', '/nojs', '/deck.html'])
 for (const file of contentFiles) {
   const source = await readText(file)
   for (const match of source.matchAll(/\]\((\/[^)\s]*)\)/g)) {
@@ -329,7 +329,28 @@ if (!nojs) {
   fail('satire', 'public/nojs/index.html claims no JavaScript but contains a <script>')
 }
 
-// --- 12. size sanity ------------------------------------------------------
+// --- 12. the deck is a file you could hand over ---------------------------
+// It has to open from file:// on a machine that has never seen this project:
+// no script, no network, a sane number of slides, and small enough to copy
+// without thinking about it.
+const deck = await readText('dist/deck.html').catch(() => '')
+if (!deck) {
+  fail('deck', 'dist/deck.html is missing — scripts/deck.mjs writes it')
+} else {
+  if (/<script/i.test(deck)) {
+    fail('deck', 'dist/deck.html contains a <script> — it must open with no application')
+  }
+  const slides = (deck.match(/<section/g) ?? []).length
+  if (slides < 6) fail('deck', `dist/deck.html has ${slides} slides; the pitch needs at least 6`)
+  if (deck.length > 250_000) {
+    fail('deck', `dist/deck.html is ${(deck.length / 1024).toFixed(0)}KB — over the 250KB budget`)
+  }
+  if (!/built \d{4}-\d{2}-\d{2} from [0-9a-f]{4,}/.test(deck)) {
+    fail('deck', 'dist/deck.html has no dated commit in its footer — a deck is a claim with a timestamp')
+  }
+}
+
+// --- 13. size sanity ------------------------------------------------------
 const total = (await Promise.all(files.map(async (f) => (await stat(f)).size))).reduce(
   (a, b) => a + b,
   0,
