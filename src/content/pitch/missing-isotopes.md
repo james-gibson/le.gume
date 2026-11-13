@@ -77,6 +77,32 @@ Three cases, so the sentence is not a dodge:
 A refund buys back money. It does not buy back the afternoon spent reading, the migration, or the
 trust. Saying so is cheaper than implying otherwise.
 
+## The terms, in one paragraph
+
+Using the system is acceptance of the terms. They are short because the system is: read, copy and
+modify under AGPL-3.0-only; no warranty; no support; and **disputes are resolved in the repository's
+GitHub issues**, which is the only venue this project operates.
+
+- **Acceptance.** Using the site, the build or the content accepts these terms. If you do not accept
+  them, do not use it. There is no checkbox, because there is no account to put one on.
+- **Disputes.** Open an issue at
+  [github.com/james-gibson/le.gume/issues](https://github.com/james-gibson/le.gume/issues). A
+  disagreement that never reaches the tracker is not a dispute this project has agreed to hear.
+  There is no arbitration clause, no venue and no jurisdiction to shop: one public thread, on the
+  record.
+- **What the terms cannot do.** They cannot override the licence. AGPL-3.0-only grants rights that a
+  paragraph of terms cannot withdraw, and where the two conflict the licence wins —
+  [the layers are on the licence page](/docs/licensing).
+- **No warranty.** Provided as is. The guard checks the build, not the truth, and the
+  [renderability](/docs/doom-renderable) and [accessibility](/docs/accessible-recapture) gates check
+  a build, not a promise.
+- **Not legal advice.** This paragraph was written by the maintainer, not by counsel, and it is worth
+  exactly what a free site's terms are worth: the record of what was said.
+
+The honest limit is that "resolved via GitHub issues" is enforcement only to the extent a public
+thread is enforcement. The remedy for a disagreement is a thread, a reply, and — if it comes to it —
+the licence, which is the part with a court behind it.
+
 ## What the absence costs
 
 A negative invoice is not free money. Each omission removes something a reader might have wanted:
@@ -113,6 +139,7 @@ The rule that keeps this page short: **a system you have not bought cannot page 
 - The avoidance costs capability, not nothing — and the trade is written down rather than assumed.
 - **The refund:** the price is zero, so it has already been issued. Nothing to reverse, nothing to
   chase.
+- **The terms:** use is acceptance; disputes go to the issue tracker; the licence outranks the terms.
 
 What the site does carry is enumerated in [Small enough to count](/pitch/attack-surface); this page
 is the other column of the same ledger.
