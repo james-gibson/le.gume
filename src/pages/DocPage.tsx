@@ -7,6 +7,7 @@ import { FileView } from '../components/FileView'
 import { useFileView } from '../lib/fileview'
 import { SeedPanel } from '../components/SeedPanel'
 import { usePageMeta } from '../lib/usePageMeta'
+import { HouseLeader } from '../components/HouseLeader'
 
 export function DocPage({ page }: { page: Page }) {
   const meta = sectionMeta(page.section)
@@ -55,6 +56,8 @@ export function DocPage({ page }: { page: Page }) {
         </header>
 
         {page.section === 'seeds' && <SeedPanel seedId={page.slug} />}
+
+        {page.path === 'factors/sla-variables' && <HouseLeader />}
 
         <div className="pb-4">
           <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
