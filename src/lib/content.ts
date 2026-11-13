@@ -23,7 +23,7 @@ export const SECTIONS = [
   {
     id: 'factors',
     label: 'Factors',
-    blurb: 'A menu, not a checklist: each rule with its price tag, and the case for skipping it.',
+    blurb: 'Twelve switches that move the uptime number — each with its price tag and the case for skipping it.',
   },
   {
     id: 'isotopes',

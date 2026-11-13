@@ -14,7 +14,7 @@ The entrance is [Start here](/factors/start-here).
 
 ## What is inside
 
-Thirteen pages: a hub and twelve lessons. Every lesson has the same shape, because the second
+Fourteen pages: a hub, twelve lessons, and one on the number they move. Every lesson has the same shape, because the second
 lesson should not require learning a new layout:
 
 > the rule in one line → the idea in plain language → a picture → what it buys → **what it costs** →
