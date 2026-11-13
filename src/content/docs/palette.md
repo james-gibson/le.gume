@@ -42,15 +42,18 @@ it has to clear 4.5:1 on its own rather than relying on size. 5.6:1 is the margi
   `/design`. A token that is only in one of them is a colour that drifts.
 - **The doom waivers assume a dark palette.** They waive gradients, alpha and dark mode because the
   design is dark. A light theme would invalidate the set, not just the colours.
-- **Nothing tests contrast.** The accessibility pass checks structure; the renderability pass runs
-  statically and does not compute ratios. The numbers above were computed by hand, and a future
-  colour that regresses them will not fail the build.
+- **The gate only covers declared pairs.** `src/lib/palette.json` lists the combinations the site
+  actually paints and the floor each must clear; `npm run contrast` fails the build when one drops.
+  A pair nobody declared is untested, and a gradient has no single ratio to declare — the worst stop
+  is the number to check, by hand.
 
-That last one is the real debt. The honest position is that the palette is a design decision with a
-measured margin, not a gate — and if it ever needs to be a gate, the rule is
-`DOOM-014` from [Runs in Doom](/docs/doom-renderable), which is the one rule that needs a browser.
+That last point is the remaining debt. The honest position is that the declared palette is a gate
+and everything outside it is a measurement. The rule that would cover the rest is `DOOM-014` from
+[Runs in Doom](/docs/doom-renderable), which needs a browser.
 
 ## The check
 
-`/design` renders the palette from the same tokens the site uses. If a swatch there disagrees with
+[/palette](/palette) is the page that fits every shade against every other: a matrix of ratios, the
+declared pairs with their floors, and the gradients the site paints with the worse of their two
+stops. `/design` renders the components; `/palette` renders the colour. If a swatch disagrees with
 what you see on a page, the hardcoded accent is the one that is wrong.

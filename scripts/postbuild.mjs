@@ -45,6 +45,7 @@ const sectionDirs = (await readdir(CONTENT, { withFileTypes: true }))
 
 const routes = [
   'design',
+  'palette',
   ...sectionDirs,
   ...(await walk(CONTENT))
     .filter((f) => f.endsWith('.md'))
@@ -88,6 +89,7 @@ const titleFor = (route) => {
   if (!route) return null
   if (pageTitles.has(route)) return `${pageTitles.get(route)} · le.gume`
   if (route === 'design') return 'Design · le.gume'
+  if (route === 'palette') return 'Colour · le.gume'
   if (route === '404') return 'Not found · le.gume'
   const section = route.split('/')[0]
   if (!route.includes('/') && section) {

@@ -18,6 +18,7 @@ import { PAGES } from '../src/lib/content'
 const routes = [
   '/',
   '/design',
+  '/palette',
   ...PAGES.map((page) => `/${page.section}/${page.slug}`),
   '/this-route-does-not-exist',
 ]

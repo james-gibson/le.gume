@@ -186,6 +186,7 @@ for (const file of contentFiles) {
 const knownRoutes = new Set([
   '/',
   '/design',
+  '/palette',
   ...sections.map((s) => `/${s}`),
   ...contentFiles.map((f) => `/${relative('src/content', f).replace(/\.md$/, '')}`),
 ])

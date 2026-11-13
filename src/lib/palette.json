@@ -1,0 +1,27 @@
+{
+  "tokens": [
+    { "name": "ink", "hex": "#0b0a0b", "role": "page background" },
+    { "name": "surface", "hex": "#121013", "role": "raised surface" },
+    { "name": "surface-2", "hex": "#191619", "role": "second surface" },
+    { "name": "line", "hex": "#2a242a", "role": "border" },
+    { "name": "line-soft", "hex": "#201b20", "role": "quiet border" },
+    { "name": "cream", "hex": "#d9d3c6", "role": "body text" },
+    { "name": "muted", "hex": "#a49a9e", "role": "secondary text" },
+    { "name": "pulse", "hex": "#ff2d95", "role": "interaction" },
+    { "name": "pulse-deep", "hex": "#c81e6f", "role": "interaction, pressed" },
+    { "name": "violet", "hex": "#ffc2dd", "role": "second voice" }
+  ],
+  "pairs": [
+    { "fg": "cream", "bg": "ink", "min": 7, "note": "body text on the page" },
+    { "fg": "cream", "bg": "surface", "min": 7, "note": "body text on a card" },
+    { "fg": "cream", "bg": "surface-2", "min": 7, "note": "body text on the second surface" },
+    { "fg": "muted", "bg": "ink", "min": 4.5, "note": "secondary text" },
+    { "fg": "muted", "bg": "surface", "min": 4.5, "note": "secondary text on a card" },
+    { "fg": "pulse", "bg": "ink", "min": 4.5, "note": "links, focus rings" },
+    { "fg": "pulse", "bg": "surface", "min": 4.5, "note": "links on a card" },
+    { "fg": "violet", "bg": "ink", "min": 7, "note": "second voice" },
+    { "fg": "violet", "bg": "surface", "min": 7, "note": "second voice on a card" },
+    { "fg": "ink", "bg": "pulse", "min": 4.5, "note": "text on the primary button" },
+    { "fg": "ink", "bg": "violet", "min": 7, "note": "text on the pastel" }
+  ]
+}

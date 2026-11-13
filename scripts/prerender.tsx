@@ -23,6 +23,7 @@ const OUT = 'dist/.prerender'
 const routes = [
   { file: 'home', path: '/' },
   { file: 'design', path: '/design' },
+  { file: 'palette', path: '/palette' },
   ...SECTIONS.map((section) => ({ file: section.id, path: `/${section.id}` })),
   ...PAGES.map((page) => ({
     file: `${page.section}/${page.slug}`.replace(/\//g, '__'),
