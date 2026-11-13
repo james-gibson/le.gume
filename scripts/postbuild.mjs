@@ -86,7 +86,7 @@ await writeFile(join(DIST, '.nojekyll'), '')
 // --- sitemap, crawl policy, catalog ---------------------------------------
 // The find half of agent readiness: one rule for all agents, a sitemap that
 // lists what is published, and a manifest an agent can discover from the head.
-const sitemapUrls = ['', ...routes, 'nojs/', 'bare/', 'deck.html']
+const sitemapUrls = ['', ...routes.map((route) => `${route}/`), 'nojs/', 'bare/', 'deck.html']
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',

@@ -393,7 +393,7 @@ if (!robots.includes(`Sitemap: ${ORIGIN}/sitemap.xml`)) {
 }
 
 const sitemap = await readText('dist/sitemap.xml').catch(() => '')
-for (const route of ['', ...routes, 'nojs/', 'bare/', 'deck.html']) {
+for (const route of ['', ...routes.map((r) => `${r}/`), 'nojs/', 'bare/', 'deck.html']) {
   const loc = route ? `${ORIGIN}/${route}` : `${ORIGIN}/`
   if (!sitemap.includes(`<loc>${loc}</loc>`)) {
     fail('agent-ready', `dist/sitemap.xml is missing ${loc}`)
