@@ -46,6 +46,12 @@ Because the site's claim is that documentation is a document, and a document sho
 virtual machine to be read. The claim is cheap to make in a paragraph and impossible to fake in a
 file: either the `<script>` tag is there or it is not.
 
+## A note on the shelf
+
+This rung is hidden from [the seed scale](/seeds) by a script. That is not a bug report; it is the
+argument wearing its own costume. With JavaScript off, the row would be visible — and so would
+nothing else, because the page listing the rungs is drawn by the script that removed the row.
+
 ## Where you are
 
 Rung −3 of [the seed scale](/seeds/what-is-a-seed). Below this there is nothing but a text file,

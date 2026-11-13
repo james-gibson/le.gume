@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Reveal } from 'fancy-ui-react'
 import { SECTIONS, pagesIn, sectionMeta, type SectionId } from '../lib/content'
@@ -8,6 +9,13 @@ export function SectionIndex({ section }: { section: SectionId }) {
   const meta = sectionMeta(section)
   const pages = pagesIn(section)
   usePageMeta(meta.label, meta.blurb)
+
+  // Rung −3 ("No script") is hidden with JavaScript, on purpose. With scripts
+  // off the row would be visible — and so would nothing else, because this page
+  // is drawn by the script that removed the row. That is the joke, and it is
+  // also the argument.
+  const [hideNoScript, setHideNoScript] = useState(false)
+  useEffect(() => setHideNoScript(true), [])
 
   return (
     <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
@@ -27,8 +35,10 @@ export function SectionIndex({ section }: { section: SectionId }) {
               </tr>
             </thead>
             <tbody>
-              {scale().map((step) => (
-                <tr key={step.level}>
+              {scale()
+                .filter((step) => !(hideNoScript && step.level === -3))
+                .map((step) => (
+                  <tr key={step.level}>
                   <td className="border-b border-line-soft px-4 py-3 font-mono text-xs text-muted">
                     {step.level}
                   </td>
@@ -71,6 +81,13 @@ export function SectionIndex({ section }: { section: SectionId }) {
               </tr>
             </tbody>
           </table>
+          {hideNoScript && (
+            <p className="border-t border-line-soft px-4 py-3 text-xs text-muted/70">
+              Rung −3 is hidden by JavaScript. Turn scripts off if you want to see it — and the rest
+              of this page will go with it, because the script that hid the rung is the script that
+              drew the table. That is the entire joke, and it is also the argument.
+            </p>
+          )}
         </div>
       )}
 
