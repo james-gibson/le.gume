@@ -164,6 +164,7 @@ const catalog = {
 await mkdir(join(DIST, '.well-known'), { recursive: true })
 await writeFile(join(DIST, '.well-known', 'ai-catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`, 'utf8')
 
+
 // --- rules.md -------------------------------------------------------------
 // The rules a child seed defers to. Stable ids, one line each, so a child can
 // fetch this file, diff it, and record an override rather than re-derive the
@@ -243,6 +244,7 @@ for (const file of await walk(CONTENT)) {
     title: data.title || route,
     description: data.description || '',
     order: Number(data.order ?? 999),
+    updated: data.updated || '',
     slots: data.slots || '',
     presumes: data.presumes || '',
   })
@@ -333,3 +335,40 @@ await writeFile(join(DIST, 'llms.txt'), lines.join('\n'), 'utf8')
 console.log(
   `postbuild: wrote ${routes.length} prerendered shells, 404.html, sitemap.xml, robots.txt, ai-catalog.json, llms.txt (${pages.length} pages)`,
 )
+
+// --- feed.xml -------------------------------------------------------------
+// A feed is a generated file, not a service. Same content tree as llms.txt, so a
+// new page appears in the feed without anyone remembering to add it.
+const xml = (value) =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+
+const newest = pages
+  .filter((page) => page.updated)
+  .sort((a, b) => b.updated.localeCompare(a.updated))
+
+const feed = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<rss version="2.0">',
+  '  <channel>',
+  '    <title>le.gume</title>',
+  `    <link>${SITE}/</link>`,
+  '    <description>A documentation site that documents itself.</description>',
+  '    <language>en</language>',
+  ...newest.flatMap((page) => [
+    '    <item>',
+    `      <title>${xml(page.title)}</title>`,
+    `      <link>${SITE}/${page.route}/</link>`,
+    `      <guid isPermaLink="true">${SITE}/${page.route}/</guid>`,
+    `      <description>${xml(page.description)}</description>`,
+    `      <pubDate>${new Date(`${page.updated}T00:00:00Z`).toUTCString()}</pubDate>`,
+    '    </item>',
+  ]),
+  '  </channel>',
+  '</rss>',
+  '',
+].join('\n')
+await writeFile(join(DIST, 'feed.xml'), feed, 'utf8')

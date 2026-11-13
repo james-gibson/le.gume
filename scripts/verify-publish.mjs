@@ -190,7 +190,7 @@ const knownRoutes = new Set([
   ...sections.map((s) => `/${s}`),
   ...contentFiles.map((f) => `/${relative('src/content', f).replace(/\.md$/, '')}`),
 ])
-const knownFiles = new Set(['/llms.txt', '/robots.txt', '/favicon.svg', '/bare', '/nojs', '/deck.html'])
+const knownFiles = new Set(['/llms.txt', '/robots.txt', '/feed.xml', '/favicon.svg', '/bare', '/nojs', '/deck.html'])
 for (const file of contentFiles) {
   const source = await readText(file)
   for (const match of source.matchAll(/\]\((\/[^)\s]*)\)/g)) {
@@ -440,7 +440,19 @@ if (!/upstream/i.test(skill) || !/isotope/i.test(skill)) {
   fail('upstream', 'the upstream rule no longer mentions isotopes or upstreaming')
 }
 
-// --- 16. rules.md, the file a child seed defers to -----------------------
+// --- 16. the feed is generated and complete ------------------------------
+// A feed is a build artefact, not a service. If it stops listing a page, the
+// claim that a feed needs a garden stops being true here.
+const feed = await readText('dist/feed.xml').catch(() => '')
+if (!feed) {
+  fail('feed', 'dist/feed.xml is missing')
+} else {
+  for (const route of routes) {
+    if (!feed.includes(`${ORIGIN}/${route}/`)) fail('feed', `dist/feed.xml is missing ${route}`)
+  }
+}
+
+// --- 17. rules.md, the file a child seed defers to -----------------------
 // Stable ids, one line each. A child fetches this and records overrides; if the
 // ids move, every child's override silently stops matching.
 const rulesFile = await readText('dist/rules.md').catch(() => '')

@@ -113,11 +113,19 @@ Four questions decide whether a change belongs here. They are cheap to run and h
 
 ## Where this is wrong
 
-- If the audience wants a feed, personalisation, a login or an app-like interaction, the garden
-  wins on those axes and this site loses. That is a real product decision, not a moral one.
-- If the content must be private, a public repository is the wrong tool entirely.
-- If the writing is the bottleneck and the authors will not use git, buy the CMS —
-  [let me spill the beans](/pitch/spill-the-beans).
+- **A feed is a file, not a garden.** An RSS feed is generated at build time from the same content
+  tree; this site publishes one at [/feed.xml](/feed.xml) and it lists every page. "The audience
+  wants a feed" is a `feed.xml` and a `<link rel="alternate">`, not a reason to leave.
+  Personalisation, a login and app-like interaction are still the garden's axes, and still a real
+  product decision rather than a moral one.
+- **Private content is not a private repository.** The repository can stay public while the artefact
+  carrying the private data does not: a release asset, an encrypted bundle, a build that is never
+  published. The repo is the method; the artefact is what you hand over. This site does not ship
+  one, but the pattern does not require a public copy of the data.
+- **"Authors will not use git" has more than one answer.** Buy the CMS, hire writers who will use
+  git, or keep the source of truth in a spreadsheet and generate the Markdown at build time. A mail
+  merge from a sheet, or Access 2010 against a SQLite export, is not elegant — and it is cheaper
+  than a platform. The failure is not "not git"; it is two sources of truth that disagree.
 
 The philosophy is a preference with costs, held because the audience here is readers and agents who
 need to cite, copy and keep things. It is not a law about how anyone else should build.
