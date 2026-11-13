@@ -46,6 +46,8 @@ What that buys you is the thing a subscription cannot: **no vendor can take the 
 have.** The repository is the artefact. If this project stops being maintained, your clone still
 builds.
 
+Which layer is licensed and which is yours is written down in [Who owns what](/docs/licensing).
+
 What it does not buy:
 
 - the name, the domain, or the deployment at this URL;
