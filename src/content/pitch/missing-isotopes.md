@@ -32,6 +32,7 @@ Priced at the smallest honest sizes, in 2026:
 | A log pipeline | $10–30/month once retention matters, plus a rota to read it | CI output, kept by the host |
 | A staging environment | a second deployment, kept in sync, drifting from production | one environment, checked by the guard before it ships |
 | A newsletter | a provider, a list, a consent record, an unsubscribe flow, deliverability | the repository's watch button |
+| A refund policy | a payment processor, a support queue, a legal review, and a window to honour | the price is zero, so the refund is pre-emptive — see below |
 
 Add the floors and it is roughly **$60–200 a month**, plus a few hours a week of moderation,
 patching and reading dashboards. The invoice is the small half.
@@ -55,6 +56,26 @@ The site stores three preferences in `localStorage` — motion, era, file view. 
 local storage like a cookie, and whether a preference needs a banner depends on the jurisdiction and
 the regulator. The honest position is that there is nothing to track and no third party to share it
 with; it is not a legal opinion, and this page is not legal advice.
+
+## The pre-emptive refund
+
+The purchase price is zero, so the refund is zero, and it was issued the first time this page loaded.
+There is no form, no ticket and no window: a refund of nothing needs no process, which is the one
+advantage of selling nothing.
+
+Three cases, so the sentence is not a dodge:
+
+- **You paid this project.** You did not — there is no checkout — so there is nothing to reverse. If
+  money went to someone claiming to be us, that is their refund to give and a report to file, not
+  ours.
+- **You paid for hosting, a domain, or your own time.** Those are not the purchase price. They are
+  the cost centre on [A cost centre, until a threshold](/pitch/cost-centres), and this project never
+  received them.
+- **You want the time back.** Not refundable by anyone. The licence is the closest remedy available:
+  take the source, change it, or leave with the copy you already have.
+
+A refund buys back money. It does not buy back the afternoon spent reading, the migration, or the
+trust. Saying so is cheaper than implying otherwise.
 
 ## What the absence costs
 
@@ -90,6 +111,8 @@ The rule that keeps this page short: **a system you have not bought cannot page 
 - Ten systems a normal doc site carries, each with a monthly floor and an unlisted obligation.
 - About **$60–200 a month** and a few hours a week, avoided.
 - The avoidance costs capability, not nothing — and the trade is written down rather than assumed.
+- **The refund:** the price is zero, so it has already been issued. Nothing to reverse, nothing to
+  chase.
 
 What the site does carry is enumerated in [Small enough to count](/pitch/attack-surface); this page
 is the other column of the same ledger.
