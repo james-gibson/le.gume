@@ -48,6 +48,33 @@ the licence and the source available, and it is yours to use.
 The distinction that matters: the **text** is licensed, the **pattern** is not owned. Reimplementing
 a slots-and-presumptions format from scratch is not a licence question at all.
 
+## What is protected is the collection
+
+Most of this site is a collection of best practices that predate it. The twelve factors were written
+in 2011 by other people ([and the lessons say so](/factors/start-here)). The guard is ordinary build
+hygiene. The content model is a pattern a hundred static sites share. The seed idea is
+audience-first writing with a name. None of that is ours to claim, and claiming it would be false.
+
+What the licence actually covers is the **collection**:
+
+- which practices are included, and which are left out;
+- the order they are taught in, and the order the pages appear in;
+- the shape of a factor page — idea, picture, cost, skip, where this site stands, exercise;
+- the seed design — audience, assumption, entrance, and the rung scale;
+- the isotope format — pickle names, slots, presumptions, shortcuts;
+- the phrasing that makes the collection readable.
+
+Selection and arrangement are the work. Copyright protects a compilation, not the facts inside it —
+which is why a recipe book can be protected while recipes cannot.
+
+So take every idea here and reimplement it without touching this text. That is allowed, and it is
+what "the pattern is not owned" means. What you may not do is copy the collection — its selection,
+order, structure and phrasing — and present it under another licence.
+
+The cost of that protection is that it is thin. A collection is easy to re-derive: a weekend and the
+same problem gets you most of the way. The licence is not a moat. It is a record of what was
+actually done, so that borrowing an idea and copying the arrangement have different names.
+
 ## Content you publish with it stays yours
 
 If you clone the system and publish your own notes, your words are yours. A text editor's licence
@@ -101,6 +128,8 @@ and the correction arrives as a letter.
 - **Prose:** the factors, guides, gherkin isotopes and seed design are under the same licence.
 - **Your content:** yours, per author. The system does not claim it.
 - **Prior terms:** they win where they exist. The AGPL covers what this repository wrote.
+- **Protected:** the collection — selection, order, shape and phrasing. **Not protected:** the
+  concepts themselves, which were never ours.
 
 What "free" means here, including where it stops, is [Free, twice](/pitch/free). What the licence
 buys you in practice is a copy you cannot lose — [What the web is for](/docs/philosophy).
