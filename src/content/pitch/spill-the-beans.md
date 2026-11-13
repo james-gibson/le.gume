@@ -49,9 +49,18 @@ the maintenance is.
 - Prose that is wrong but plausible.
 - A page that describes a feature you removed last week.
 - A link to a private document that is technically public but should not be.
+- **Contrast after the page renders.** `DOOM-014` is the rule that would catch text which passes in
+  RGB and fails once a renderer snaps it to a palette. It needs a browser to compute, so the build
+  checks only the pairs somebody declared in `src/lib/palette.json`; a gradient, a hover state and a
+  pair nobody listed stay unmeasured until an audit runs.
+- **Focus order, keyboard traps and how a screen reader pronounces a name.** The accessibility pass
+  reads the DOM; it cannot press Tab.
+- **Whether an alt text describes the image**, only that one exists.
 
 It checks the build, not the truth. The only control for truth is the `updated` field and the
-person who edits it.
+person who edits it — and the three gates it does run are listed in
+[Recaptured from accessibility](/docs/accessible-recapture), [Runs in Doom](/docs/doom-renderable)
+and [Ivory, dimmed](/docs/palette), each with what it cannot see.
 
 ## The offer, plainly
 
