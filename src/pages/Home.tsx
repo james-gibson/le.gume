@@ -88,12 +88,12 @@ export function Home() {
 
           <MotionReveal preset="fade-up" delay={140}>
             <div className="relative overflow-hidden rounded-2xl border border-line bg-surface/90 p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.9)]">
-              <MotionBeam colorFrom="#b6f24a" colorTo="#a78bfa" duration={11} size={220} glow={0.5} />
+              <MotionBeam colorFrom="#ff2d95" colorTo="#ffc2dd" duration={11} size={220} glow={0.5} />
               <div className="flex items-center justify-between gap-3">
                 <p className="text-xs tracking-[0.16em] text-muted uppercase">Start a site</p>
                 <CopyButton value={INSTALL} label="Copy" copiedLabel="Copied" size="sm" />
               </div>
-              <pre className="mt-4 overflow-x-auto rounded-xl border border-line-soft bg-[#0c0e0a] p-4 font-mono text-[13px] leading-6 text-cream/90">
+              <pre className="mt-4 overflow-x-auto rounded-xl border border-line-soft bg-[#0c0a0c] p-4 font-mono text-[13px] leading-6 text-cream/90">
                 <code>{INSTALL}</code>
               </pre>
               <ul className="mt-5 space-y-3 text-sm text-muted">
@@ -148,7 +148,7 @@ export function Home() {
         </div>
 
         <MotionReveal preset="fade-up" className="mt-8">
-          <BentoGrid accent="#b6f24a" className="w-full" reveal={!still}>
+          <BentoGrid accent="#ff2d95" className="w-full" reveal={!still}>
             {SECTIONS.map((section) => (
               <BentoGridCard
                 key={section.id}

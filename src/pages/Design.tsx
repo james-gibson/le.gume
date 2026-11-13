@@ -102,13 +102,13 @@ export function Design() {
         <h2 className="text-xs tracking-[0.18em] text-muted uppercase">Palette</h2>
         <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            ['ink', '#0a0b09'],
-            ['surface', '#11130f'],
-            ['line', '#272b22'],
-            ['cream', '#f2efe4'],
-            ['muted', '#a7aa9d'],
-            ['pulse', '#b6f24a'],
-            ['violet', '#a78bfa'],
+            ['ink', '#0b0a0b'],
+            ['surface', '#121013'],
+            ['line', '#2a242a'],
+            ['cream', '#d9d3c6'],
+            ['muted', '#a49a9e'],
+            ['pulse', '#ff2d95'],
+            ['violet', '#ffc2dd'],
           ].map(([name, hex]) => (
             <li key={name} className="rounded-xl border border-line bg-surface p-3">
               <span
@@ -135,8 +135,8 @@ export function Design() {
             </>
           }
         >
-          <div className="relative max-w-md overflow-hidden rounded-xl border border-line bg-[#0c0e0a] p-6">
-            <MotionBeam colorFrom="#b6f24a" colorTo="#a78bfa" duration={9} size={180} glow={0.55} />
+          <div className="relative max-w-md overflow-hidden rounded-xl border border-line bg-[#0c0a0c] p-6">
+            <MotionBeam colorFrom="#ff2d95" colorTo="#ffc2dd" duration={9} size={180} glow={0.55} />
             <p className="text-sm font-medium text-cream">Deploy in progress</p>
             <p className="mt-1 text-xs text-muted">main · build 1482 · 41s</p>
           </div>
@@ -177,7 +177,7 @@ export function Design() {
           }
         >
           <GradientButton
-            colors={['#b6f24a', '#a78bfa', '#f2efe4']}
+            colors={['#ff2d95', '#ffc2dd', '#d9d3c6']}
             duration={3400}
             borderRadius={12}
             blur={5}
@@ -263,7 +263,7 @@ export function Design() {
             </>
           }
         >
-          <BentoGrid accent="#a78bfa" className="w-full">
+          <BentoGrid accent="#ffc2dd" className="w-full">
             <BentoGridCard
               name="One accent"
               description="A single colour token keeps the grid quiet at rest."

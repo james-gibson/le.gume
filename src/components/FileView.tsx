@@ -29,7 +29,7 @@ export function FileView({ page }: { page: Page }) {
         </button>
       </div>
 
-      <pre className="mt-4 overflow-x-auto rounded-xl border border-line bg-[#0c0e0a] p-4 font-mono text-[12px] leading-6 whitespace-pre-wrap text-cream/85">
+      <pre className="mt-4 overflow-x-auto rounded-xl border border-line bg-[#0c0a0c] p-4 font-mono text-[12px] leading-6 whitespace-pre-wrap text-cream/85">
         {page.raw}
       </pre>
 

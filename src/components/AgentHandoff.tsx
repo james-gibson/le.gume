@@ -42,7 +42,7 @@ export function AgentHandoff({
               level="M"
               marginSize={2}
               bgColor="#f4f1e8"
-              fgColor="#0a0b09"
+              fgColor="#0b0a0b"
               title="Instructions for an agent"
             />
           </div>
@@ -56,7 +56,7 @@ export function AgentHandoff({
           <p className="mt-2 max-w-prose text-sm leading-6 text-muted">{note}</p>
 
           <div className="mt-4 flex items-start gap-3">
-            <pre className="min-w-0 flex-1 overflow-x-auto rounded-xl border border-line-soft bg-[#0c0e0a] p-3 font-mono text-[12px] leading-6 break-words whitespace-pre-wrap text-cream/85">
+            <pre className="min-w-0 flex-1 overflow-x-auto rounded-xl border border-line-soft bg-[#0c0a0c] p-3 font-mono text-[12px] leading-6 break-words whitespace-pre-wrap text-cream/85">
               {instructions}
             </pre>
             <CopyButton value={instructions} label="Copy" copiedLabel="Copied" size="sm" />

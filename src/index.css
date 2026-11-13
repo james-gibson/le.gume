@@ -5,16 +5,16 @@
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", monospace;
 
-  --color-ink: #0a0b09;
-  --color-surface: #11130f;
-  --color-surface-2: #171a14;
-  --color-line: #272b22;
-  --color-line-soft: #1e2119;
-  --color-cream: #f2efe4;
-  --color-muted: #a7aa9d;
-  --color-pulse: #b6f24a;
-  --color-pulse-deep: #7ea832;
-  --color-violet: #a78bfa;
+  --color-ink: #0b0a0b;
+  --color-surface: #121013;
+  --color-surface-2: #191619;
+  --color-line: #2a242a;
+  --color-line-soft: #201b20;
+  --color-cream: #d9d3c6;
+  --color-muted: #a49a9e;
+  --color-pulse: #ff2d95;
+  --color-pulse-deep: #c81e6f;
+  --color-violet: #ffc2dd;
 }
 
 html {

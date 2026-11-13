@@ -82,7 +82,7 @@ export const markdownComponents: Components = {
   },
   pre: ({ node: _node, ...props }) => (
     <pre
-      className="my-5 overflow-x-auto rounded-xl border border-line bg-[#0d0f0b] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+      className="my-5 overflow-x-auto rounded-xl border border-line bg-[#0d0b0d] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
       {...props}
     />
   ),
