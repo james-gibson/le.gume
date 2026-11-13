@@ -37,8 +37,8 @@ Rungs measure **readiness**, not seniority. The question is not "how experienced
 | --- | --- | --- | --- |
 | −3 | No script | wants the words; has JavaScript off on purpose | No script |
 | −2 | No stylesheet | wants to read; no opinions from the page | No stylesheet |
-| −1 | Just a website | wants a page, not a system; will not read a build log | It's just a website |
-| 0 | Decide | reads cost and risk; will not open a terminal | The commercial case |
+| −1 | Just a file | wants the file itself; the page is optional | It's just a file |
+| 0 | Just a website | wants a website and a bill; will not open a terminal | The commercial case |
 | 1 | Understand | reads concepts; will not deploy anything | The twelve factors |
 | 2 | Learn | runs it locally and breaks it on purpose | The starter |
 | 3 | Operate | delegates the running; wants it repeatable | Agent operations |
@@ -66,7 +66,7 @@ reading:
 | --- | --- | --- |
 | −3 | `still` | served as one static file; the application never loads |
 | −2 | `still` | served with no stylesheet at all |
-| −1 | `still` | and rendered as HTML 2.0, because the page is about not needing the layer |
+| −1 | `still` | and rendered as its source file, frontmatter and all |
 | 0–1 | `still` | no beams, no marquee, no counting numbers — the page holds still |
 | 2–3 | `calm` | reveals and tickers, no ambient loops |
 | 4 | `full` | everything the design calls for |

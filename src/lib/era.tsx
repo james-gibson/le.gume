@@ -7,7 +7,6 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { useLocation } from 'react-router-dom'
 
 /**
  * Era: 2026, or 1996.
@@ -17,15 +16,12 @@ import { useLocation } from 'react-router-dom'
  * the browser's own stylesheet show through — and the page has to survive that.
  * If it does not, it was not documentation.
  *
- * The mode is automatic on the rung −1 seed page, because a page about being
- * just a website should not be wearing a gradient while it says so. Elsewhere it
- * is a stored toggle, so the joke is available anywhere and does not follow you
- * home.
+ * It is a stored toggle rather than a route, because the rung that used to
+ * demonstrate it now renders as a file instead — see lib/fileview.tsx.
  */
 export type Era = 'modern' | 'retro'
 
 const STORAGE_KEY = 'legume.era'
-const RETRO_ROUTE = '/seeds/just-a-website'
 
 type EraState = {
   era: Era
@@ -37,16 +33,14 @@ type EraState = {
 const EraContext = createContext<EraState | null>(null)
 
 export function EraProvider({ children }: { children: ReactNode }) {
-  const { pathname } = useLocation()
-
   const [explicit, setExplicit] = useState<Era | null>(() => {
     if (typeof window === 'undefined') return null
     const stored = window.localStorage.getItem(STORAGE_KEY)
     return stored === 'retro' || stored === 'modern' ? stored : null
   })
 
-  const automatic = !explicit && pathname.replace(/\/$/, '') === RETRO_ROUTE
-  const era: Era = explicit ?? (automatic ? 'retro' : 'modern')
+  const automatic = false
+  const era: Era = explicit ?? 'modern'
 
   useEffect(() => {
     document.documentElement.dataset.era = era

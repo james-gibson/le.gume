@@ -63,6 +63,8 @@ export type Page = {
   tags: string[]
   /** seed ids this page belongs to; a page can be shared by several seeds */
   seeds: string[]
+  /** the file itself, frontmatter included — what "file mode" renders */
+  raw: string
   body: string
   headings: Heading[]
 }
@@ -140,6 +142,7 @@ function toPage(path: string, source: string): Page | null {
       .split(',')
       .map((t) => t.trim())
       .filter(Boolean),
+    raw: source,
     body,
     headings: extractHeadings(body),
   }

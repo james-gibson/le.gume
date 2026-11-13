@@ -11,8 +11,8 @@ tags: seed, satire, no-css
 The entrance is [`/bare/`](/bare/) — one HTML file, no `<style>` element, no `<link>` to a
 stylesheet, not a single `style` attribute.
 
-Rung −2: below "just a website", because the previous rung still used CSS to strip itself. This one
-declines to bring any.
+Rung −2: one above [It's just a file](/seeds/just-a-file), which gives up the page as well. This one
+keeps the document and gives up the design system.
 
 ## What this rung claims
 

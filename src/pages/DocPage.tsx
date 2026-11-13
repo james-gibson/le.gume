@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { neighbours, sectionMeta, type Page } from '../lib/content'
 import { markdownComponents } from '../lib/markdown'
+import { FileView } from '../components/FileView'
+import { useFileView } from '../lib/fileview'
 import { SeedPanel } from '../components/SeedPanel'
 import { usePageMeta } from '../lib/usePageMeta'
 
@@ -10,6 +12,9 @@ export function DocPage({ page }: { page: Page }) {
   const meta = sectionMeta(page.section)
   const { prev, next } = neighbours(page)
   usePageMeta(page.title, page.description)
+  const { view } = useFileView()
+
+  if (view === 'file') return <FileView page={page} />
 
   const editUrl = `https://github.com/james-gibson/le.gume/edit/main/src/content/${page.path}.md`
 

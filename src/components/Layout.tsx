@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { EraProvider } from '../lib/era'
+import { FileViewProvider } from '../lib/fileview'
 import { MotionProvider } from '../lib/motion'
 import { SiteFooter } from './SiteFooter'
 import { SiteHeader } from './SiteHeader'
@@ -14,7 +15,8 @@ export function Layout() {
 
   return (
     <EraProvider>
-      <MotionProvider>
+      <FileViewProvider>
+        <MotionProvider>
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
         <main className="flex-1">
@@ -22,7 +24,8 @@ export function Layout() {
         </main>
         <SiteFooter />
       </div>
-      </MotionProvider>
+        </MotionProvider>
+      </FileViewProvider>
     </EraProvider>
   )
 }

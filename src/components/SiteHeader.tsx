@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { SECTIONS } from '../lib/content'
 import { useEra } from '../lib/era'
+import { useFileView } from '../lib/fileview'
 import { MotionToggle } from './MotionToggle'
 
 const linkBase =
@@ -9,6 +10,7 @@ const linkActive = 'bg-surface-2 text-cream'
 
 export function SiteHeader() {
   const { era, setEra } = useEra()
+  const { view, setView } = useFileView()
 
   return (
     <header className="sticky top-0 z-50 border-b border-line/80 bg-ink/85 backdrop-blur-md">
@@ -53,7 +55,15 @@ export function SiteHeader() {
               Source
             </a>
           </div>
-          {/* The way back out of 1996 must exist at every width. */}
+          {/* The way back out of 1996, and out of the file, must exist at every width. */}
+          <button
+            type="button"
+            onClick={() => setView(view === 'file' ? 'page' : 'file')}
+            className="shrink-0 rounded-lg border border-line px-2.5 py-1.5 text-xs text-muted transition-colors hover:border-pulse/50 hover:text-cream"
+            title={view === 'file' ? 'Render the page' : 'Show the source file'}
+          >
+            {view === 'file' ? 'render' : 'file'}
+          </button>
           <button
             type="button"
             onClick={() => setEra(era === 'retro' ? 'modern' : 'retro')}
