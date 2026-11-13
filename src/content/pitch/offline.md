@@ -41,11 +41,32 @@ does not open and the meeting becomes about the slide deck.
 ## What the whole site weighs
 
 The built site is about 2.9 MB across 81 files at the time of writing, most of it the prerendered
-HTML that puts each page's answer in its initial response. That is the price of being readable
-without JavaScript, and it is why the deck exists: one 6.5 KB file with no application behind it.
+HTML that puts each page's answer in its initial response. In the unit this site uses for sizes:
+**two floppies**, and a sliver.
 
-The deck itself is a few tens of kilobytes: the size of an email attachment nobody has to think
-about. A project that cannot fit on a stick has a dependency the stick just exposed.
+The deck itself is 7.7 KB — half a percent of a floppy, the size of an email attachment nobody has
+to think about. A project that cannot fit on a stick has a dependency the stick just exposed.
+
+---
+
+## The floppy, as a unit
+
+A 3.5-inch floppy held 1.44 MB, which is not much and was once everything. It is a useful reference
+because it is physical: you have held one, you know how big it is, and you can tell whether a thing
+fits without trusting a table of prefixes.
+
+- the deck: 7.7 KB — 0.005 of a floppy
+- a page of this site: about 25 KB — 0.02
+- the whole site: 2.9 MB — 2.0
+
+Read the count as satire or as a budget; the arithmetic does not care. Two floppies is a joke about
+the web's current weight, and it is also a number you can hold up against a claim. The site went
+from one floppy to two when it started shipping each page's answer in its HTML — the cost of being
+readable without JavaScript, made visible because the count moved.
+
+What the unit is not: a distribution medium. Nobody ships a site on floppies, and a USB stick is a
+thousand of them. It is a reference, kept because "2.9 MB" is a number nobody has an intuition for
+and "two floppies" is one everybody does.
 
 ---
 

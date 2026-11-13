@@ -61,7 +61,7 @@ The last one is the important one. It is the check that would have failed before
 
 - **About 1.6 MB of duplicated HTML.** Each of the 64 shells carries its page, so the build is
   roughly 2.9 MB instead of 1.3 MB. That is the price of AR-READ-01, and it is why
-  [the deck](/pitch/offline) still matters: one 6.5 KB file with no application behind it.
+  [the deck](/pitch/offline) still matters: one 7.7 KB file with no application behind it.
 - **A second rendering path.** `scripts/prerender.tsx` renders every route at build time. It can
   break in ways the client bundle cannot, which is why it fails the build rather than warning.
 - **Static markup replaced on load.** The application boots over the prerendered HTML. The content
