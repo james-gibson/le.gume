@@ -23,7 +23,7 @@ export const SECTIONS = [
   {
     id: 'factors',
     label: 'Factors',
-    blurb: 'Twelve rules of thumb, taught one at a time — with the price tag and the exit.',
+    blurb: 'A menu, not a checklist: each rule with its price tag, and the case for skipping it.',
   },
   {
     id: 'isotopes',

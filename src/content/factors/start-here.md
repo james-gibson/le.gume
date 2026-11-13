@@ -63,7 +63,8 @@ compliance with all twelve.
 Every page finishes with **where this site stands**: applied, declined, or applied with a caveat.
 This site declines three factors on the record — 4, 7 and 8 are declared out of scope — and the
 lessons that apply say what the application cost. A rule you cannot afford is not a rule; it is a
-bill.
+bill. [Twelve is a bill](/pitch/twelve-is-a-bill) prices the full set and uses this site as the
+receipt.
 
 ## The lessons
 
