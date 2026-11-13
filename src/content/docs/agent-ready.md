@@ -19,7 +19,7 @@ This page maps the site onto that standard, with the check that keeps each claim
 | --- | --- |
 | **AR-FIND-01** · MUST · allow agents | `robots.txt` is one wildcard rule, `Allow: /`, with no allowlist of named crawlers and no bot manager in front |
 | **AR-FIND-02** · SHOULD · first-party docs | the whole site is first-party docs; there is no other surface |
-| **AR-FIND-03** · SHOULD · sitemap | `sitemap.xml`, 69 URLs, generated from the content tree |
+| **AR-FIND-03** · SHOULD · sitemap | `sitemap.xml`, 70 URLs, generated from the content tree |
 | **AR-FIND-04** · MAY · AI catalog | `/.well-known/ai-catalog.json`, linked from the head with `rel="ai-catalog"` |
 
 ## Read
@@ -29,7 +29,7 @@ This page maps the site onto that standard, with the check that keeps each claim
 | **AR-READ-01** · MUST · answer in the initial HTML | every route is prerendered; the shell carries the page markup, and the application replaces it on load |
 | **AR-READ-02** · MUST · real status codes | unknown paths get `404.html` with a 404 status; no path returns 200 with a "not found" body |
 | **AR-READ-03** · SHOULD · homepage in raw HTML | prerendered, with real links to docs, seeds, factors and the pitch |
-| **AR-READ-04** · SHOULD · docs pages that answer | 57 pages, all prerendered, all linked from `llms.txt` |
+| **AR-READ-04** · SHOULD · docs pages that answer | 58 pages, all prerendered, all linked from `llms.txt` |
 | **AR-READ-05** · SHOULD · fenced, language-tagged code | every block is fenced and tagged |
 | **AR-READ-06** · SHOULD · `.well-known/` | the AI catalog is the only machine file the site needs |
 | **AR-READ-07** · SHOULD · `llms.txt` | generated from the content tree, and linked from every page's footer |
@@ -63,7 +63,7 @@ The last one is the important one. It is the check that would have failed before
 
 ## What it costs
 
-- **About 1.6 MB of duplicated HTML.** Each of the 65 shells carries its page, so the build is
+- **About 1.6 MB of duplicated HTML.** Each of the 66 shells carries its page, so the build is
   roughly 2.9 MB instead of 1.3 MB. That is the price of AR-READ-01, and it is why
   [the deck](/pitch/offline) still matters: one 7.7 KB file with no application behind it.
 - **A second rendering path.** `scripts/prerender.tsx` renders every route at build time. It can

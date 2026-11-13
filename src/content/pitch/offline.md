@@ -40,7 +40,7 @@ does not open and the meeting becomes about the slide deck.
 
 ## What the whole site weighs
 
-The built site is about 2.9 MB across 83 files at the time of writing, most of it the prerendered
+The built site is about 2.9 MB across 84 files at the time of writing, most of it the prerendered
 HTML that puts each page's answer in its initial response. In the unit this site uses for sizes:
 **two floppies**, and a sliver.
 

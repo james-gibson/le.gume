@@ -41,7 +41,7 @@ someone at 2am, and a documentation site has no reason to own any of it.
 ## This site is the receipt
 
 At the time of writing, the honest subset costs: about sixty pages, eighty-odd files in the build,
-2.9 MB, a guard of 400-odd lines, sixty-five prerendered shells, seven runtime dependencies, and a rebuild
+2.9 MB, a guard of 400-odd lines, sixty-six prerendered shells, seven runtime dependencies, and a rebuild
 and deploy whenever a dependency needs patching.
 
 That is the bill for nine factors applied to a folder of Markdown. None of it is waste — the guard

@@ -1,0 +1,12 @@
+# Waivers are decisions with a reason, not a mute button. Each one below is a
+# cosmetic loss in a 320x200 frame that the design system accepts on purpose;
+# see /design for the components and /docs/doom-renderable for the argument.
+DOOM-002  *   # dark mode is the design, not an accident
+DOOM-004  *   # backdrop blur on the sticky header
+DOOM-005  *   # blend modes in the motion effects
+DOOM-006  *   # sticky header and fixed overlays
+DOOM-011  *   # gradients in the hero and section rules
+DOOM-013  *   # alpha colours are how the palette works
+DOOM-020  *   # border-radius on every surface
+DOOM-023  *   # motion is transform-based, budgeted by rung
+DOOM-040  *   # two families: sans and mono
