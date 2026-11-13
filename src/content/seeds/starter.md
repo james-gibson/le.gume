@@ -14,7 +14,8 @@ assumption is git and Node, with no documentation tooling experience. The entran
 
 ## What is inside
 
-- **The pattern** — quickstart, the architecture, the content model, the file map, the deploy.
+- **The pattern** — quickstart, the architecture, the content model, the file map, the deploy,
+  and [what the web is for](/docs/philosophy).
 - **The tasks** — seed a project, add a page, colocate knowledge, ship it.
 - **The proof** — [Silverskin](/isotopes/silverskin), which is this very site described as an
   isotope, with its costs written down.

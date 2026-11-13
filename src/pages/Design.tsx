@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 import {
   BentoGrid,
   BentoGridCard,
@@ -63,6 +64,17 @@ export function Design() {
         with the same props, rendered by the same bundle. If a sample stops working, the site is
         wrong — which is the point of keeping the documentation and the demo in one file tree.
       </p>
+      <p className="mt-3 max-w-2xl text-sm text-muted/80">
+        Why the page is shaped this way, and what each choice gives up, is written down in{' '}
+        <Link
+          to="/docs/philosophy"
+          className="text-pulse underline decoration-pulse/30 underline-offset-4"
+        >
+          What the web is for
+        </Link>
+        .
+      </p>
+
       <p className="mt-3 max-w-2xl text-sm text-muted/80">
         Motion is provided by{' '}
         <a
