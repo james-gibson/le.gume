@@ -58,7 +58,10 @@ export function DocPage({ page }: { page: Page }) {
 
         <div className="pb-4">
           <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-            {page.body}
+            {/* The body opens with "# Title", which the header above already
+                renders as the page's <h1>. Rendering both gives every page two
+                h1s and an outline that starts twice. */}
+            {page.body.replace(/^\s*#\s+[^\n]*\n/, '')}
           </ReactMarkdown>
         </div>
 

@@ -153,6 +153,7 @@ const html = `<!doctype html>
 </style>
 </head>
 <body>
+<main>
 ${slides
   .map(
     (slide, index) =>
@@ -163,6 +164,7 @@ ${slides
   ${escapeHtml(title)} · built ${built} from ${escapeHtml(commit)} · AGPL-3.0-only · no script, no network.<br>
   Generated from ${SOURCE} — the same file the site publishes, so the two cannot disagree on purpose.
 </footer>
+</main>
 </body>
 </html>
 `

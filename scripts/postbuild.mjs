@@ -73,14 +73,47 @@ const shellFor = (key) => {
   return content ? template.replace('<div id="root"></div>', `<div id="root">${content}</div>`) : template
 }
 
+// The build knows each page's title; the prerendered shell must say it. An
+// effect that sets document.title runs after paint, so without this every page
+// ships the same <title> — a WCAG 2.4.2 failure and a bad unfurl.
+const pageTitles = new Map()
+for (const file of await walk(CONTENT)) {
+  if (!file.endsWith('.md')) continue
+  const source = await readFile(file, 'utf8')
+  const title = /^title:\s*(.+)$/m.exec(source)?.[1]?.trim().replace(/^["']|["']$/g, '')
+  if (title) pageTitles.set(relative(CONTENT, file).replace(/\.md$/, ''), title)
+}
+
+const titleFor = (route) => {
+  if (!route) return null
+  if (pageTitles.has(route)) return `${pageTitles.get(route)} · le.gume`
+  if (route === 'design') return 'Design · le.gume'
+  if (route === '404') return 'Not found · le.gume'
+  const section = route.split('/')[0]
+  if (!route.includes('/') && section) {
+    return `${section.charAt(0).toUpperCase()}${section.slice(1)} · le.gume`
+  }
+  return null
+}
+
+const withTitle = (html, route) => {
+  const title = titleFor(route)
+  if (!title) return html
+  return html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`)
+}
+
 for (const route of routes) {
   const dir = join(DIST, route)
   await mkdir(dir, { recursive: true })
-  await writeFile(join(dir, 'index.html'), shellFor(route.replace(/\//g, '__')), 'utf8')
+  await writeFile(
+    join(dir, 'index.html'),
+    withTitle(shellFor(route.replace(/\//g, '__')), route),
+    'utf8',
+  )
 }
 
 await writeFile(join(DIST, 'index.html'), shellFor('home'), 'utf8')
-await writeFile(join(DIST, '404.html'), shellFor('404'), 'utf8')
+await writeFile(join(DIST, '404.html'), withTitle(shellFor('404'), '404'), 'utf8')
 await writeFile(join(DIST, '.nojekyll'), '')
 
 // --- sitemap, crawl policy, catalog ---------------------------------------
