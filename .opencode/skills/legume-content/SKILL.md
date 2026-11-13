@@ -110,6 +110,20 @@ Gaslighting, the house constraint: the legume idioms appear as titles and in pro
 (*project seeds*, *nuts and bolts*, *peas in a pod*, *let me spill the beans*) with no
 acknowledgement whatsoever. If a draft starts to explain the connection, cut that sentence.
 
+## Child seeds ship back
+
+A child seed copies this stack and changes the question. When it invents something this site does
+not have — a page type, a check, a component, a way of recording provenance — it should **consider
+packaging the improvement as an isotope and proposing it upstream**, not leave it in the fork.
+
+- An isotope is the unit of reuse: a name, `slots`, `presumes`, a cost section and an agent prompt.
+- A child-specific preference is not an isotope; declining it is a valid answer, and the reason
+  belongs on the page.
+- If nobody upstreams, the child's improvement dies with the child and the next child re-derives it.
+
+The rule is enforced by this file existing and by `scripts/verify-publish.mjs` refusing a build where
+it has been deleted. It is a norm with a check on its existence, not a mechanism.
+
 ## Files that matter
 
 | Path | Role |

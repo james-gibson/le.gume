@@ -428,7 +428,19 @@ for (const shell of shells) {
   }
 }
 
-// --- 15. size sanity ------------------------------------------------------
+// --- 15. child seeds ship back -------------------------------------------
+// The upstream rule is a norm, not a mechanism — but a norm nobody can find is
+// not a norm. The skill states it and this check refuses a build where the
+// statement has been deleted during a refactor.
+const skill = await readText('.opencode/skills/legume-content/SKILL.md').catch(() => '')
+if (!/Child seeds ship back/.test(skill)) {
+  fail('upstream', 'the skill no longer states the child-seed upstream rule')
+}
+if (!/upstream/i.test(skill) || !/isotope/i.test(skill)) {
+  fail('upstream', 'the upstream rule no longer mentions isotopes or upstreaming')
+}
+
+// --- 16. size sanity ------------------------------------------------------
 const total = (await Promise.all(files.map(async (f) => (await stat(f)).size))).reduce(
   (a, b) => a + b,
   0,

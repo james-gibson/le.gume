@@ -1,0 +1,76 @@
+---
+title: Child seeds ship back
+description: A child seed that invents something should package it as an isotope and propose it upstream — not leave the improvement to die with the fork.
+order: 19
+updated: 2026-11-13
+tags: isotopes, agents, governance
+seeds: agent-operations
+---
+
+# Child seeds ship back
+
+A child seed copies the stack and changes the question. Somewhere in that work it will invent
+something the parent does not have: a page type, a check, a component, a way of recording
+provenance. The rule is that the child should **consider packaging it as an isotope and proposing it
+upstream** before the improvement settles into the fork.
+
+Consider, not must. A child-specific preference is not an isotope, and pretending otherwise is how a
+shelf fills with things nobody can lift.
+
+## Why an isotope and not a diff
+
+An isotope is the parent's unit of reusable system: a named procedure with `slots` for what an agent
+cannot guess, `presumes` for its runtime and permissions, a cost section and an agent prompt. It is
+named after a pickle, and the name is permanent because it is the URL, the QR payload and the prompt.
+
+That packaging is the difference between an improvement and a patch:
+
+- a **diff** is something a maintainer has to read, understand and re-derive;
+- an **isotope** is something a reader can lift whole, with its costs stated and its assumptions
+  declared.
+
+The child already did the hard part — it built the thing and found out what it costs. Writing the
+page is the cheap half.
+
+## What packaging costs
+
+- **The page**, in the parent's isotope shape: what it proves, the parts, what it costs, take this
+  not that, what would break it.
+- **A name**, chosen once and kept, because it becomes a URL and a prompt.
+- **The declaration**: `slots:` (even `none`) and `presumes:`. An isotope that hides its runtime is
+  an isotope nobody can compare or assess.
+- **A review** in the parent, which may say no.
+
+## What the parent owes
+
+A yes or no within one review, and a decline that says why. "Not general enough" is a valid answer;
+silence is not, because silence is how the next child re-solves the same problem. An isotope that is
+really a preference of one audience should be declined and the reason written on the page.
+
+## What happens when nobody does it
+
+- The child's improvement dies when the child does, which for a research dashboard is when the
+  question changes.
+- The parent keeps a bug the child already fixed, and pays for it again.
+- The next child re-derives the same thing, at the same cost, with a different name.
+
+The arithmetic is the argument: upstreaming is one page and a review; re-deriving is a week, every
+time, for every child.
+
+## How it is enforced
+
+Three places, none of them a police force:
+
+1. **The skill** — `.opencode/skills/legume-content/SKILL.md` states the rule, so an agent working in
+   this repository reads it before it ships a feature.
+2. **The guard** — the build fails if the skill stops stating it, so the rule cannot be quietly
+   deleted during a refactor.
+3. **The child's `AGENTS.md`** — the same sentence, in the file the next agent reads first, so the
+   obligation is visible where the feature is built rather than only where it lands.
+
+What none of that does is force a child to upstream. The rule is a norm with a check on its
+existence, not a mechanism; the honest version is that the guard proves the instruction is still
+written, not that anyone followed it.
+
+The format it should be packaged in is [What an isotope is](/isotopes/what-is-an-isotope); the
+licence that lets a child take the work and give it back is [Who owns what](/docs/licensing).
