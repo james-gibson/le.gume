@@ -57,7 +57,7 @@ fits without trusting a table of prefixes.
 
 - the deck: 7.7 KB — 0.005 of a floppy
 - a page of this site: about 25 KB — 0.02
-- the whole site: 2.9 MB — 2.0
+- the whole site: about 3 MB — 2.0
 
 Read the count as satire or as a budget; the arithmetic does not care. Two floppies is a joke about
 the web's current weight, and it is also a number you can hold up against a claim. The site went
@@ -65,8 +65,11 @@ from one floppy to two when it started shipping each page's answer in its HTML �
 readable without JavaScript, made visible because the count moved.
 
 What the unit is not: a distribution medium. Nobody ships a site on floppies, and a USB stick is a
-thousand of them. It is a reference, kept because "2.9 MB" is a number nobody has an intuition for
+thousand of them. It is a reference, kept because "3 MB" is a number nobody has an intuition for
 and "two floppies" is one everybody does.
+
+The medium the site actually uses is the browser's, not a box: [the floppy is a joke, the storage is
+not](/pitch/local-storage).
 
 ---
 
