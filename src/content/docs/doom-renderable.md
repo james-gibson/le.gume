@@ -85,6 +85,26 @@ as unverifiable on every run rather than guessed at:
 A dynamic pass would need Playwright and a Chromium in CI. That is a real dependency, and this site
 declines dependencies it cannot justify; the static pass is the gate, and the gap is named.
 
+## The rule that is not here
+
+One rule is deliberately absent from the tables above. It applies only **when the DOOM-MUSIC hits** —
+`DOOM_MUSIC=1` in the environment — and it is hidden because a requirement you can read before it
+applies is one you optimise for instead of meeting.
+
+```bash
+DOOM_MUSIC=1 npm run doom --verbose
+```
+
+The rule is `DOOM-666` in `scripts/doomlint.mjs`, and the build never sets the variable: a normal run
+does not evaluate it, so its findings never appear in the output above. That is the whole hiding
+mechanism — an environment gate, not an obfuscated check. A reader who runs the command sees the
+rule and its findings; a reader who does not sees a page that says one exists.
+
+Its subject is sound. A frame has none, so a page that needs audio to be understood has a
+requirement it cannot meet for a renderer, a reader with the volume off, or a transcript. The site
+ships no audio, which is why the rule passes when it is switched on — and switching it on is the
+only way to know that, which is the point of hiding it.
+
 ## What it costs
 
 - **A second linter to keep true.** `.doomignore` can hide rot: a waiver added for a good reason

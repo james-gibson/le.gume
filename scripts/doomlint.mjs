@@ -32,6 +32,10 @@ const RULES = {
   'DOOM-032': ['high', 5, 20, 'image carries no alt text'],
   'DOOM-040': ['low', 1, 5, 'more than two font families'],
   'DOOM-002': ['low', 1, 5, 'rendering depends on the viewer environment'],
+  // Not listed on the page, and only evaluated when DOOM_MUSIC is set. A frame
+  // has no sound, so a page that needs audio to be understood has a requirement
+  // it cannot meet for a renderer, a muted reader, or a transcript.
+  'DOOM-666': ['critical', 10, 30, 'the page needs sound the frame does not have'],
 }
 
 const ORDER = { critical: 0, high: 1, medium: 2, low: 3 }
@@ -39,6 +43,9 @@ const ORDER = { critical: 0, high: 1, medium: 2, low: 3 }
 const args = process.argv.slice(2)
 const root = args.find((a) => !a.startsWith('--')) ?? 'dist'
 const verbose = args.includes('--verbose')
+// Hidden by an environment variable, not by obfuscation: run with DOOM_MUSIC=1
+// and the rule is visible, its findings included.
+const music = Boolean(process.env.DOOM_MUSIC)
 const failOnIndex = args.indexOf('--fail-on')
 const failOn = failOnIndex > -1 ? args[failOnIndex + 1] : null
 
@@ -107,6 +114,8 @@ for (const file of files) {
       hit('DOOM-001', file, `cross-origin src: ${match[0].slice(0, 48)}`)
     for (const match of source.matchAll(/url\(\s*["']?https?:\/\//gi))
       hit('DOOM-001', file, 'cross-origin url() in markup')
+    if (music && /<(audio|video)[\s>]|<[^>]+\bautoplay\b/i.test(source))
+      hit('DOOM-666', file, 'sound is required to understand the page')
   } else {
     if (/url\(\s*["']?https?:\/\//i.test(source)) hit('DOOM-001', file, 'cross-origin url() in CSS')
     if (/(?:^|[;{])\s*filter\s*:\s*(?!none)/i.test(source)) hit('DOOM-004', file, 'filter')
@@ -153,6 +162,8 @@ const advisory = findings.filter((f) => !waivers.has(f.rule) && ORDER[RULES[f.ru
 const waived = findings.filter((f) => waivers.has(f.rule))
 
 // --- report ----------------------------------------------------------------
+if (music) console.log('doom: DOOM-MUSIC engaged — one hidden rule is active')
+
 console.log(
   `doom: ${badge} · ${score}/100 · ${gating.length} gating, ${advisory.length} advisory, ` +
     `${waived.length} waived`,
