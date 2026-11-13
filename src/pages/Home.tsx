@@ -20,6 +20,7 @@ export function Home() {
   const navigate = useNavigate()
   const { mode } = useMotion()
   const still = mode === 'still'
+  const full = mode === 'full'
 
   const facts = [
     { k: 'Pages', v: PAGES.length },
@@ -58,21 +59,23 @@ export function Home() {
 
             <MotionReveal preset="fade-up" delay={180}>
               <div className="mt-9 flex flex-wrap items-center gap-3">
-                {still ? (
+                {full ? (
+                  <>
+                    <RainbowButton href={`${base}docs/quickstart`}>
+                      Go<span className="sr-only"> — read the quickstart</span>
+                    </RainbowButton>
+                    <GradientButton onClick={() => navigate('/pitch/why-legume')}>
+                      The commercial case
+                    </GradientButton>
+                  </>
+                ) : (
                   <>
                     <Button href={`${base}docs/quickstart`} variant="primary">
-                      Read the quickstart
+                      Go<span className="sr-only"> — read the quickstart</span>
                     </Button>
                     <Button variant="secondary" onClick={() => navigate('/pitch/why-legume')}>
                       The commercial case
                     </Button>
-                  </>
-                ) : (
-                  <>
-                    <RainbowButton href={`${base}docs/quickstart`}>Read the quickstart</RainbowButton>
-                    <GradientButton onClick={() => navigate('/pitch/why-legume')}>
-                      The commercial case
-                    </GradientButton>
                   </>
                 )}
               </div>

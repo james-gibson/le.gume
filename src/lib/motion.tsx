@@ -10,6 +10,7 @@ import {
 } from 'react'
 import { useLocation } from 'react-router-dom'
 import { BorderBeam, NumberTicker, Reveal } from 'fancy-ui-react'
+import { PAGES } from './content'
 import { getSeed } from './seeds'
 
 /**
@@ -73,10 +74,28 @@ export function MotionProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const auto = useMemo<MotionMode>(() => {
-    const seedId = pathname.startsWith('/seeds/') ? pathname.split('/')[2] : undefined
-    const seed = seedId ? getSeed(seedId) : undefined
-    const rung = seed?.rung
-    if (rung === undefined) return 'full'
+    const route = pathname.replace(/\/+$/, '') || '/'
+
+    // The catalogue exists to show motion; it is the one page that is allowed
+    // to be loud by default.
+    if (route === '/design') return 'full'
+
+    // A page's budget comes from the seeds it belongs to, taking the lowest rung
+    // so a page shared by two audiences is safe for both. The old version only
+    // looked at /seeds/<id>, which gave the front door and the whole pitch the
+    // loudest budget — the reason the hero rainbow never muted.
+    const seedId = route.startsWith('/seeds/') ? route.split('/')[2] : undefined
+    const page = PAGES.find((candidate) => `/${candidate.path}` === route)
+    const seedIds = seedId ? [seedId] : (page?.seeds ?? [])
+    const rungs = seedIds
+      .map((id) => getSeed(id)?.rung)
+      .filter((rung): rung is number => typeof rung === 'number')
+
+    // No seed: the home page, a section index, the 404. The front door serves
+    // every rung, so it gets the middle budget rather than the loudest.
+    if (!rungs.length) return 'calm'
+
+    const rung = Math.min(...rungs)
     if (rung <= 1) return 'still'
     if (rung <= 3) return 'calm'
     return 'full'
