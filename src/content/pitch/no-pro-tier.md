@@ -1,9 +1,9 @@
 ---
 title: There is no pro tier
-description: The open-source version is the professional version. Nothing is held back, and every claim on the site can be checked at the published URL or in the repository.
+description: The open-source version is the professional version. A pro tier would sell a compliance checklist, hold basic internet specs hostage and add liabilities — not peace.
 order: 10
-updated: 2026-11-13
-tags: pitch, licence, trust
+updated: 2026-11-21
+tags: pitch, licence, trust, sales, compliance
 seeds: pitch
 ---
 
@@ -32,6 +32,45 @@ the wall would cost more than the features behind it.
 
 Read the third column carefully: none of those are withheld. Several are **declined**, which is a
 different thing. The absence is the same absence for every user, including the person who wrote it.
+
+## What a pro tier would actually sell
+
+The table above is generous to the idea. Most "pro" tiers do not sell a capability the free
+version lacks; they sell a document that says the buyer is allowed to stop worrying.
+
+- **A compliance checklist.** Single sign-on, audit retention, a data-processing agreement, a
+  subprocessor list, a security questionnaire with the right boxes ticked. The artifact is real.
+  The safety is often the artifact.
+- **Basic internet specs as hostages.** TLS, HTTP, accessible HTML, deep links, security headers,
+  a working 404, logs that name the observed peer. None of these is advanced. A tier that withholds
+  them to make the paid edition look complete is not selling an upgrade; it is creating the
+  deficiency it then charges to remove.
+- **Increased liabilities.** An SLA, a support rota, an uptime number, a promise to patch by
+  Friday. Every one is a liability the lab would have to carry and the buyer would have to
+  enforce. A pro tier looks like certainty; the invoice is a promise someone else must keep.
+
+## What the buyer wants is peace
+
+Not a dashboard. Not a badge. Peace is the absence of traps: no surprise invoice, no lock-in, no
+security regression between editions, no renewal negotiation, no audit finding caused by the
+version you were allowed to have. A pro tier usually sells the opposite — another relationship to
+manage, another contract to renew, another place where the free edition was made worse so the paid
+one could be better.
+
+That is why there is no pro tier here. The free edition is the professional edition because the
+thing a pro buyer wants would be peace, and peace is not a feature flag.
+
+## Common peace, not sales
+
+lab-safety is making the case for common peace, not sales. Safety is a commons: the baseline that
+protects one reader protects the next, and a baseline withheld from some users is not a safety
+property — it is a market segment. This site can argue for the commons because it is not trying to
+convert the argument into a checkout.
+
+If a sale is introduced, it should be for **new work**: a migration, an integration, a fork that
+stays maintained, a review of your own version, a new site or universe. Not for a better edition of
+what already exists. The rule is simple: nothing that is already true is held back; only work that
+does not exist yet can be sold.
 
 ## What "testable in production" means
 
