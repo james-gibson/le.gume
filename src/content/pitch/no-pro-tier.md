@@ -1,6 +1,6 @@
 ---
 title: There is no pro tier
-description: The open-source version is the professional version. A pro tier would sell a compliance checklist, hold basic internet specs hostage and add liabilities — not peace.
+description: The open-source version is the professional version. A pro tier would sell a compliance checklist, hold basic internet specs hostage and turn a working site into a false choice — not peace.
 order: 10
 updated: 2026-11-21
 tags: pitch, licence, trust, sales, compliance
@@ -59,6 +59,27 @@ one could be better.
 
 That is why there is no pro tier here. The free edition is the professional edition because the
 thing a pro buyer wants would be peace, and peace is not a feature flag.
+
+## A pro tier is a false choice
+
+It asks the buyer to choose before the work is known: pay now for the cheaper edition, or pay
+later when the free edition runs out. Will the documentation be complete enough? Will the first
+mistake be recoverable? Is the pro price a discount for trust, or a penalty for needing help? None
+of those is a product question. They are pricing questions, answered by the person with the least
+information at the worst possible time.
+
+What a user wants is simpler: a working site, and an update six months later that does not cost an
+arm and a child. A pro tier is often a bet that the later update will be expensive enough to make
+the earlier upgrade look rational. That is not a choice between editions; it is a choice between
+being helped now and being held up later.
+
+## What we give
+
+A working system, free, with enough examples that a child could update the basic site case without
+extra assistance. The examples are not a teaser for a paid edition; they are the edition. Start
+with the [quickstart](/docs/quickstart), copy [the starter
+seed](/seeds/starter), and follow [adding a page](/guides/adding-a-page). If the basic case needs a
+support contract to change, the documentation has failed, and no pricing page fixes that.
 
 ## Common peace, not sales
 
