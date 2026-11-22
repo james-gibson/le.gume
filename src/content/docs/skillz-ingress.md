@@ -60,10 +60,10 @@ substitute for a request that crossed.
 ## The four checks
 
 ```sh
-cd ~/skillz
-bin/skillz verify
-bin/skillz probe
-bin/skillz ingress-probe --key-file state/ops/border.key
+cd skillz
+./bin/skillz verify
+./bin/skillz probe
+./bin/skillz ingress-probe --key-file state/ops/border.key
 ops/install.sh doctor
 ```
 

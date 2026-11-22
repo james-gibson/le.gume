@@ -64,5 +64,5 @@ is reading are the bytes that were adopted.
 Whether a skill is any good, how to route a model to it, or how to publish it to a registry. Those
 are authoring and distribution problems; this seed is about custody.
 
-The worked example is `skillz` at `~/skillz`. Start with
-[One owner for every skill](/docs/skillz).
+The installable repository is [james-gibson/skillz](https://github.com/james-gibson/skillz); the
+worked example is the repository itself. Start with [One owner for every skill](/docs/skillz).

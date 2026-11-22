@@ -13,15 +13,19 @@ The task starts with the same symptom: the same skill exists in several agent di
 one knows which copy an agent will read. The end state is one canonical copy, the old locations
 left as views, and a verification command that fails when the copies drift.
 
-The worked example is `~/skillz`. The commands are the same if you rename the folder; the paths
-below are the ones in this repository.
+The worked example is [james-gibson/skillz](https://github.com/james-gibson/skillz). Clone it first;
+the paths below are relative to that clone.
+
+```sh
+git clone https://github.com/james-gibson/skillz.git
+cd skillz
+```
 
 ## Before you start
 
 Inventory first. It reads; it does not move anything.
 
 ```sh
-cd ~/skillz
 bin/skillz inventory
 ```
 

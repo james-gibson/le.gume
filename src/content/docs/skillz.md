@@ -15,7 +15,8 @@ project's `.opencode/skills`, a worktree's `.claude/skills`, and a cache. The co
 problem; the missing answer to "which one is true?" is.
 
 `skillz` is a repository with one job: answer that question once. It is the worked example, not a
-package. The pattern is four tiers and a sealed manifest.
+package. The installable repository is [james-gibson/skillz](https://github.com/james-gibson/skillz);
+the pattern is four tiers and a sealed manifest.
 
 ## The four tiers
 
