@@ -70,18 +70,20 @@ are materialised in `cache/external/` on demand; a cache miss is a warning, not 
 
 ## Hired sources
 
-A skill can be canon and still have an upstream. `sources.lock.json` pins the repository, ref,
-commit, path and license; the vendored `skill.json` carries the same source. `skillz sync --check`
-resolves the exact branch or tag and reports `current`, `drift` or `unreachable`; `sync --update`
-refreshes the copy and reseals it. Local edits are replaced by an update, so a deliberate fork
-removes the source entry instead.
+An expert can be canon and still have an upstream. `sources.lock.json` pins the repository, ref,
+commit, path and license for every skill in the group; each vendored `skill.json` carries the same
+source. `hire --all` imports the set, and `skillz sync --check` resolves the repository/ref once for
+the whole group. It reports `current`, `drift` or `unreachable`; `sync --update` refreshes the
+copies and reseals them. Local edits are replaced by an update, so a deliberate fork removes the
+source entry instead.
 
 The MCP server advertises `sync` only while every pin is current. The optional `skillz-sync` alarm
 target requires `sync/current`, so an upstream commit turns that light yellow. That is the
-difference between a copy and a hired expert: the copy can drift silently; the pin cannot.
+difference between a copy and an imported expert: the copy can drift silently; the pin cannot.
 
-The worked example is [Matt Pocock's `code-review`](https://github.com/mattpocock/skills), pinned
-under MIT at a commit, not at a branch name that happens to be current.
+The worked example is [Matt Pocock's `ask-matt` set](https://github.com/mattpocock/skills), pinned
+under MIT at a commit, not at a branch name that happens to be current. `ask-matt` is the router;
+the rest of the set is what it routes to.
 
 ## The loop
 
