@@ -40,6 +40,10 @@ The source does not have to be a person. The same pin imports the official
 [shadcn/ui skill](https://github.com/shadcn-ui/ui/tree/main/skills/shadcn) from the framework's
 monorepo. A UI skill is a project source, not an expert bundle.
 
+Not every library ships a `SKILL.md`. GlassCN UI is a component library; its skill is an **authored
+adapter** that records the upstream commit in `skill.json` and cites the README at that commit in
+`external.lock.json`. There is no upstream skill to sync, so there is no pin.
+
 ## Why it is shaped this way
 
 An agent skill is a claim about how to act, written down. Once the same claim exists in

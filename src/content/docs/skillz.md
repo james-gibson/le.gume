@@ -90,6 +90,13 @@ The source does not have to be a person: the official
 `shadcn-ui/ui` monorepo at `skills/shadcn`, one directory among many. The ledger records the path,
 the commit and the MIT license; it does not assume an individual author.
 
+### Authored adapters
+
+Not every library ships a `SKILL.md`. GlassCN UI is a component library; its skill is an **authored
+adapter**. It copies no upstream skill, records the repository and commit in `skill.json.source`,
+and cites the README at that commit in `external.lock.json`. There is no `sync` pin, because there
+is no upstream skill to pin; if the docs change, re-read them and re-seal the adapter.
+
 ## The loop
 
 | Act | Command | What it changes |
