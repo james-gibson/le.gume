@@ -20,6 +20,20 @@ is [One owner for every skill](/docs/skillz).
   token admission, a signed border, and the checks that say it is still answering.
 - **The task** — [Adopt a skill collection](/guides/skillz-adoption): inventory, adopt, link, seal,
   verify, archive, and the point at which the loop is done.
+- **The hire** — [Hired sources](/docs/skillz#hired-sources): pin an external expert by commit,
+  update it deliberately, and let the alarm notice drift.
+
+## Hiring an expert
+
+A skill does not have to be authored here to be canon. The worked example is
+[Matt Pocock's skills repository](https://github.com/mattpocock/skills): `skillz hire` copies the
+`code-review` skill into the canon, records the MIT license and the exact commit, and writes the pin
+to `sources.lock.json`.
+
+`skillz sync --check` resolves the exact branch or tag and reports `current`, `drift` or
+`unreachable`. `sync --update` refreshes the copy and reseals it. The alarm watches the pin: the MCP
+server advertises `sync` only while every source is current, so an upstream commit turns that light
+yellow. A copy can drift silently; a pin cannot.
 
 ## Why it is shaped this way
 
@@ -56,6 +70,8 @@ is reading are the bytes that were adopted.
   has a second copy.
 - **A service face to keep alive.** The MCP server, alarm and ingress are optional, but once they
   are on, `doctor` is the difference between an alarm and a decoration.
+- **A pin to watch.** A hired skill is only as current as its last `sync --update`; the alarm makes
+  the gap visible, not smaller.
 - **No search, no registry, no permissions.** The store is a git repository and a read-only wire.
   Multi-user access control is a different system.
 

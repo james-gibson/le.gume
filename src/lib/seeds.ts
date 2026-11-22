@@ -204,6 +204,7 @@ export const SEEDS: Seed[] = [
       'the four tiers that keep canon, archive, sources and cache distinct',
       "a sealed manifest that makes a skill's bytes checkable",
       'why the service face is read-only, loopback and fail-closed',
+      'how to pin an external expert and let an alarm notice drift',
     ],
     entry: '/docs/skillz',
     rung: 3,

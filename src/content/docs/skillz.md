@@ -68,6 +68,21 @@ Owned payloads live in `external/` and are committed. Referenced payloads live a
 are materialised in `cache/external/` on demand; a cache miss is a warning, not a loss of canon.
 `skillz external verify` checks every materialised copy against the recorded hash.
 
+## Hired sources
+
+A skill can be canon and still have an upstream. `sources.lock.json` pins the repository, ref,
+commit, path and license; the vendored `skill.json` carries the same source. `skillz sync --check`
+resolves the exact branch or tag and reports `current`, `drift` or `unreachable`; `sync --update`
+refreshes the copy and reseals it. Local edits are replaced by an update, so a deliberate fork
+removes the source entry instead.
+
+The MCP server advertises `sync` only while every pin is current. The optional `skillz-sync` alarm
+target requires `sync/current`, so an upstream commit turns that light yellow. That is the
+difference between a copy and a hired expert: the copy can drift silently; the pin cannot.
+
+The worked example is [Matt Pocock's `code-review`](https://github.com/mattpocock/skills), pinned
+under MIT at a commit, not at a branch name that happens to be current.
+
 ## The loop
 
 | Act | Command | What it changes |
@@ -109,6 +124,8 @@ explicitly.
   not that the advice is good.
 - **A repository to keep.** The canon is git history: back it up, review it, and do not let a cache
   become the only copy.
+- **An upstream to watch.** A hired skill is only as current as its pin. `sync --check` and the
+  alarm tell you when the expert moved; they do not merge the change for you.
 - **A service to keep alive.** The MCP surface is optional; an alarm without a running server is a
   red light, not a discovery.
 
