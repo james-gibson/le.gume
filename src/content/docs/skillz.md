@@ -85,6 +85,11 @@ The worked example is [Matt Pocock's `ask-matt` set](https://github.com/mattpoco
 under MIT at a commit, not at a branch name that happens to be current. `ask-matt` is the router;
 the rest of the set is what it routes to.
 
+The source does not have to be a person: the official
+[shadcn/ui skill](https://github.com/shadcn-ui/ui/tree/main/skills/shadcn) is pinned from the
+`shadcn-ui/ui` monorepo at `skills/shadcn`, one directory among many. The ledger records the path,
+the commit and the MIT license; it does not assume an individual author.
+
 ## The loop
 
 | Act | Command | What it changes |

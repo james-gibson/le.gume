@@ -36,6 +36,10 @@ pin per skill under a shared group.
 server advertises `sync` only while every source is current, so an upstream commit turns that light
 yellow. A copy can drift silently; a pin cannot.
 
+The source does not have to be a person. The same pin imports the official
+[shadcn/ui skill](https://github.com/shadcn-ui/ui/tree/main/skills/shadcn) from the framework's
+monorepo. A UI skill is a project source, not an expert bundle.
+
 ## Why it is shaped this way
 
 An agent skill is a claim about how to act, written down. Once the same claim exists in
