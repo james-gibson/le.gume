@@ -196,6 +196,20 @@ export const SEEDS: Seed[] = [
     touches: 'delegates the running; wants it repeatable',
   },
   {
+    id: 'skillz',
+    title: 'The skill repository',
+    audience: 'Someone who owns a folder of agent skills and needs one canonical copy, not another cache.',
+    assumes: 'A shell, Python 3, and Markdown files you already trust.',
+    teaches: [
+      'the four tiers that keep canon, archive, sources and cache distinct',
+      "a sealed manifest that makes a skill's bytes checkable",
+      'why the service face is read-only, loopback and fail-closed',
+    ],
+    entry: '/docs/skillz',
+    rung: 3,
+    touches: 'runs the store and its alarm; wants the loop repeatable',
+  },
+  {
     id: 'isotopes',
     title: 'Isotopes',
     audience: 'Anyone who keeps re-explaining a setup they only do occasionally.',

@@ -41,7 +41,7 @@ Rungs measure **readiness**, not seniority. The question is not "how experienced
 | 0 | Just a website | wants a website and a bill; will not open a terminal | The commercial case |
 | 1 | Understand | reads concepts; will not deploy anything | The twelve factors · Scenario as contract |
 | 2 | Learn | runs it locally and breaks it on purpose | The starter |
-| 3 | Operate | delegates the running; wants it repeatable | Agent operations |
+| 3 | Operate | delegates the running; wants it repeatable | Agent operations · The skill repository |
 | 4 | Package | designs systems other people will operate | Isotopes |
 
 The ordering is the argument: **someone who does not want to deploy software sits below someone who
