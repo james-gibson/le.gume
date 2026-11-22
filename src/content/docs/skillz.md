@@ -97,8 +97,8 @@ adapter**. It copies no upstream skill, records the repository and commit in `sk
 and cites the README at that commit in `external.lock.json`. There is no `sync` pin, because there
 is no upstream skill to pin; if the docs change, re-read them and re-seal the adapter.
 
-A group does not have to be the whole catalog. Six skills from
-[`github/awesome-copilot`](https://github.com/github/awesome-copilot) are pinned from a large
+A group does not have to be the whole catalog. A curated set from
+[`github/awesome-copilot`](https://github.com/github/awesome-copilot) is pinned from a large
 repository, one path at a time, under one repository pin; the rest of the catalog is not vendored.
 
 ## The loop

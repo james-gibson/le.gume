@@ -44,7 +44,7 @@ Not every library ships a `SKILL.md`. GlassCN UI is a component library; its ski
 adapter** that records the upstream commit in `skill.json` and cites the README at that commit in
 `external.lock.json`. There is no upstream skill to sync, so there is no pin.
 
-A curated subset works the same way. Six skills from the large
+A curated set works the same way. Skills from the large
 [`github/awesome-copilot`](https://github.com/github/awesome-copilot) catalog are pinned as one
 group; the rest of the catalog is not vendored.
 
