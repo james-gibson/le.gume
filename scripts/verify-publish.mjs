@@ -495,11 +495,42 @@ const rulesFile = await readText('dist/rules.md').catch(() => '')
 if (!rulesFile) {
   fail('rules', 'dist/rules.md is missing — child seeds have nothing to defer to')
 } else {
-  for (let i = 1; i <= 8; i += 1) {
+  for (let i = 1; i <= 10; i += 1) {
     const id = `RULES-${String(i).padStart(2, '0')}`
     if (!rulesFile.includes(`${id}:`)) fail('rules', `dist/rules.md does not define ${id}`)
   }
   if (!/^version: \S+/m.test(rulesFile)) fail('rules', 'dist/rules.md has no version line')
+}
+
+// --- 18. the publish workflow runs on the current LTS ---------------------
+// RULES-10. A step pinned to an action major whose runtime is Node 20 warns on
+// every run and will eventually stop. Bump this map when GitHub moves the
+// runtime; the rule text lives in scripts/postbuild.mjs.
+const NODE_LTS_ACTION_MAJORS = {
+  checkout: 5,
+  'setup-node': 5,
+  'configure-pages': 6,
+  'upload-pages-artifact': 5,
+  'deploy-pages': 5,
+  'upload-artifact': 6,
+  'download-artifact': 7,
+}
+const workflowDir = '.github/workflows'
+let workflowFiles = []
+try {
+  workflowFiles = (await readdir(workflowDir)).filter((f) => /\.ya?ml$/.test(f))
+} catch {
+  workflowFiles = []
+}
+if (!workflowFiles.length) fail('workflow', 'no .github/workflows/*.yml — the deploy is not checked in')
+for (const name of workflowFiles) {
+  const text = await readText(join(workflowDir, name))
+  for (const match of text.matchAll(/uses:\s*actions\/([a-z0-9-]+)@v(\d+)/g)) {
+    const minimum = NODE_LTS_ACTION_MAJORS[match[1]]
+    if (minimum && Number(match[2]) < minimum) {
+      fail('workflow', `${name}: actions/${match[1]}@v${match[2]} runs on an older Node; use v${minimum} or later (RULES-10)`)
+    }
+  }
 }
 
 // --- 17. size sanity ------------------------------------------------------
